@@ -21,4 +21,12 @@ export const springIn = (frame: number, start: number, fps: number) =>
     config: { damping: 200, stiffness: 130, mass: 0.7 },
   });
 
-export const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
+export const clampedInterp = (
+  frame: number,
+  range: [number, number],
+  output: [number, number],
+) =>
+  interpolate(frame, range, output, {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });

@@ -1,0 +1,18 @@
+export const palette = {
+  bg: "#F6F4EE",
+  card: "#FFFFFF",
+  ink: "#171A1F",
+  inkSoft: "rgba(23, 26, 31, 0.62)",
+  inkFaint: "rgba(23, 26, 31, 0.34)",
+  rule: "rgba(23, 26, 31, 0.12)",
+  ruleFaint: "rgba(23, 26, 31, 0.07)",
+  amber: "#C8862E",
+  amberSoft: "#E9C58C",
+  amberBg: "rgba(200, 134, 46, 0.09)",
+  teal: "#0F7A6C",
+  tealSoft: "#7FC4B7",
+  tealBg: "rgba(15, 122, 108, 0.09)",
+  charcoal: "#14171C",
+  charcoalDeep: "#0B0D10",
+  cream: "#F6F4EE",
+} as const;

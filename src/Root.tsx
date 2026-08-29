@@ -1,16 +1,16 @@
 import "./index.css";
 import { Composition } from "remotion";
 import { MyComposition } from "./Composition";
-import { PropertyComparisonScene } from "./PropertyComparison";
-import { DURATION_IN_FRAMES, FPS, HEIGHT, WIDTH } from "./PropertyComparison/timeline";
+import { OwnerGuestEyesScene } from "./OwnerGuestEyes";
+import { DURATION_IN_FRAMES, FPS, HEIGHT, WIDTH } from "./OwnerGuestEyes/timeline";
 
 export const RemotionRoot: React.FC = () => {
   return (
     <>
       <MyComposition />
       <Composition
-        id="PropertyComparison"
-        component={PropertyComparisonScene}
+        id="OwnerGuestEyes"
+        component={OwnerGuestEyesScene}
         durationInFrames={DURATION_IN_FRAMES}
         fps={FPS}
         width={WIDTH}
