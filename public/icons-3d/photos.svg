@@ -1,0 +1,40 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="plate" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#6FD0FF"/>
+      <stop offset="100%" stop-color="#0B67B0"/>
+    </linearGradient>
+    <radialGradient id="sheen" cx="30%" cy="20%" r="75%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="glyphFill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#DDF0FF"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="56" y="82" width="400" height="400" rx="130" fill="#063E68" opacity="0.10"/>
+  <rect x="56" y="73" width="400" height="400" rx="130" fill="#063E68" opacity="0.16"/>
+  <rect x="56" y="64" width="400" height="400" rx="130" fill="#063E68" opacity="0.22"/>
+  <rect x="56" y="56" width="400" height="400" rx="130" fill="url(#plate)"/>
+  <rect x="56" y="56" width="400" height="400" rx="130" fill="url(#sheen)"/>
+  <rect x="57" y="57" width="398" height="398" rx="129" fill="none" stroke="#FFFFFF" stroke-opacity="0.22" stroke-width="2"/>
+
+  <!-- extrusion shadow -->
+  <g transform="translate(12,16)" fill="#084E82" opacity="0.9">
+    <rect x="166" y="214" width="180" height="112" rx="22"/>
+    <rect x="222" y="192" width="68" height="26" rx="9"/>
+  </g>
+
+  <!-- front camera -->
+  <g fill="url(#glyphFill)">
+    <rect x="166" y="214" width="180" height="112" rx="22"/>
+    <rect x="222" y="192" width="68" height="26" rx="9"/>
+  </g>
+  <circle cx="256" cy="272" r="38" fill="#0B67B0"/>
+  <circle cx="256" cy="272" r="27" fill="url(#glyphFill)"/>
+  <circle cx="256" cy="272" r="16" fill="#6FD0FF"/>
+  <circle cx="316" cy="238" r="7" fill="#FFFFFF" opacity="0.85"/>
+  <ellipse cx="196" cy="234" rx="16" ry="9" fill="#FFFFFF" opacity="0.5"/>
+</svg>

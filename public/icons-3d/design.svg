@@ -1,0 +1,35 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="plate" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FF8FBE"/>
+      <stop offset="100%" stop-color="#C81E6B"/>
+    </linearGradient>
+    <radialGradient id="sheen" cx="30%" cy="20%" r="75%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="glyphFill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#FFE3F0"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="56" y="82" width="400" height="400" rx="130" fill="#7A0F42" opacity="0.10"/>
+  <rect x="56" y="73" width="400" height="400" rx="130" fill="#7A0F42" opacity="0.16"/>
+  <rect x="56" y="64" width="400" height="400" rx="130" fill="#7A0F42" opacity="0.22"/>
+  <rect x="56" y="56" width="400" height="400" rx="130" fill="url(#plate)"/>
+  <rect x="56" y="56" width="400" height="400" rx="130" fill="url(#sheen)"/>
+  <rect x="57" y="57" width="398" height="398" rx="129" fill="none" stroke="#FFFFFF" stroke-opacity="0.22" stroke-width="2"/>
+
+  <!-- extrusion shadow -->
+  <polygon points="256,176 328,238 256,352 184,238" fill="#8A1350" opacity="0.9" transform="translate(12,16)"/>
+
+  <!-- front gem -->
+  <polygon points="256,176 328,238 256,352 184,238" fill="url(#glyphFill)"/>
+  <polyline points="256,176 231,238" stroke="#C81E6B" stroke-opacity="0.35" stroke-width="3" fill="none"/>
+  <polyline points="256,176 281,238" stroke="#C81E6B" stroke-opacity="0.35" stroke-width="3" fill="none"/>
+  <polyline points="256,352 231,238" stroke="#C81E6B" stroke-opacity="0.35" stroke-width="3" fill="none"/>
+  <polyline points="256,352 281,238" stroke="#C81E6B" stroke-opacity="0.35" stroke-width="3" fill="none"/>
+  <polyline points="184,238 328,238" stroke="#C81E6B" stroke-opacity="0.35" stroke-width="3" fill="none"/>
+  <ellipse cx="222" cy="205" rx="20" ry="12" fill="#FFFFFF" opacity="0.55" transform="rotate(-25 222 205)"/>
+</svg>

@@ -1,0 +1,40 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="plate" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFC98A"/>
+      <stop offset="100%" stop-color="#D9622A"/>
+    </linearGradient>
+    <radialGradient id="sheen" cx="30%" cy="20%" r="75%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="glyphFill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#FFE9D4"/>
+    </linearGradient>
+    <linearGradient id="glyphFillDim" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFE1BE"/>
+      <stop offset="100%" stop-color="#FFD1A0"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="56" y="82" width="400" height="400" rx="130" fill="#7A3610" opacity="0.10"/>
+  <rect x="56" y="73" width="400" height="400" rx="130" fill="#7A3610" opacity="0.16"/>
+  <rect x="56" y="64" width="400" height="400" rx="130" fill="#7A3610" opacity="0.22"/>
+  <rect x="56" y="56" width="400" height="400" rx="130" fill="url(#plate)"/>
+  <rect x="56" y="56" width="400" height="400" rx="130" fill="url(#sheen)"/>
+  <rect x="57" y="57" width="398" height="398" rx="129" fill="none" stroke="#FFFFFF" stroke-opacity="0.22" stroke-width="2"/>
+
+  <!-- extrusion shadow -->
+  <g transform="translate(12,16)" fill="#8A3E14" opacity="0.9">
+    <circle cx="204" cy="216" r="30"/>
+    <polygon points="180,340 262,222 344,340"/>
+    <polygon points="238,340 300,244 362,340"/>
+  </g>
+
+  <!-- front scene -->
+  <circle cx="204" cy="216" r="30" fill="url(#glyphFill)"/>
+  <polygon points="180,340 262,222 344,340" fill="url(#glyphFillDim)"/>
+  <polygon points="238,340 300,244 362,340" fill="url(#glyphFill)"/>
+  <ellipse cx="192" cy="204" rx="10" ry="6" fill="#FFFFFF" opacity="0.6"/>
+</svg>
