@@ -3,7 +3,8 @@ import { useCurrentFrame } from "remotion";
 import { palette } from "./theme";
 import { sans } from "./fonts";
 import { fadeSlide } from "./utils";
-import { CheckIcon, DotIcon, StarIcon } from "./icons";
+import { DotIcon } from "./icons";
+import { Icon3D, ICON3D_KIND_BY_ITEM } from "./icons3d";
 
 type Props = {
   items: readonly string[];
@@ -24,12 +25,16 @@ export const DifferenceList: React.FC<Props> = ({
   const textColor = isPremium ? palette.cream : palette.creamDim;
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 9 }}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: isPremium ? 15 : 9,
+      }}
+    >
       {items.map((item, i) => {
         const start = startFrame + i * step;
         const { opacity, translateY } = fadeSlide(frame, start, 20, 16);
-        const isReview = item.toLowerCase().includes("review");
-        const Icon = isPremium ? (isReview ? StarIcon : CheckIcon) : DotIcon;
         return (
           <div
             key={item}
@@ -43,14 +48,23 @@ export const DifferenceList: React.FC<Props> = ({
           >
             <div
               style={{
-                width: 22,
+                width: isPremium ? 34 : 22,
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
                 flexShrink: 0,
               }}
             >
-              <Icon color={iconColor} size={isPremium ? 15 : 8} />
+              {isPremium ? (
+                <Icon3D
+                  kind={ICON3D_KIND_BY_ITEM(item)}
+                  size={30}
+                  phase={i * 37}
+                  progress={opacity}
+                />
+              ) : (
+                <DotIcon color={iconColor} size={8} />
+              )}
             </div>
             <span
               style={{
