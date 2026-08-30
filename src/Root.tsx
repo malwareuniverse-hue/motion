@@ -5,6 +5,8 @@ import { OwnerGuestEyesScene } from "./OwnerGuestEyes";
 import * as OwnerGuestEyesTimeline from "./OwnerGuestEyes/timeline";
 import { MiraIntroScene } from "./MiraIntro";
 import * as MiraIntroTimeline from "./MiraIntro/timeline";
+import { BrowserShoppingScene } from "./BrowserShopping";
+import * as BrowserShoppingTimeline from "./BrowserShopping/timeline";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -25,6 +27,14 @@ export const RemotionRoot: React.FC = () => {
         fps={MiraIntroTimeline.FPS}
         width={MiraIntroTimeline.WIDTH}
         height={MiraIntroTimeline.HEIGHT}
+      />
+      <Composition
+        id="BrowserShopping"
+        component={BrowserShoppingScene}
+        durationInFrames={BrowserShoppingTimeline.DURATION_IN_FRAMES}
+        fps={BrowserShoppingTimeline.FPS}
+        width={BrowserShoppingTimeline.WIDTH}
+        height={BrowserShoppingTimeline.HEIGHT}
       />
     </>
   );

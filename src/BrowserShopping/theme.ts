@@ -1,0 +1,33 @@
+export const palette = {
+  stageTop: "#1D2128",
+  stageBottom: "#0A0C0F",
+  chrome: "#EDEBE4",
+  chromeBorder: "rgba(20, 20, 20, 0.12)",
+  siteBg: "#FBFAF6",
+  siteBgAlt: "#F2F0E8",
+  ink: "#1B1D22",
+  inkSoft: "rgba(27, 29, 34, 0.6)",
+  inkFaint: "rgba(27, 29, 34, 0.36)",
+  rule: "rgba(27, 29, 34, 0.1)",
+  teal: "#0F7A6C",
+  tealSoft: "#7FC4B7",
+  tealBg: "rgba(15, 122, 108, 0.1)",
+  amber: "#C8862E",
+  amberSoft: "#F0CE94",
+  amberBg: "rgba(200, 134, 46, 0.12)",
+  cream: "#F6F4EE",
+  winner: "#D9A441",
+} as const;
+
+export const PHOTO_HUES: Array<[string, string]> = [
+  ["#8FB79B", "#4E7A5E"],
+  ["#D9A97C", "#B06B3E"],
+  ["#8EB4C7", "#3E6E8A"],
+  ["#B7AFA0", "#7A6F5C"],
+  ["#E3C081", "#B98A3B"],
+  ["#A791B0", "#6B5479"],
+  ["#9BB98C", "#5D7C4C"],
+  ["#C9B79A", "#93744F"],
+  ["#8FC4BA", "#3E7E71"],
+  ["#C8A0A0", "#8A4E4E"],
+];
