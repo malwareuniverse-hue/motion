@@ -9,6 +9,8 @@ import { BrowserShoppingScene } from "./BrowserShopping";
 import * as BrowserShoppingTimeline from "./BrowserShopping/timeline";
 import { PropertyAnalyticsScene } from "./PropertyAnalytics";
 import * as PropertyAnalyticsTimeline from "./PropertyAnalytics/timeline";
+import { WrongCompsScene } from "./WrongComps";
+import * as WrongCompsTimeline from "./WrongComps/timeline";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -45,6 +47,14 @@ export const RemotionRoot: React.FC = () => {
         fps={PropertyAnalyticsTimeline.FPS}
         width={PropertyAnalyticsTimeline.WIDTH}
         height={PropertyAnalyticsTimeline.HEIGHT}
+      />
+      <Composition
+        id="WrongComps"
+        component={WrongCompsScene}
+        durationInFrames={WrongCompsTimeline.DURATION_IN_FRAMES}
+        fps={WrongCompsTimeline.FPS}
+        width={WrongCompsTimeline.WIDTH}
+        height={WrongCompsTimeline.HEIGHT}
       />
     </>
   );
