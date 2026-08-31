@@ -11,6 +11,8 @@ import { PropertyAnalyticsScene } from "./PropertyAnalytics";
 import * as PropertyAnalyticsTimeline from "./PropertyAnalytics/timeline";
 import { WrongCompsScene } from "./WrongComps";
 import * as WrongCompsTimeline from "./WrongComps/timeline";
+import { BookingDecisionScene } from "./BookingDecision";
+import * as BookingDecisionTimeline from "./BookingDecision/timeline";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -55,6 +57,14 @@ export const RemotionRoot: React.FC = () => {
         fps={WrongCompsTimeline.FPS}
         width={WrongCompsTimeline.WIDTH}
         height={WrongCompsTimeline.HEIGHT}
+      />
+      <Composition
+        id="BookingDecision"
+        component={BookingDecisionScene}
+        durationInFrames={BookingDecisionTimeline.DURATION_IN_FRAMES}
+        fps={BookingDecisionTimeline.FPS}
+        width={BookingDecisionTimeline.WIDTH}
+        height={BookingDecisionTimeline.HEIGHT}
       />
     </>
   );
