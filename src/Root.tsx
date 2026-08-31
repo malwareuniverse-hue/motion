@@ -7,6 +7,8 @@ import { MiraIntroScene } from "./MiraIntro";
 import * as MiraIntroTimeline from "./MiraIntro/timeline";
 import { BrowserShoppingScene } from "./BrowserShopping";
 import * as BrowserShoppingTimeline from "./BrowserShopping/timeline";
+import { PropertyAnalyticsScene } from "./PropertyAnalytics";
+import * as PropertyAnalyticsTimeline from "./PropertyAnalytics/timeline";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -35,6 +37,14 @@ export const RemotionRoot: React.FC = () => {
         fps={BrowserShoppingTimeline.FPS}
         width={BrowserShoppingTimeline.WIDTH}
         height={BrowserShoppingTimeline.HEIGHT}
+      />
+      <Composition
+        id="PropertyAnalytics"
+        component={PropertyAnalyticsScene}
+        durationInFrames={PropertyAnalyticsTimeline.DURATION_IN_FRAMES}
+        fps={PropertyAnalyticsTimeline.FPS}
+        width={PropertyAnalyticsTimeline.WIDTH}
+        height={PropertyAnalyticsTimeline.HEIGHT}
       />
     </>
   );
