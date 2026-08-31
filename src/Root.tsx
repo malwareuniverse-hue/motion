@@ -13,6 +13,8 @@ import { WrongCompsScene } from "./WrongComps";
 import * as WrongCompsTimeline from "./WrongComps/timeline";
 import { BookingDecisionScene } from "./BookingDecision";
 import * as BookingDecisionTimeline from "./BookingDecision/timeline";
+import { CompsChainScene } from "./CompsChain";
+import * as CompsChainTimeline from "./CompsChain/timeline";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -65,6 +67,14 @@ export const RemotionRoot: React.FC = () => {
         fps={BookingDecisionTimeline.FPS}
         width={BookingDecisionTimeline.WIDTH}
         height={BookingDecisionTimeline.HEIGHT}
+      />
+      <Composition
+        id="CompsChain"
+        component={CompsChainScene}
+        durationInFrames={CompsChainTimeline.DURATION_IN_FRAMES}
+        fps={CompsChainTimeline.FPS}
+        width={CompsChainTimeline.WIDTH}
+        height={CompsChainTimeline.HEIGHT}
       />
     </>
   );
