@@ -17,6 +17,8 @@ import { CompsChainScene } from "./CompsChain";
 import * as CompsChainTimeline from "./CompsChain/timeline";
 import { UnbookedCalendarScene } from "./UnbookedCalendar";
 import * as UnbookedCalendarTimeline from "./UnbookedCalendar/timeline";
+import { PaceSplitScene } from "./PaceSplit";
+import * as PaceSplitTimeline from "./PaceSplit/timeline";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -85,6 +87,14 @@ export const RemotionRoot: React.FC = () => {
         fps={UnbookedCalendarTimeline.FPS}
         width={UnbookedCalendarTimeline.WIDTH}
         height={UnbookedCalendarTimeline.HEIGHT}
+      />
+      <Composition
+        id="PaceSplit"
+        component={PaceSplitScene}
+        durationInFrames={PaceSplitTimeline.DURATION_IN_FRAMES}
+        fps={PaceSplitTimeline.FPS}
+        width={PaceSplitTimeline.WIDTH}
+        height={PaceSplitTimeline.HEIGHT}
       />
     </>
   );
