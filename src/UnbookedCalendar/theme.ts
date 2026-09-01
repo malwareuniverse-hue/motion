@@ -1,0 +1,15 @@
+export const palette = {
+  bg: "#08090B",
+  bgLift: "#101216",
+  paper: "#111318",
+  paperLift: "#171A20",
+  gridLine: "rgba(201, 165, 92, 0.16)",
+  gold: "#C9A961",
+  goldSoft: "#E8D5A3",
+  goldDim: "rgba(201, 169, 97, 0.5)",
+  cream: "#F3F0E8",
+  creamSoft: "rgba(243, 240, 232, 0.62)",
+  creamFaint: "rgba(243, 240, 232, 0.28)",
+  rose: "#D8574C",
+  roseSoft: "#F0968B",
+} as const;

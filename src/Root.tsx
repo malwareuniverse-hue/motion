@@ -15,6 +15,8 @@ import { BookingDecisionScene } from "./BookingDecision";
 import * as BookingDecisionTimeline from "./BookingDecision/timeline";
 import { CompsChainScene } from "./CompsChain";
 import * as CompsChainTimeline from "./CompsChain/timeline";
+import { UnbookedCalendarScene } from "./UnbookedCalendar";
+import * as UnbookedCalendarTimeline from "./UnbookedCalendar/timeline";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -75,6 +77,14 @@ export const RemotionRoot: React.FC = () => {
         fps={CompsChainTimeline.FPS}
         width={CompsChainTimeline.WIDTH}
         height={CompsChainTimeline.HEIGHT}
+      />
+      <Composition
+        id="UnbookedCalendar"
+        component={UnbookedCalendarScene}
+        durationInFrames={UnbookedCalendarTimeline.DURATION_IN_FRAMES}
+        fps={UnbookedCalendarTimeline.FPS}
+        width={UnbookedCalendarTimeline.WIDTH}
+        height={UnbookedCalendarTimeline.HEIGHT}
       />
     </>
   );
