@@ -15,6 +15,12 @@ import { BookingDecisionScene } from "./BookingDecision";
 import * as BookingDecisionTimeline from "./BookingDecision/timeline";
 import { CompsChainScene } from "./CompsChain";
 import * as CompsChainTimeline from "./CompsChain/timeline";
+import { RevenueChainScene } from "./RevenueChain";
+import * as RevenueChainTimeline from "./RevenueChain/timeline";
+import { DecisionLoopScene } from "./DecisionLoop";
+import * as DecisionLoopTimeline from "./DecisionLoop/timeline";
+import { DecisionScaleScene } from "./DecisionScale";
+import * as DecisionScaleTimeline from "./DecisionScale/timeline";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -75,6 +81,30 @@ export const RemotionRoot: React.FC = () => {
         fps={CompsChainTimeline.FPS}
         width={CompsChainTimeline.WIDTH}
         height={CompsChainTimeline.HEIGHT}
+      />
+      <Composition
+        id="DecisionScale"
+        component={DecisionScaleScene}
+        durationInFrames={DecisionScaleTimeline.DURATION_IN_FRAMES}
+        fps={DecisionScaleTimeline.FPS}
+        width={DecisionScaleTimeline.WIDTH}
+        height={DecisionScaleTimeline.HEIGHT}
+      />
+      <Composition
+        id="DecisionLoop"
+        component={DecisionLoopScene}
+        durationInFrames={DecisionLoopTimeline.DURATION_IN_FRAMES}
+        fps={DecisionLoopTimeline.FPS}
+        width={DecisionLoopTimeline.WIDTH}
+        height={DecisionLoopTimeline.HEIGHT}
+      />
+      <Composition
+        id="RevenueChain"
+        component={RevenueChainScene}
+        durationInFrames={RevenueChainTimeline.DURATION_IN_FRAMES}
+        fps={RevenueChainTimeline.FPS}
+        width={RevenueChainTimeline.WIDTH}
+        height={RevenueChainTimeline.HEIGHT}
       />
     </>
   );

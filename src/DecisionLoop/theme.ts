@@ -1,0 +1,15 @@
+export const palette = {
+  bg: "#0B0D11",
+  bgLift: "#12151B",
+  panel: "#151920",
+  panelBorder: "rgba(246, 244, 238, 0.09)",
+  cream: "#F6F4EE",
+  creamSoft: "rgba(246, 244, 238, 0.62)",
+  creamFaint: "rgba(246, 244, 238, 0.34)",
+  ring: "rgba(246, 244, 238, 0.07)",
+  teal: "#14A08D",
+  tealSoft: "#7FC4B7",
+  amber: "#E0A23D",
+  amberSoft: "#F0CE94",
+  amberBg: "rgba(224, 162, 61, 0.16)",
+} as const;
