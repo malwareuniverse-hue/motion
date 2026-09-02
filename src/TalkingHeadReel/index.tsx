@@ -1,5 +1,5 @@
 import React from "react";
-import { AbsoluteFill, Sequence } from "remotion";
+import { AbsoluteFill, Audio, Sequence, staticFile } from "remotion";
 import { ReelBackground } from "./ReelBackground";
 import { BrollSlot } from "./BrollSlot";
 import { ProgressBar } from "./ProgressBar";
@@ -12,6 +12,7 @@ import { StatementCard } from "./StatementCard";
 import { PillarFramework } from "./PillarFramework";
 import { VrmaCta } from "./VrmaCta";
 import {
+  AUDIO_SRC,
   BROLL_WINDOWS,
   FRAGMENT,
   FRAMEWORK,
@@ -41,6 +42,8 @@ const span = (b: { start: number; end: number }) => ({
 export const TalkingHeadReelScene: React.FC = () => {
   return (
     <AbsoluteFill>
+      <Audio src={staticFile(AUDIO_SRC)} />
+
       <ReelBackground />
 
       {BROLL_WINDOWS.map((b) => (
