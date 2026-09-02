@@ -15,6 +15,8 @@ import { BookingDecisionScene } from "./BookingDecision";
 import * as BookingDecisionTimeline from "./BookingDecision/timeline";
 import { CompsChainScene } from "./CompsChain";
 import * as CompsChainTimeline from "./CompsChain/timeline";
+import { RevenueScalingScene } from "./RevenueScaling";
+import * as RevenueScalingTimeline from "./RevenueScaling/timeline";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -75,6 +77,44 @@ export const RemotionRoot: React.FC = () => {
         fps={CompsChainTimeline.FPS}
         width={CompsChainTimeline.WIDTH}
         height={CompsChainTimeline.HEIGHT}
+      />
+      <Composition
+        id="RevenueScaling"
+        component={RevenueScalingScene}
+        durationInFrames={RevenueScalingTimeline.DURATION_IN_FRAMES}
+        fps={RevenueScalingTimeline.FPS}
+        width={RevenueScalingTimeline.WIDTH}
+        height={RevenueScalingTimeline.HEIGHT}
+        defaultProps={{ mode: "full" as const }}
+      />
+      {/* Graphics only, over transparency — composite onto the A-roll in the NLE. */}
+      <Composition
+        id="RevenueScalingOverlays"
+        component={RevenueScalingScene}
+        durationInFrames={RevenueScalingTimeline.DURATION_IN_FRAMES}
+        fps={RevenueScalingTimeline.FPS}
+        width={RevenueScalingTimeline.WIDTH}
+        height={RevenueScalingTimeline.HEIGHT}
+        defaultProps={{ mode: "overlays" as const }}
+      />
+      {/* 9:16 delivery — same components, re-laid out via layout.ts. */}
+      <Composition
+        id="RevenueScalingVertical"
+        component={RevenueScalingScene}
+        durationInFrames={RevenueScalingTimeline.DURATION_IN_FRAMES}
+        fps={RevenueScalingTimeline.FPS}
+        width={RevenueScalingTimeline.V_WIDTH}
+        height={RevenueScalingTimeline.V_HEIGHT}
+        defaultProps={{ mode: "full" as const }}
+      />
+      <Composition
+        id="RevenueScalingVerticalOverlays"
+        component={RevenueScalingScene}
+        durationInFrames={RevenueScalingTimeline.DURATION_IN_FRAMES}
+        fps={RevenueScalingTimeline.FPS}
+        width={RevenueScalingTimeline.V_WIDTH}
+        height={RevenueScalingTimeline.V_HEIGHT}
+        defaultProps={{ mode: "overlays" as const }}
       />
     </>
   );
