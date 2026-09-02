@@ -133,6 +133,10 @@ npx remotion render VRMA4-CompScan out/comp-scan.mp4
 npx remotion still  VRMA4-DecisionSet out/frame.png --frame=480
 ```
 
+Poppins is served from `public/fonts` via `src/fonts/poppins.ts` rather than
+fetched from Google at render time, so renders work offline and in CI. Every
+scene in the repo now shares that loader.
+
 Alpha passes (framework overlay, lower third) need ProRes 4444 or WebM:
 
 ```bash
