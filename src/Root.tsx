@@ -15,6 +15,8 @@ import { BookingDecisionScene } from "./BookingDecision";
 import * as BookingDecisionTimeline from "./BookingDecision/timeline";
 import { CompsChainScene } from "./CompsChain";
 import * as CompsChainTimeline from "./CompsChain/timeline";
+import { TalkingHeadReelScene } from "./TalkingHeadReel";
+import * as TalkingHeadReelTimeline from "./TalkingHeadReel/timeline";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -75,6 +77,14 @@ export const RemotionRoot: React.FC = () => {
         fps={CompsChainTimeline.FPS}
         width={CompsChainTimeline.WIDTH}
         height={CompsChainTimeline.HEIGHT}
+      />
+      <Composition
+        id="TalkingHeadReel"
+        component={TalkingHeadReelScene}
+        durationInFrames={TalkingHeadReelTimeline.DURATION_IN_FRAMES}
+        fps={TalkingHeadReelTimeline.FPS}
+        width={TalkingHeadReelTimeline.WIDTH}
+        height={TalkingHeadReelTimeline.HEIGHT}
       />
     </>
   );
