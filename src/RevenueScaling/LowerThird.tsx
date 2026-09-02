@@ -66,7 +66,7 @@ export const LowerThird: React.FC = () => {
             color: palette.white,
           }}
         >
-          EMILE SAEL
+          EMILE SAKHEL
         </div>
         <div
           style={{
