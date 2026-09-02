@@ -3,13 +3,13 @@ import { useCurrentFrame } from "remotion";
 import { palette } from "./theme";
 import { poppins } from "./fonts";
 import { clampedInterp } from "./utils";
-import { BRAND_BUG_IN, END_CARD_START } from "./timeline";
+import { BRAND_BUG_IN, BRAND_BUG_OUT } from "./timeline";
 
 export const BrandBug: React.FC = () => {
   const frame = useCurrentFrame();
   const opacity =
     clampedInterp(frame, [BRAND_BUG_IN, BRAND_BUG_IN + 16], [0, 0.9]) *
-    clampedInterp(frame, [END_CARD_START - 12, END_CARD_START + 8], [1, 0]);
+    clampedInterp(frame, [BRAND_BUG_OUT - 12, BRAND_BUG_OUT + 8], [1, 0]);
 
   return (
     <div
