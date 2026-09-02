@@ -23,14 +23,14 @@ export const BrandBug: React.FC = () => {
         opacity,
       }}
     >
-      <div style={{ width: 8, height: 8, borderRadius: "50%", background: palette.teal }} />
+      <div style={{ width: 8, height: 8, borderRadius: "50%", background: palette.gold }} />
       <span
         style={{
           fontFamily: poppins,
           fontSize: 24,
           fontWeight: 600,
           letterSpacing: 2.6,
-          color: palette.creamSoft,
+          color: palette.softWhiteSoft,
         }}
       >
         PRICING BY MIRA

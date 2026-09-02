@@ -46,11 +46,11 @@ export const EndCard: React.FC = () => {
             fontSize: 72,
             fontWeight: 800,
             letterSpacing: 1,
-            color: palette.cream,
+            color: palette.softWhite,
             lineHeight: 1.1,
           }}
         >
-          PRICING <span style={{ color: palette.teal }}>BY MIRA</span>
+          PRICING <span style={{ color: palette.gold }}>BY MIRA</span>
         </span>
         <div style={{ width: ruleWidth, height: 2, background: palette.rule }} />
         <span
@@ -59,7 +59,7 @@ export const EndCard: React.FC = () => {
             fontSize: 26,
             fontWeight: 500,
             letterSpacing: 3,
-            color: palette.creamSoft,
+            color: palette.softWhiteSoft,
           }}
         >
           STRATEGIC PRICING · REAL REVENUE
@@ -70,7 +70,7 @@ export const EndCard: React.FC = () => {
             fontSize: 24,
             fontWeight: 600,
             letterSpacing: 1.6,
-            color: palette.amberSoft,
+            color: palette.goldSoft,
             marginTop: 8,
           }}
         >

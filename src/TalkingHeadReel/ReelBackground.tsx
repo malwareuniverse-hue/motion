@@ -16,10 +16,10 @@ import { palette } from "./theme";
 // sit over the footage unchanged.
 
 const blobs = [
-  { cx: 0.28, cy: 0.22, r: 320, color: palette.tealDeep, speed: 0.006, phase: 0 },
-  { cx: 0.78, cy: 0.34, r: 360, color: palette.amber, speed: 0.005, phase: 2.1 },
-  { cx: 0.55, cy: 0.62, r: 420, color: palette.teal, speed: 0.0045, phase: 4.2 },
-  { cx: 0.2, cy: 0.78, r: 300, color: palette.amberSoft, speed: 0.007, phase: 1.3 },
+  { cx: 0.28, cy: 0.22, r: 320, color: palette.navy, speed: 0.006, phase: 0 },
+  { cx: 0.78, cy: 0.34, r: 360, color: palette.goldDeep, speed: 0.005, phase: 2.1 },
+  { cx: 0.55, cy: 0.62, r: 420, color: palette.navy, speed: 0.0045, phase: 4.2 },
+  { cx: 0.2, cy: 0.78, r: 300, color: palette.gold, speed: 0.007, phase: 1.3 },
 ];
 
 export const ReelBackground: React.FC = () => {
@@ -30,7 +30,7 @@ export const ReelBackground: React.FC = () => {
       style={{
         position: "absolute",
         inset: 0,
-        background: `linear-gradient(165deg, ${palette.charcoalLift} 0%, ${palette.charcoal} 45%, ${palette.charcoalDeep} 100%)`,
+        background: `linear-gradient(165deg, ${palette.charcoalLift} 0%, ${palette.charcoal} 45%, ${palette.nearBlack} 100%)`,
         overflow: "hidden",
       }}
     >
@@ -48,7 +48,7 @@ export const ReelBackground: React.FC = () => {
               height: b.r,
               borderRadius: "50%",
               background: b.color,
-              opacity: 0.26,
+              opacity: 0.2,
               filter: "blur(110px)",
               transform: "translate(-50%, -50%)",
             }}

@@ -40,7 +40,7 @@ export const LowerThird: React.FC = () => {
         style={{
           width: 6,
           borderRadius: 3,
-          background: `linear-gradient(180deg, ${palette.teal}, ${palette.amber})`,
+          background: `linear-gradient(180deg, ${palette.gold}, ${palette.goldDeep})`,
           transform: `scaleY(${barScale})`,
           transformOrigin: "bottom",
         }}
@@ -52,7 +52,7 @@ export const LowerThird: React.FC = () => {
             fontSize: 40,
             fontWeight: 700,
             letterSpacing: 0.6,
-            color: palette.cream,
+            color: palette.softWhite,
           }}
         >
           EMILE SAKHEL
@@ -63,7 +63,7 @@ export const LowerThird: React.FC = () => {
             fontSize: 22,
             fontWeight: 500,
             letterSpacing: 2,
-            color: palette.tealSoft,
+            color: palette.mutedGray,
             marginTop: 4,
           }}
         >

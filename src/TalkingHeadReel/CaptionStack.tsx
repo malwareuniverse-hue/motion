@@ -1,6 +1,6 @@
 import React from "react";
 import { useCurrentFrame, useVideoConfig } from "remotion";
-import { accentHex, palette } from "./theme";
+import { palette } from "./theme";
 import { poppins } from "./fonts";
 import { clampedInterp, springIn } from "./utils";
 import { CAPTION_LINES, type CaptionLine } from "./timeline";
@@ -58,12 +58,11 @@ const CaptionPhrase: React.FC<{ line: CaptionLine }> = ({ line }) => {
         });
 
         const isActive = i === activeIndex;
-        const isKey = Boolean(word.accent);
-        const color = isKey
-          ? accentHex(word.accent!)
-          : isActive
-            ? palette.teal
-            : palette.cream;
+        const isKey = Boolean(word.key);
+        // Gold is the single accent: key words stay gold, and the currently
+        // spoken (karaoke) word flashes gold as it passes; everything else is
+        // soft white.
+        const color = isKey || isActive ? palette.gold : palette.softWhite;
         const scale = (0.86 + wordEnter * 0.14) * (isActive ? 1.05 : 1);
 
         return (

@@ -29,7 +29,7 @@ export const ProgressBar: React.FC = () => {
         style={{
           height: "100%",
           width: `${progress * 100}%`,
-          background: `linear-gradient(90deg, ${palette.teal}, ${palette.amber})`,
+          background: `linear-gradient(90deg, ${palette.goldDeep}, ${palette.gold})`,
         }}
       />
     </div>

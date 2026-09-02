@@ -1,5 +1,3 @@
-import type { AccentColor } from "./theme";
-
 // ---------------------------------------------------------------------------
 // Vertical "reel" format — 9:16, short-form (Shorts / Reels / TikTok).
 // ---------------------------------------------------------------------------
@@ -18,7 +16,7 @@ export const DURATION_IN_FRAMES = 600; // 20.00s at 30fps — adjust to the cut.
 // ---------------------------------------------------------------------------
 export type CaptionWord = {
   text: string;
-  accent?: AccentColor; // key word — always rendered in this accent color
+  key?: boolean; // key word — always rendered in warm gold
 };
 
 export type CaptionLine = {
@@ -27,13 +25,12 @@ export type CaptionLine = {
   end: number; // frame the phrase leaves
 };
 
-// Small helper so the script below stays readable. Wrap a word in {teal:"..."}
-// or {amber:"..."} to make it a key word.
-type WordSpec = string | { teal: string } | { amber: string };
+// Small helper so the script below stays readable. Wrap a word in {gold:"..."}
+// to make it a key word (rendered in warm gold).
+type WordSpec = string | { gold: string };
 const w = (spec: WordSpec): CaptionWord => {
   if (typeof spec === "string") return { text: spec };
-  if ("teal" in spec) return { text: spec.teal, accent: "teal" };
-  return { text: spec.amber, accent: "amber" };
+  return { text: spec.gold, key: true };
 };
 const line = (start: number, end: number, ...specs: WordSpec[]): CaptionLine => ({
   start,
@@ -48,16 +45,16 @@ const line = (start: number, end: number, ...specs: WordSpec[]): CaptionLine => 
 // to end. Replace CAPTION_LINES with the real voiceover once the script + audio
 // are available — keep each line to ~3–6 words for short-form legibility, and
 // re-time `start`/`end` (in frames) to the spoken word. Mark the key words with
-// {teal:"..."} / {amber:"..."}; use amber sparingly, for the payoff word.
+// {gold:"..."}; use gold selectively, for emphasis and payoff words.
 // ---------------------------------------------------------------------------
 export const CAPTION_LINES: CaptionLine[] = [
-  line(14, 78, "MORE", "BOOKINGS", "ISN'T", "THE", { teal: "GOAL" }),
-  line(84, 150, "MORE", { amber: "REVENUE" }, "IS."),
-  line(158, 232, "MOST", "OPERATORS", "PRICE", "OFF", "THE", { teal: "WRONG COMPS" }),
-  line(240, 312, "SO", "THEY", "LEAVE", { amber: "MONEY" }, "ON", "THE", "TABLE"),
-  line(320, 392, "AT", { teal: "PRICING BY MIRA" }),
-  line(398, 470, "WE", "PRICE", "OFF", { teal: "REAL DEMAND" }, "—"),
-  line(476, 540, "NOT", "A", { amber: "GUESS." }),
+  line(14, 78, "MORE", "BOOKINGS", "ISN'T", "THE", { gold: "GOAL" }),
+  line(84, 150, "MORE", { gold: "REVENUE" }, "IS."),
+  line(158, 232, "MOST", "OPERATORS", "PRICE", "OFF", "THE", { gold: "WRONG COMPS" }),
+  line(240, 312, "SO", "THEY", "LEAVE", { gold: "MONEY" }, "ON", "THE", "TABLE"),
+  line(320, 392, "AT", { gold: "PRICING BY MIRA" }),
+  line(398, 470, "WE", "PRICE", "OFF", { gold: "REAL DEMAND" }, "—"),
+  line(476, 540, "NOT", "A", { gold: "GUESS." }),
 ];
 
 // Brand bug (top): fades in early, out before the end card takes over.
