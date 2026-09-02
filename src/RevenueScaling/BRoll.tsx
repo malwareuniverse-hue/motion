@@ -2,7 +2,8 @@ import React from "react";
 import { OffthreadVideo, staticFile, useCurrentFrame } from "remotion";
 import { palette } from "./theme";
 import { clampedInterp, seeded } from "./utils";
-import { BROLL, HEIGHT, WIDTH, type BrollSpec } from "./timeline";
+import { BROLL, type BrollSpec } from "./timeline";
+import { useLayout } from "./layout";
 
 /* ---------------------------------------------------------------- */
 /* Procedural placeholders                                           */
@@ -10,6 +11,7 @@ import { BROLL, HEIGHT, WIDTH, type BrollSpec } from "./timeline";
 
 /** Depth-layered property plates — stands in for portfolio / aerial B-roll. */
 const PortfolioPlaceholder: React.FC<{ local: number }> = ({ local }) => {
+  const { width, height } = useLayout();
   const plates = React.useMemo(
     () =>
       Array.from({ length: 16 }, (_, i) => {
@@ -27,6 +29,8 @@ const PortfolioPlaceholder: React.FC<{ local: number }> = ({ local }) => {
     [],
   );
 
+  // plates are sized against the 16:9 frame; keep their apparent scale in 9:16
+  const plateScale = Math.max(1, (1920 / width) * 0.62);
   const push = 1.05 + local * 0.00016;
 
   return (
@@ -48,10 +52,10 @@ const PortfolioPlaceholder: React.FC<{ local: number }> = ({ local }) => {
               key={i}
               style={{
                 position: "absolute",
-                left: p.x * WIDTH - parallax,
-                top: p.y * HEIGHT,
-                width: p.w,
-                height: p.h,
+                left: p.x * width - parallax,
+                top: p.y * height,
+                width: p.w * plateScale,
+                height: p.h * plateScale,
                 background: palette.charcoal,
                 border: `1px solid rgba(243, 241, 236, ${0.1 - p.band * 0.025})`,
                 opacity: 0.92 - p.band * 0.22,
@@ -82,8 +86,12 @@ const PortfolioPlaceholder: React.FC<{ local: number }> = ({ local }) => {
 
 /** A receding row of lit doorways — stands in for "more doors" B-roll. */
 const DoorsPlaceholder: React.FC<{ local: number }> = ({ local }) => {
-  const doors = Array.from({ length: 7 }, (_, i) => i);
-  const slide = local * 0.42;
+  const { width, height, portrait } = useLayout();
+  const count = portrait ? 4 : 7;
+  const doors = Array.from({ length: count }, (_, i) => i);
+  const slide = local * (portrait ? 0.24 : 0.42);
+  const pitch = width / (count - 0.8);
+  const doorH = height * (portrait ? 0.34 : 0.57);
 
   return (
     <div
@@ -96,15 +104,15 @@ const DoorsPlaceholder: React.FC<{ local: number }> = ({ local }) => {
     >
       {doors.map((i) => {
         const depth = i / (doors.length - 1);
-        const h = 620 - depth * 190;
-        const w = 236 - depth * 74;
+        const h = doorH - depth * doorH * 0.32;
+        const w = pitch * 0.72 - depth * pitch * 0.22;
         return (
           <div
             key={i}
             style={{
               position: "absolute",
-              left: 120 + i * 276 - slide,
-              top: HEIGHT / 2 - h / 2 + depth * 22,
+              left: pitch * 0.4 + i * pitch - slide,
+              top: height / 2 - h / 2 + depth * 22,
               width: w,
               height: h,
               background: palette.black,
@@ -141,6 +149,7 @@ const DoorsPlaceholder: React.FC<{ local: number }> = ({ local }) => {
 
 /** Layered blue-hour skyline — stands in for Nashville establishing footage. */
 const SkylinePlaceholder: React.FC<{ local: number }> = ({ local }) => {
+  const { width, height } = useLayout();
   const bands = [
     {
       y: 0.66,
@@ -180,18 +189,18 @@ const SkylinePlaceholder: React.FC<{ local: number }> = ({ local }) => {
       {bands.map((band, b) =>
         Array.from({ length: band.count }, (_, i) => {
           const seedBase = b * 40 + i;
-          const w = 90 + seeded(seedBase, 7) * 110;
-          const h = band.h * HEIGHT * (0.5 + seeded(seedBase, 8) * 0.6);
-          const x = (i / band.count) * (WIDTH + 240) - 120 - local * band.speed;
+          const w = (90 + seeded(seedBase, 7) * 110) * (width / 1920) * 1.4;
+          const h = band.h * height * (0.5 + seeded(seedBase, 8) * 0.6);
+          const x = (i / band.count) * (width + 240) - 120 - local * band.speed;
           return (
             <div
               key={`${b}-${i}`}
               style={{
                 position: "absolute",
                 left: x,
-                top: band.y * HEIGHT - h + band.h * HEIGHT * 0.4,
+                top: band.y * height - h + band.h * height * 0.4,
                 width: w,
-                height: h + HEIGHT,
+                height: h + height,
                 background: band.tint,
                 opacity: band.opacity,
               }}

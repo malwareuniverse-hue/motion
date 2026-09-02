@@ -10,51 +10,36 @@ import {
   fadeUp,
   seeded,
 } from "./utils";
-import {
-  HEIGHT,
-  SHIFT_COLS,
-  SHIFT_FRAME_PAD,
-  SHIFT_GRID_H,
-  SHIFT_GRID_LEFT,
-  SHIFT_GRID_TOP,
-  SHIFT_GRID_W,
-  SHIFT_NODE,
-  SHIFT_NODE_COUNT,
-  SHIFT_NODE_GAP,
-  T,
-  WIDTH,
-} from "./timeline";
-
-const NODES = Array.from({ length: SHIFT_NODE_COUNT }, (_, i) => {
-  const col = i % SHIFT_COLS;
-  const row = Math.floor(i / SHIFT_COLS);
-  return {
-    i,
-    // scattered: every property managed on its own, at its own size
-    sx: 220 + seeded(i, 11) * 1420,
-    sy: 220 + seeded(i, 12) * 560,
-    ssize: 92 + seeded(i, 13) * 72,
-    srot: (seeded(i, 14) - 0.5) * 16,
-    // resolved: one grid, one scale, one system
-    gx: SHIFT_GRID_LEFT + col * (SHIFT_NODE + SHIFT_NODE_GAP),
-    gy: SHIFT_GRID_TOP + row * (SHIFT_NODE + SHIFT_NODE_GAP),
-    delay: seeded(i, 15) * 18,
-  };
-});
-
-const FRAME_W = SHIFT_GRID_W + SHIFT_FRAME_PAD * 2;
-const FRAME_H = SHIFT_GRID_H + SHIFT_FRAME_PAD * 2;
-const FRAME_LEFT = SHIFT_GRID_LEFT - SHIFT_FRAME_PAD;
-const FRAME_TOP = SHIFT_GRID_TOP - SHIFT_FRAME_PAD;
-const PERIMETER = 2 * (FRAME_W + FRAME_H);
+import { shiftGrid, useLayout } from "./layout";
+import { SHIFT_NODE_COUNT, T } from "./timeline";
 
 /**
  * PROPERTY BY PROPERTY -> ENTERPRISE SYSTEM (1:07–1:19). Twelve independently
  * managed properties, each its own size and angle, resolve into one grid inside
- * a single gold frame. The motion is the argument.
+ * a single gold frame. The motion is the argument. The grid is 4x3 in 16:9 and
+ * 3x4 in 9:16; the scatter is expressed in fractions of the frame so it fills
+ * either one.
  */
 export const EnterpriseShift: React.FC = () => {
   const frame = useCurrentFrame();
+  const l = useLayout();
+  const grid = shiftGrid(l, SHIFT_NODE_COUNT);
+
+  const nodes = React.useMemo(() => {
+    const s = l.shift.scatter;
+    return Array.from({ length: SHIFT_NODE_COUNT }, (_, i) => ({
+      i,
+      // scattered: every property managed on its own, at its own size
+      sx: (s.x0 + seeded(i, 11) * (s.x1 - s.x0)) * l.width,
+      sy: (s.y0 + seeded(i, 12) * (s.y1 - s.y0)) * l.height,
+      ssize: l.shift.node * (0.61 + seeded(i, 13) * 0.48),
+      srot: (seeded(i, 14) - 0.5) * 16,
+      // resolved: one grid, one scale, one system
+      gx: grid.x(i),
+      gy: grid.y(i),
+      delay: seeded(i, 15) * 18,
+    }));
+  }, [l, grid]);
 
   const opacity = beatOpacity(
     frame,
@@ -65,6 +50,7 @@ export const EnterpriseShift: React.FC = () => {
   );
   if (opacity <= 0) return null;
 
+  const perimeter = 2 * (grid.frameW + grid.frameH);
   const frameDraw = clampedInterp(
     frame,
     [T.shiftFrameIn, T.shiftFrameIn + 46],
@@ -88,26 +74,26 @@ export const EnterpriseShift: React.FC = () => {
   return (
     <div style={{ position: "absolute", inset: 0, opacity }}>
       <svg
-        width={WIDTH}
-        height={HEIGHT}
+        width={l.width}
+        height={l.height}
         style={{ position: "absolute", inset: 0 }}
         aria-hidden="true"
       >
         <rect
-          x={FRAME_LEFT}
-          y={FRAME_TOP}
-          width={FRAME_W}
-          height={FRAME_H}
+          x={grid.frameLeft}
+          y={grid.frameTop}
+          width={grid.frameW}
+          height={grid.frameH}
           fill="none"
           stroke={palette.gold}
           strokeWidth={1.5}
-          strokeDasharray={PERIMETER}
-          strokeDashoffset={PERIMETER * (1 - frameDraw)}
+          strokeDasharray={perimeter}
+          strokeDashoffset={perimeter * (1 - frameDraw)}
           opacity={0.7}
         />
       </svg>
 
-      {NODES.map((n) => {
+      {nodes.map((n) => {
         const appear = fadeUp(frame, T.shiftNodesIn + n.delay, 24, 12);
         const t = clampedInterp(
           frame,
@@ -123,25 +109,23 @@ export const EnterpriseShift: React.FC = () => {
 
         // interpolate centres, not corners, so the boxes converge on the grid
         // instead of drifting by half the difference in their scattered sizes
-        const size = n.ssize + (SHIFT_NODE - n.ssize) * t;
+        const size = n.ssize + (l.shift.node - n.ssize) * t;
         const cx =
           n.sx +
           n.ssize / 2 +
-          (n.gx + SHIFT_NODE / 2 - (n.sx + n.ssize / 2)) * t;
+          (n.gx + l.shift.node / 2 - (n.sx + n.ssize / 2)) * t;
         const cy =
           n.sy +
           n.ssize / 2 +
-          (n.gy + SHIFT_NODE / 2 - (n.sy + n.ssize / 2)) * t;
-        const x = cx - size / 2 + drift;
-        const y = cy - size / 2 + drift * 0.6;
+          (n.gy + l.shift.node / 2 - (n.sy + n.ssize / 2)) * t;
 
         return (
           <div
             key={n.i}
             style={{
               position: "absolute",
-              left: x,
-              top: y + appear.translateY,
+              left: cx - size / 2 + drift,
+              top: cy - size / 2 + drift * 0.6 + appear.translateY,
               width: size,
               height: size,
               background: palette.charcoal,
@@ -171,20 +155,21 @@ export const EnterpriseShift: React.FC = () => {
           position: "absolute",
           left: 0,
           right: 0,
-          top: FRAME_TOP + FRAME_H + 74,
+          top: grid.frameTop + grid.frameH + 74,
+          padding: `0 ${l.margin}px`,
           textAlign: "center",
           opacity: labelIn.opacity,
           transform: `translateY(${labelIn.translateY}px)`,
         }}
       >
-        <div style={{ position: "relative", height: 66 }}>
+        <div style={{ position: "relative", height: l.portrait ? 120 : 66 }}>
           <div
             style={{
               position: "absolute",
               left: 0,
               right: 0,
               fontFamily: poppins,
-              fontSize: 46,
+              fontSize: l.portrait ? 40 : 46,
               fontWeight: 600,
               letterSpacing: 3,
               color: palette.gray,
@@ -199,14 +184,16 @@ export const EnterpriseShift: React.FC = () => {
               left: 0,
               right: 0,
               fontFamily: poppins,
-              fontSize: 52,
+              fontSize: l.type.h2,
               fontWeight: 700,
               letterSpacing: 2,
+              lineHeight: 1.18,
               color: palette.white,
               opacity: labelAfter,
             }}
           >
-            AN <span style={{ color: palette.gold }}>ENTERPRISE-LEVEL</span>{" "}
+            AN <span style={{ color: palette.gold }}>ENTERPRISE-LEVEL</span>
+            {l.portrait ? <br /> : " "}
             REVENUE SYSTEM
           </div>
         </div>
@@ -215,9 +202,9 @@ export const EnterpriseShift: React.FC = () => {
           style={{
             marginTop: 22,
             fontFamily: poppins,
-            fontSize: 26,
+            fontSize: l.portrait ? 22 : 26,
             fontWeight: 400,
-            letterSpacing: 2.6,
+            letterSpacing: l.portrait ? 1.8 : 2.6,
             color: palette.gray,
             opacity: sub.opacity,
             transform: `translateY(${sub.translateY}px)`,

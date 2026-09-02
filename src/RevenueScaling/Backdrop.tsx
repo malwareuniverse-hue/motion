@@ -1,7 +1,6 @@
 import React from "react";
 import { useCurrentFrame } from "remotion";
 import { palette } from "./theme";
-import { WIDTH } from "./timeline";
 
 /**
  * The base grade every graphic sits on: near-black with a single deep-navy
@@ -59,8 +58,8 @@ export const Backdrop: React.FC = () => {
         style={{
           position: "absolute",
           left: 0,
+          right: 0,
           top: "78%",
-          width: WIDTH,
           height: 1,
           background: `linear-gradient(90deg, transparent 0%, ${palette.goldRule} 50%, transparent 100%)`,
           opacity: 0.16,

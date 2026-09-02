@@ -4,6 +4,7 @@ import { palette } from "./theme";
 import { poppins } from "./fonts";
 import { clampedInterp, easeOutCubic, fadeUp } from "./utils";
 import { T } from "./timeline";
+import { useLayout } from "./layout";
 
 /**
  * CTA (1:20–1:30). The frame darkens so the lockup is the only thing left,
@@ -11,6 +12,7 @@ import { T } from "./timeline";
  */
 export const EndLockup: React.FC = () => {
   const frame = useCurrentFrame();
+  const l = useLayout();
   if (frame < T.ctaKickerIn - 20) return null;
 
   const dim = clampedInterp(
@@ -48,15 +50,15 @@ export const EndLockup: React.FC = () => {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          gap: 26,
+          gap: l.portrait ? 22 : 26,
         }}
       >
         <div
           style={{
             fontFamily: poppins,
-            fontSize: 20,
+            fontSize: l.portrait ? 18 : 20,
             fontWeight: 600,
-            letterSpacing: 5,
+            letterSpacing: l.portrait ? 4 : 5,
             color: palette.gold,
             opacity: kicker.opacity,
             transform: `translateY(${kicker.translateY}px)`,
@@ -68,7 +70,7 @@ export const EndLockup: React.FC = () => {
         <div
           style={{
             fontFamily: poppins,
-            fontSize: 82,
+            fontSize: l.type.lockup,
             fontWeight: 800,
             letterSpacing: 1.4,
             color: palette.white,
@@ -81,7 +83,7 @@ export const EndLockup: React.FC = () => {
 
         <div
           style={{
-            width: 200,
+            width: l.portrait ? 160 : 200,
             height: 1,
             background: palette.rule,
             transform: `scaleX(${rule})`,
@@ -92,7 +94,7 @@ export const EndLockup: React.FC = () => {
         <div
           style={{
             fontFamily: poppins,
-            fontSize: 40,
+            fontSize: l.portrait ? 34 : 40,
             fontWeight: 500,
             letterSpacing: 1,
             color: palette.whiteSoft,
@@ -106,9 +108,9 @@ export const EndLockup: React.FC = () => {
         <div
           style={{
             fontFamily: poppins,
-            fontSize: 24,
+            fontSize: l.portrait ? 21 : 24,
             fontWeight: 600,
-            letterSpacing: 7,
+            letterSpacing: l.portrait ? 5 : 7,
             color: palette.gold,
             marginTop: 6,
             opacity: event.opacity,

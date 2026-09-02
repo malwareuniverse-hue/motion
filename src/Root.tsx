@@ -97,6 +97,25 @@ export const RemotionRoot: React.FC = () => {
         height={RevenueScalingTimeline.HEIGHT}
         defaultProps={{ mode: "overlays" as const }}
       />
+      {/* 9:16 delivery — same components, re-laid out via layout.ts. */}
+      <Composition
+        id="RevenueScalingVertical"
+        component={RevenueScalingScene}
+        durationInFrames={RevenueScalingTimeline.DURATION_IN_FRAMES}
+        fps={RevenueScalingTimeline.FPS}
+        width={RevenueScalingTimeline.V_WIDTH}
+        height={RevenueScalingTimeline.V_HEIGHT}
+        defaultProps={{ mode: "full" as const }}
+      />
+      <Composition
+        id="RevenueScalingVerticalOverlays"
+        component={RevenueScalingScene}
+        durationInFrames={RevenueScalingTimeline.DURATION_IN_FRAMES}
+        fps={RevenueScalingTimeline.FPS}
+        width={RevenueScalingTimeline.V_WIDTH}
+        height={RevenueScalingTimeline.V_HEIGHT}
+        defaultProps={{ mode: "overlays" as const }}
+      />
     </>
   );
 };

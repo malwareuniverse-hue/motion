@@ -4,10 +4,12 @@ import { palette } from "./theme";
 import { poppins } from "./fonts";
 import { clampedInterp } from "./utils";
 import { T } from "./timeline";
+import { useLayout } from "./layout";
 
 /** Persistent corner mark. Retires before the end lockup takes the frame. */
 export const BrandBug: React.FC = () => {
   const frame = useCurrentFrame();
+  const l = useLayout();
   const opacity =
     clampedInterp(frame, [T.brandBugIn, T.brandBugIn + 20], [0, 0.8]) *
     clampedInterp(frame, [T.brandBugOut, T.brandBugOut + 18], [1, 0]);
@@ -16,8 +18,8 @@ export const BrandBug: React.FC = () => {
     <div
       style={{
         position: "absolute",
-        top: 56,
-        right: 72,
+        top: l.portrait ? 72 : 56,
+        right: l.portrait ? l.margin : 72,
         display: "flex",
         alignItems: "center",
         gap: 10,

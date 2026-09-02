@@ -4,6 +4,7 @@ import { palette } from "./theme";
 import { poppins } from "./fonts";
 import { clampedInterp, easeOutCubic } from "./utils";
 import { T } from "./timeline";
+import { useLayout } from "./layout";
 
 /**
  * PBM lower third, lower-left safe area. Placed on the one beat with no
@@ -12,6 +13,7 @@ import { T } from "./timeline";
  */
 export const LowerThird: React.FC = () => {
   const frame = useCurrentFrame();
+  const l = useLayout();
 
   const inT = clampedInterp(
     frame,
@@ -39,8 +41,8 @@ export const LowerThird: React.FC = () => {
     <div
       style={{
         position: "absolute",
-        left: 120,
-        bottom: 132,
+        left: l.portrait ? l.margin : 120,
+        bottom: l.portrait ? 300 : 132,
         display: "flex",
         alignItems: "stretch",
         gap: 20,
@@ -60,7 +62,7 @@ export const LowerThird: React.FC = () => {
         <div
           style={{
             fontFamily: poppins,
-            fontSize: 34,
+            fontSize: l.portrait ? 30 : 34,
             fontWeight: 700,
             letterSpacing: 0.4,
             color: palette.white,

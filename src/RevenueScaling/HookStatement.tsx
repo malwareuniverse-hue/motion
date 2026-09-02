@@ -4,6 +4,7 @@ import { palette } from "./theme";
 import { poppins } from "./fonts";
 import { beatOpacity, clampedInterp, easeOutCubic, fadeUp } from "./utils";
 import { GoldRule, headlineStyle } from "./Primitives";
+import { useLayout } from "./layout";
 import { T } from "./timeline";
 
 /**
@@ -13,6 +14,7 @@ import { T } from "./timeline";
  */
 export const HookStatement: React.FC = () => {
   const frame = useCurrentFrame();
+  const l = useLayout();
 
   const opacity = beatOpacity(frame, T.hookLine1In, 1, T.hookOut, T.hookOutDur);
   if (opacity <= 0) return null;
@@ -43,8 +45,8 @@ export const HookStatement: React.FC = () => {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        gap: 34,
-        padding: "0 200px",
+        gap: l.portrait ? 26 : 34,
+        padding: `0 ${l.margin}px`,
         textAlign: "center",
         opacity,
       }}
@@ -52,7 +54,7 @@ export const HookStatement: React.FC = () => {
       <div>
         <div
           style={{
-            ...headlineStyle,
+            ...headlineStyle(l),
             opacity: l1.opacity,
             transform: `translateY(${l1.translateY}px)`,
           }}
@@ -61,7 +63,7 @@ export const HookStatement: React.FC = () => {
         </div>
         <div
           style={{
-            ...headlineStyle,
+            ...headlineStyle(l),
             marginTop: 8,
             opacity: l2.opacity,
             transform: `translateY(${l2.translateY}px)`,
@@ -71,13 +73,13 @@ export const HookStatement: React.FC = () => {
         </div>
       </div>
 
-      <GoldRule progress={rule} width={200} />
+      <GoldRule progress={rule} width={l.portrait ? 150 : 200} />
 
       <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
         <div
           style={{
             fontFamily: poppins,
-            fontSize: 40,
+            fontSize: l.portrait ? 32 : 40,
             fontWeight: 500,
             letterSpacing: 1.2,
             color: palette.gray,
@@ -90,7 +92,7 @@ export const HookStatement: React.FC = () => {
         <div
           style={{
             fontFamily: poppins,
-            fontSize: 52,
+            fontSize: l.portrait ? 40 : 52,
             fontWeight: 700,
             letterSpacing: 0.6,
             color: palette.white,
@@ -104,7 +106,7 @@ export const HookStatement: React.FC = () => {
         <div
           style={{
             alignSelf: "center",
-            width: 420,
+            width: Math.min(420, l.width - l.margin * 2),
             height: 1,
             marginTop: 6,
             background: palette.goldRule,

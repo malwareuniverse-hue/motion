@@ -3,6 +3,10 @@ export const WIDTH = 1920;
 export const HEIGHT = 1080;
 export const DURATION_IN_FRAMES = 2700; // 90.00s at 30fps
 
+/** 9:16 delivery, same timings and same components — see layout.ts. */
+export const V_WIDTH = 1080;
+export const V_HEIGHT = 1920;
+
 /**
  * Frame timings are derived from the voiceover transcript (30fps):
  *   0:01 hook            0:12 more doors        0:20 the question
@@ -179,41 +183,22 @@ export const BROLL: BrollSpec[] = [
 /* The "more" stack                                                    */
 /* ------------------------------------------------------------------ */
 
-export type MoreCard = { text: string; col: number; row: number; in: number };
+export type MoreCard = { text: string; in: number };
 
+/** Order here is the reveal order and the grid order in both formats. */
 export const MORE_CARDS: MoreCard[] = [
-  { text: "MORE MARKETS", col: 0, row: 0, in: 990 },
-  { text: "MORE OWNERS", col: 1, row: 0, in: 1044 },
-  { text: "MORE BOOKING WINDOWS", col: 2, row: 0, in: 1092 },
-  { text: "MORE SEASONALITY", col: 0, row: 1, in: 1140 },
-  { text: "MORE EXCEPTIONS", col: 1, row: 1, in: 1212 },
-  { text: "MORE DATA", col: 2, row: 1, in: 1258 },
+  { text: "MORE MARKETS", in: 990 },
+  { text: "MORE OWNERS", in: 1044 },
+  { text: "MORE BOOKING WINDOWS", in: 1092 },
+  { text: "MORE SEASONALITY", in: 1140 },
+  { text: "MORE EXCEPTIONS", in: 1212 },
+  { text: "MORE DATA", in: 1258 },
 ];
 
-export const CARD_W = 484;
-export const CARD_H = 96;
-export const CARD_GAP = 34;
 export const CARD_IN_DUR = 26;
-export const GRID_LEFT = (WIDTH - (CARD_W * 3 + CARD_GAP * 2)) / 2;
-export const GRID_TOP = 352;
-
-export const cardX = (col: number) => GRID_LEFT + col * (CARD_W + CARD_GAP);
-export const cardY = (row: number) => GRID_TOP + row * (CARD_H + CARD_GAP);
 
 /* ------------------------------------------------------------------ */
 /* Enterprise shift                                                    */
 /* ------------------------------------------------------------------ */
 
 export const SHIFT_NODE_COUNT = 12;
-export const SHIFT_COLS = 4;
-export const SHIFT_NODE = 150;
-export const SHIFT_NODE_GAP = 44;
-export const SHIFT_ROWS = SHIFT_NODE_COUNT / SHIFT_COLS;
-export const SHIFT_GRID_W =
-  SHIFT_COLS * SHIFT_NODE + (SHIFT_COLS - 1) * SHIFT_NODE_GAP;
-export const SHIFT_GRID_H =
-  SHIFT_ROWS * SHIFT_NODE + (SHIFT_ROWS - 1) * SHIFT_NODE_GAP;
-export const SHIFT_CENTER_Y = 442;
-export const SHIFT_GRID_LEFT = (WIDTH - SHIFT_GRID_W) / 2;
-export const SHIFT_GRID_TOP = SHIFT_CENTER_Y - SHIFT_GRID_H / 2;
-export const SHIFT_FRAME_PAD = 56;

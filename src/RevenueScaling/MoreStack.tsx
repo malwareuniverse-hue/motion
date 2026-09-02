@@ -4,19 +4,16 @@ import { palette } from "./theme";
 import { poppins } from "./fonts";
 import { beatOpacity, clampedInterp, easeOutCubic, fadeUp } from "./utils";
 import { Kicker } from "./Primitives";
-import {
-  CARD_H,
-  CARD_IN_DUR,
-  CARD_W,
-  MORE_CARDS,
-  T,
-  cardX,
-  cardY,
-  type MoreCard,
-} from "./timeline";
+import { cardGrid, useLayout, type Layout } from "./layout";
+import { CARD_IN_DUR, MORE_CARDS, T, type MoreCard } from "./timeline";
 
-const MoreCardTile: React.FC<{ spec: MoreCard }> = ({ spec }) => {
+const MoreCardTile: React.FC<{ spec: MoreCard; index: number; l: Layout }> = ({
+  spec,
+  index,
+  l,
+}) => {
   const frame = useCurrentFrame();
+  const grid = cardGrid(l);
   const { opacity, translateY } = fadeUp(frame, spec.in, CARD_IN_DUR, 14);
   const tick = clampedInterp(
     frame,
@@ -29,10 +26,10 @@ const MoreCardTile: React.FC<{ spec: MoreCard }> = ({ spec }) => {
     <div
       style={{
         position: "absolute",
-        left: cardX(spec.col),
-        top: cardY(spec.row),
-        width: CARD_W,
-        height: CARD_H,
+        left: grid.x(index),
+        top: grid.y(index),
+        width: l.card.w,
+        height: l.card.h,
         background: palette.panel,
         border: `1px solid ${palette.panelBorder}`,
         display: "flex",
@@ -55,7 +52,7 @@ const MoreCardTile: React.FC<{ spec: MoreCard }> = ({ spec }) => {
       <span
         style={{
           fontFamily: poppins,
-          fontSize: 29,
+          fontSize: l.type.card,
           fontWeight: 600,
           letterSpacing: 1.4,
           color: palette.white,
@@ -70,10 +67,12 @@ const MoreCardTile: React.FC<{ spec: MoreCard }> = ({ spec }) => {
 /**
  * THE "MORE" STACK (0:32–0:46). Six equal-weight cards reveal one per beat, then
  * the frame resolves into the one line that isn't equal to the others — the
- * decisions compound while everything else merely adds.
+ * decisions compound while everything else merely adds. Three columns in 16:9,
+ * a single column in 9:16.
  */
 export const MoreStack: React.FC = () => {
   const frame = useCurrentFrame();
+  const l = useLayout();
 
   const opacity = beatOpacity(
     frame,
@@ -106,7 +105,7 @@ export const MoreStack: React.FC = () => {
           position: "absolute",
           left: 0,
           right: 0,
-          top: 262,
+          top: l.card.kickerTop,
           opacity: kicker.opacity,
           transform: `translateY(${kicker.translateY}px)`,
         }}
@@ -115,8 +114,8 @@ export const MoreStack: React.FC = () => {
       </div>
 
       <div style={{ position: "absolute", inset: 0, opacity: cardDim }}>
-        {MORE_CARDS.map((spec) => (
-          <MoreCardTile key={spec.text} spec={spec} />
+        {MORE_CARDS.map((spec, i) => (
+          <MoreCardTile key={spec.text} spec={spec} index={i} l={l} />
         ))}
       </div>
 
@@ -125,7 +124,7 @@ export const MoreStack: React.FC = () => {
           position: "absolute",
           left: 0,
           right: 0,
-          top: 716,
+          top: l.card.heroTop,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
@@ -134,7 +133,7 @@ export const MoreStack: React.FC = () => {
       >
         <div
           style={{
-            width: 240,
+            width: l.portrait ? 180 : 240,
             height: 2,
             background: palette.gold,
             transform: `scaleX(${rule})`,
@@ -144,16 +143,19 @@ export const MoreStack: React.FC = () => {
         <div
           style={{
             fontFamily: poppins,
-            fontSize: 62,
+            fontSize: l.type.hero,
             fontWeight: 700,
             letterSpacing: 0.4,
+            lineHeight: 1.18,
+            textAlign: "center",
             color: palette.white,
             opacity: hero.opacity,
             transform: `translateY(${hero.translateY}px)`,
           }}
         >
-          <span style={{ color: palette.gold }}>EXPONENTIALLY</span> MORE
-          DECISIONS
+          <span style={{ color: palette.gold }}>EXPONENTIALLY</span>
+          {l.portrait ? <br /> : " "}
+          MORE DECISIONS
         </div>
       </div>
     </div>

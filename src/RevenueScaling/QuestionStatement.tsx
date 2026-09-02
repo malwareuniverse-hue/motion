@@ -3,6 +3,7 @@ import { useCurrentFrame } from "remotion";
 import { palette } from "./theme";
 import { beatOpacity, fadeUp } from "./utils";
 import { Kicker, StatementFrame, headlineStyle } from "./Primitives";
+import { useLayout } from "./layout";
 import { T } from "./timeline";
 
 /**
@@ -11,6 +12,7 @@ import { T } from "./timeline";
  */
 export const QuestionStatement: React.FC = () => {
   const frame = useCurrentFrame();
+  const l = useLayout();
 
   const opacity = beatOpacity(
     frame,
@@ -38,7 +40,7 @@ export const QuestionStatement: React.FC = () => {
       <div>
         <div
           style={{
-            ...headlineStyle,
+            ...headlineStyle(l),
             opacity: l1.opacity,
             transform: `translateY(${l1.translateY}px)`,
           }}
@@ -47,7 +49,7 @@ export const QuestionStatement: React.FC = () => {
         </div>
         <div
           style={{
-            ...headlineStyle,
+            ...headlineStyle(l),
             marginTop: 8,
             opacity: l2.opacity,
             transform: `translateY(${l2.translateY}px)`,

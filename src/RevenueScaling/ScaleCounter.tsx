@@ -10,6 +10,7 @@ import {
   fadeUp,
 } from "./utils";
 import { GoldRule, Kicker } from "./Primitives";
+import { useLayout } from "./layout";
 import { T } from "./timeline";
 
 const numberStyle: React.CSSProperties = {
@@ -25,6 +26,7 @@ const numberStyle: React.CSSProperties = {
  */
 export const ScaleCounter: React.FC = () => {
   const frame = useCurrentFrame();
+  const l = useLayout();
 
   const opacity = beatOpacity(
     frame,
@@ -81,11 +83,17 @@ export const ScaleCounter: React.FC = () => {
         <Kicker>GOING FROM</Kicker>
       </div>
 
-      <div style={{ display: "flex", alignItems: "center", gap: 56 }}>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: l.portrait ? 34 : 56,
+        }}
+      >
         <div
           style={{
             ...numberStyle,
-            fontSize: 132,
+            fontSize: l.type.numberSmall,
             color: palette.gray,
             opacity: from.opacity * 0.75,
             transform: `translateY(${from.translateY}px)`,
@@ -94,7 +102,13 @@ export const ScaleCounter: React.FC = () => {
           30
         </div>
 
-        <div style={{ display: "flex", alignItems: "center", width: 220 }}>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            width: l.portrait ? 130 : 220,
+          }}
+        >
           <div
             style={{
               height: 2,
@@ -119,7 +133,7 @@ export const ScaleCounter: React.FC = () => {
         <div
           style={{
             ...numberStyle,
-            fontSize: 188,
+            fontSize: l.type.number,
             color: palette.white,
             opacity: to.opacity,
             transform: `translateY(${to.translateY}px)`,

@@ -3,11 +3,8 @@ import { useCurrentFrame } from "remotion";
 import { palette } from "./theme";
 import { poppins } from "./fonts";
 import { beatOpacity, clampedInterp, easeOutCubic, fadeUp } from "./utils";
-import { HEIGHT, T, WIDTH } from "./timeline";
-
-const FRAME_W = 1020;
-const FRAME_H = 400;
-const PERIMETER = 2 * (FRAME_W + FRAME_H);
+import { T } from "./timeline";
+import { useLayout } from "./layout";
 
 /**
  * VRMA NASHVILLE (1:00–1:06). Reusable event/chapter card: charcoal surface,
@@ -15,6 +12,11 @@ const PERIMETER = 2 * (FRAME_W + FRAME_H);
  */
 export const EventCard: React.FC = () => {
   const frame = useCurrentFrame();
+  const l = useLayout();
+
+  const FRAME_W = l.portrait ? l.width - l.margin * 2 : 1020;
+  const FRAME_H = l.portrait ? 460 : 400;
+  const PERIMETER = 2 * (FRAME_W + FRAME_H);
 
   const opacity = beatOpacity(frame, T.eventIn, 1, T.eventOut, T.eventOutDur);
   if (opacity <= 0) return null;
@@ -29,8 +31,8 @@ export const EventCard: React.FC = () => {
   const title = fadeUp(frame, T.eventIn + 14, 28, 14);
   const sub = fadeUp(frame, T.eventSubIn, 28, 14);
 
-  const left = (WIDTH - FRAME_W) / 2;
-  const top = (HEIGHT - FRAME_H) / 2;
+  const left = (l.width - FRAME_W) / 2;
+  const top = (l.height - FRAME_H) / 2;
 
   return (
     <div style={{ position: "absolute", inset: 0, opacity }}>
@@ -48,8 +50,8 @@ export const EventCard: React.FC = () => {
       />
 
       <svg
-        width={WIDTH}
-        height={HEIGHT}
+        width={l.width}
+        height={l.height}
         style={{ position: "absolute", inset: 0 }}
         aria-hidden="true"
       >
@@ -84,9 +86,9 @@ export const EventCard: React.FC = () => {
         <div
           style={{
             fontFamily: poppins,
-            fontSize: 18,
+            fontSize: l.portrait ? 16 : 18,
             fontWeight: 600,
-            letterSpacing: 5,
+            letterSpacing: l.portrait ? 3.6 : 5,
             color: palette.gold,
             opacity: title.opacity,
             transform: `translateY(${title.translateY}px)`,
@@ -97,7 +99,7 @@ export const EventCard: React.FC = () => {
         <div
           style={{
             fontFamily: poppins,
-            fontSize: 118,
+            fontSize: l.portrait ? 104 : 118,
             fontWeight: 800,
             letterSpacing: 6,
             color: palette.white,
@@ -110,9 +112,9 @@ export const EventCard: React.FC = () => {
         <div
           style={{
             fontFamily: poppins,
-            fontSize: 26,
+            fontSize: l.portrait ? 24 : 26,
             fontWeight: 500,
-            letterSpacing: 8,
+            letterSpacing: l.portrait ? 6 : 8,
             color: palette.whiteSoft,
             opacity: sub.opacity,
             transform: `translateY(${sub.translateY}px)`,

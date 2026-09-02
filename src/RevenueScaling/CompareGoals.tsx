@@ -3,21 +3,34 @@ import { useCurrentFrame } from "remotion";
 import { palette } from "./theme";
 import { poppins } from "./fonts";
 import { beatOpacity, clampedInterp, easeOutCubic, fadeUp } from "./utils";
+import { useLayout, type Layout } from "./layout";
 import { T } from "./timeline";
 
-const COL_W = 720;
-const COL_LEFT = 200;
-const COL_RIGHT = 1000;
-const COL_TOP = 348;
-const COL_H = 268;
-
-const kickerStyle = (color: string): React.CSSProperties => ({
+const kickerStyle = (color: string, l: Layout): React.CSSProperties => ({
   fontFamily: poppins,
-  fontSize: 17,
+  fontSize: l.portrait ? 16 : 17,
   fontWeight: 600,
-  letterSpacing: 4.6,
+  letterSpacing: l.portrait ? 3.8 : 4.6,
   color,
 });
+
+/** Column geometry: side by side in 16:9, stacked in 9:16. */
+const columns = (l: Layout) =>
+  l.portrait
+    ? {
+        w: l.width - l.margin * 2,
+        h: 240,
+        rejected: { left: l.margin, top: 540 },
+        real: { left: l.margin, top: 880 },
+        captionTop: 1310,
+      }
+    : {
+        w: 720,
+        h: 268,
+        rejected: { left: l.margin, top: 348 },
+        real: { left: 1000, top: 348 },
+        captionTop: 736,
+      };
 
 /**
  * WORK HARDER vs. A PROCESS THAT COMPOUNDS (0:47–0:56). The rejected goal is
@@ -25,6 +38,8 @@ const kickerStyle = (color: string): React.CSSProperties => ({
  */
 export const CompareGoals: React.FC = () => {
   const frame = useCurrentFrame();
+  const l = useLayout();
+  const col = columns(l);
 
   const opacity = beatOpacity(
     frame,
@@ -52,16 +67,23 @@ export const CompareGoals: React.FC = () => {
   );
   const caption = fadeUp(frame, T.systemCaptionIn, 28, 14);
 
+  const headline: React.CSSProperties = {
+    fontFamily: poppins,
+    fontSize: l.type.h2,
+    letterSpacing: 0.4,
+    lineHeight: 1.16,
+  };
+
   return (
     <div style={{ position: "absolute", inset: 0, opacity }}>
       {/* rejected goal */}
       <div
         style={{
           position: "absolute",
-          left: COL_LEFT,
-          top: COL_TOP,
-          width: COL_W,
-          height: COL_H,
+          left: col.rejected.left,
+          top: col.rejected.top,
+          width: col.w,
+          height: col.h,
           opacity: left.opacity * dim,
           transform: `translateY(${left.translateY}px)`,
           display: "flex",
@@ -72,17 +94,9 @@ export const CompareGoals: React.FC = () => {
           paddingLeft: 40,
         }}
       >
-        <div style={kickerStyle(palette.graySoft)}>THE GOAL ISN&rsquo;T</div>
+        <div style={kickerStyle(palette.graySoft, l)}>THE GOAL ISN&rsquo;T</div>
         <div style={{ position: "relative", alignSelf: "flex-start" }}>
-          <div
-            style={{
-              fontFamily: poppins,
-              fontSize: 62,
-              fontWeight: 600,
-              letterSpacing: 0.4,
-              color: palette.gray,
-            }}
-          >
+          <div style={{ ...headline, fontWeight: 600, color: palette.gray }}>
             WORK HARDER
           </div>
           <div
@@ -105,10 +119,10 @@ export const CompareGoals: React.FC = () => {
       <div
         style={{
           position: "absolute",
-          left: COL_RIGHT,
-          top: COL_TOP,
-          width: COL_W,
-          height: COL_H,
+          left: col.real.left,
+          top: col.real.top,
+          width: col.w,
+          height: col.h,
           opacity: right.opacity,
           transform: `translateY(${right.translateY}px)`,
           display: "flex",
@@ -130,17 +144,8 @@ export const CompareGoals: React.FC = () => {
             transformOrigin: "center",
           }}
         />
-        <div style={kickerStyle(palette.gold)}>THE GOAL IS</div>
-        <div
-          style={{
-            fontFamily: poppins,
-            fontSize: 62,
-            fontWeight: 700,
-            letterSpacing: 0.2,
-            lineHeight: 1.16,
-            color: palette.white,
-          }}
-        >
+        <div style={kickerStyle(palette.gold, l)}>THE GOAL IS</div>
+        <div style={{ ...headline, fontWeight: 700, color: palette.white }}>
           BUILD A REVENUE
           <br />
           PROCESS
@@ -152,11 +157,13 @@ export const CompareGoals: React.FC = () => {
           position: "absolute",
           left: 0,
           right: 0,
-          top: 736,
+          top: col.captionTop,
+          padding: `0 ${l.margin}px`,
           textAlign: "center",
           fontFamily: poppins,
-          fontSize: 32,
+          fontSize: l.portrait ? 28 : 32,
           fontWeight: 500,
+          lineHeight: 1.4,
           letterSpacing: 0.6,
           color: palette.gray,
           opacity: caption.opacity,

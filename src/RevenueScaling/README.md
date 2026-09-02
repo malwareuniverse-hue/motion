@@ -1,16 +1,23 @@
 # RevenueScaling — VRMA Nashville, "Revenue at scale" (90s)
 
-Two compositions, one component:
+Four compositions, one component. The 16:9 and 9:16 cuts share every beat,
+every timing and every component — only the layout differs, and all of that
+lives in `layout.ts`.
 
-| Composition | What it renders |
-| --- | --- |
-| `RevenueScaling` | The finished piece — backdrop, B-roll, grain, graphics, brand system. |
-| `RevenueScalingOverlays` | Graphics only over transparency, for compositing onto Emile's A-roll. Render with `--codec=prores --prores-profile=4444`, or as a PNG sequence. |
+| Composition | Size | What it renders |
+| --- | --- | --- |
+| `RevenueScaling` | 1920×1080 | The finished 16:9 piece — backdrop, B-roll, grain, graphics, brand system. |
+| `RevenueScalingOverlays` | 1920×1080 | Graphics only over transparency, for compositing onto Emile's A-roll. |
+| `RevenueScalingVertical` | 1080×1920 | The finished 9:16 piece. |
+| `RevenueScalingVerticalOverlays` | 1080×1920 | 9:16 graphics only over transparency. |
+
+Render the overlay cuts with `--codec=prores --prores-profile=4444`, or as a
+PNG sequence — h.264 has no alpha channel.
 
 ## Beat map
 
-All timings live in `timeline.ts` (30fps). Re-time there against the final audio;
-nothing else needs touching.
+All timings live in `timeline.ts` (30fps) and are shared by both formats.
+Re-time there against the final audio; nothing else needs touching.
 
 | VO | Frames | Beat |
 | --- | --- | --- |
@@ -26,6 +33,25 @@ nothing else needs touching.
 | 1:20 | 2404–2700 | CTA lockup |
 
 Only one graphic is on screen at a time, by design.
+
+## How the two aspect ratios share one build
+
+`layout.ts` resolves the safe margin, the type scale, and the two grids that
+have to re-flow; components read those tokens through `useLayout()` and never
+branch on raw pixel dimensions. What changes between formats:
+
+- **The "more" stack** — three columns of two in 16:9, a single column of six
+  in 9:16.
+- **Work harder vs. build a process** — side by side in 16:9, stacked in 9:16.
+- **The enterprise grid** — 4×3 in 16:9, 3×4 in 9:16. The scattered start
+  positions are fractions of the frame, so they fill either one.
+- **`MORE DOORS ≠ MORE PROFIT`** — one line set left in 16:9 (leaving the right
+  third as open footage); three centred lines in 9:16, with the ≠ on its own.
+- **B-roll placeholders** — the doors slot drops from seven doorways to four,
+  and the portfolio plates scale up, so neither reads as thin bars in portrait.
+
+To add a beat, put its timing in `timeline.ts` and its geometry in `layout.ts`
+for both formats; that keeps the two cuts from drifting apart.
 
 ## Dropping in footage
 
@@ -51,8 +77,10 @@ Every slot carries its exact stock search phrases:
 | `nashville-skyline` | 1706–2016 | Nashville skyline blue hour aerial · Nashville downtown evening cinematic drone · hospitality conference expo hall professionals talking |
 | `cta-portfolio` | 2384–2700 | business professionals meeting conference lobby warm light · handshake hospitality conference networking · Nashville skyline night slow aerial |
 
-Raise or lower a slot's `scrim` (0–1) if a real clip needs more or less headroom
-under the typography.
+Source vertical clips for the 9:16 cut where you can — the layer uses
+`objectFit: cover`, so a 16:9 clip is centre-cropped hard in portrait. Raise or
+lower a slot's `scrim` (0–1) if a real clip needs more or less headroom under
+the typography.
 
 ## Visual system
 
