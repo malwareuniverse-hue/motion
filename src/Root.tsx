@@ -19,6 +19,8 @@ import { UnbookedCalendarScene } from "./UnbookedCalendar";
 import * as UnbookedCalendarTimeline from "./UnbookedCalendar/timeline";
 import { PaceSplitScene } from "./PaceSplit";
 import * as PaceSplitTimeline from "./PaceSplit/timeline";
+import { NightReviewScene } from "./NightReview";
+import * as NightReviewTimeline from "./NightReview/timeline";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -95,6 +97,14 @@ export const RemotionRoot: React.FC = () => {
         fps={PaceSplitTimeline.FPS}
         width={PaceSplitTimeline.WIDTH}
         height={PaceSplitTimeline.HEIGHT}
+      />
+      <Composition
+        id="NightReview"
+        component={NightReviewScene}
+        durationInFrames={NightReviewTimeline.DURATION_IN_FRAMES}
+        fps={NightReviewTimeline.FPS}
+        width={NightReviewTimeline.WIDTH}
+        height={NightReviewTimeline.HEIGHT}
       />
     </>
   );
