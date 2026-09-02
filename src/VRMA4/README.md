@@ -93,7 +93,11 @@ label — that line stays Emile's.
 
 - `transparent: false` → full-frame charcoal beat.
 - `transparent: true` → keys over Emile or the montage. Render with alpha:
-  `npx remotion render VRMA4-DecisionSet out/decision-set.mov --codec=prores --prores-profile=4444 --props='{"transparent":true}'`
+  ```bash
+  npx remotion render VRMA4-DecisionSet out/vrma4/alpha/VRMA4-DecisionSet-alpha.mov \
+    --codec=prores --prores-profile=4444 --image-format=png \
+    --pixel-format=yuva444p10le --props='{"transparent":true}'
+  ```
 - Reveal timings are in `timeline.ts` → `DECISION_SET.itemIn`, as frame offsets
   from 0:43.0. **These are the only numbers in the folder that must sit on the
   word** — nudge them against the real VO once the camera track is down.
@@ -102,8 +106,18 @@ label — that line stays Emile's.
 
 ⚠️ **Wording needs Maynard's confirmation.** Defaults are placeholders pulled
 from Emile's own line — `label: "COME SEE ME AT"`, `headline: "VRMA Nashville"`.
-Swap them for the approved VRMA template copy via `defaultProps` before render.
-Renders with alpha the same way as above.
+Swap them for the approved VRMA template copy via `defaultProps`, or pass them
+on the command line:
+
+```bash
+npx remotion render VRMA4-VrmaLowerThird out/vrma4/alpha/VRMA4-VrmaLowerThird-alpha.mov \
+  --codec=prores --prores-profile=4444 --image-format=png --pixel-format=yuva444p10le \
+  --props='{"label":"COME SEE ME AT","headline":"VRMA Nashville","transparent":true}'
+```
+
+Both alpha passes come out as ProRes 4444 `ap4h` / `yuva444p12le` — a real alpha
+plane, ready to key in Premiere. Everything else in the set is full-frame and has
+no alpha to render.
 
 ---
 
