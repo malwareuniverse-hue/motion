@@ -21,6 +21,8 @@ import { DecisionLoopScene } from "./DecisionLoop";
 import * as DecisionLoopTimeline from "./DecisionLoop/timeline";
 import { DecisionScaleScene } from "./DecisionScale";
 import * as DecisionScaleTimeline from "./DecisionScale/timeline";
+import { PriceNotTheProblemScene } from "./PriceNotTheProblem";
+import * as PriceNotTheProblemTimeline from "./PriceNotTheProblem/timeline";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -105,6 +107,14 @@ export const RemotionRoot: React.FC = () => {
         fps={RevenueChainTimeline.FPS}
         width={RevenueChainTimeline.WIDTH}
         height={RevenueChainTimeline.HEIGHT}
+      />
+      <Composition
+        id="PriceNotTheProblem"
+        component={PriceNotTheProblemScene}
+        durationInFrames={PriceNotTheProblemTimeline.DURATION_IN_FRAMES}
+        fps={PriceNotTheProblemTimeline.FPS}
+        width={PriceNotTheProblemTimeline.WIDTH}
+        height={PriceNotTheProblemTimeline.HEIGHT}
       />
     </>
   );
