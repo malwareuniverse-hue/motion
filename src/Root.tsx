@@ -15,6 +15,20 @@ import { BookingDecisionScene } from "./BookingDecision";
 import * as BookingDecisionTimeline from "./BookingDecision/timeline";
 import { CompsChainScene } from "./CompsChain";
 import * as CompsChainTimeline from "./CompsChain/timeline";
+import {
+  BookingHistory,
+  BookingWindows,
+  CompScan,
+  DecisionSet,
+  ForwardView,
+  GuestSignal,
+  MarketPace,
+  SurfacePrice,
+  VrmaLowerThird,
+  decisionSetDefaults,
+  vrmaLowerThirdDefaults,
+} from "./VRMA4";
+import * as VRMA4 from "./VRMA4/timeline";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -75,6 +89,82 @@ export const RemotionRoot: React.FC = () => {
         fps={CompsChainTimeline.FPS}
         width={CompsChainTimeline.WIDTH}
         height={CompsChainTimeline.HEIGHT}
+      />
+
+      {/* VRMA Reel 4 - vertical 1080x1920 B-roll inserts. See src/VRMA4/README.md */}
+      <Composition
+        id="VRMA4-CompScan"
+        component={CompScan}
+        durationInFrames={VRMA4.COMP_SCAN_DURATION}
+        fps={VRMA4.FPS}
+        width={VRMA4.WIDTH}
+        height={VRMA4.HEIGHT}
+      />
+      <Composition
+        id="VRMA4-BookingHistory"
+        component={BookingHistory}
+        durationInFrames={VRMA4.BOOKING_HISTORY_DURATION}
+        fps={VRMA4.FPS}
+        width={VRMA4.WIDTH}
+        height={VRMA4.HEIGHT}
+      />
+      <Composition
+        id="VRMA4-GuestSignal"
+        component={GuestSignal}
+        durationInFrames={VRMA4.GUEST_SIGNAL_DURATION}
+        fps={VRMA4.FPS}
+        width={VRMA4.WIDTH}
+        height={VRMA4.HEIGHT}
+      />
+      <Composition
+        id="VRMA4-SurfacePrice"
+        component={SurfacePrice}
+        durationInFrames={VRMA4.SURFACE_PRICE_DURATION}
+        fps={VRMA4.FPS}
+        width={VRMA4.WIDTH}
+        height={VRMA4.HEIGHT}
+      />
+      <Composition
+        id="VRMA4-MarketPace"
+        component={MarketPace}
+        durationInFrames={VRMA4.MARKET_PACE_DURATION}
+        fps={VRMA4.FPS}
+        width={VRMA4.WIDTH}
+        height={VRMA4.HEIGHT}
+      />
+      <Composition
+        id="VRMA4-BookingWindows"
+        component={BookingWindows}
+        durationInFrames={VRMA4.BOOKING_WINDOWS_DURATION}
+        fps={VRMA4.FPS}
+        width={VRMA4.WIDTH}
+        height={VRMA4.HEIGHT}
+      />
+      <Composition
+        id="VRMA4-ForwardView"
+        component={ForwardView}
+        durationInFrames={VRMA4.FORWARD_VIEW_DURATION}
+        fps={VRMA4.FPS}
+        width={VRMA4.WIDTH}
+        height={VRMA4.HEIGHT}
+      />
+      <Composition
+        id="VRMA4-DecisionSet"
+        component={DecisionSet}
+        defaultProps={decisionSetDefaults}
+        durationInFrames={VRMA4.DECISION_SET_DURATION}
+        fps={VRMA4.FPS}
+        width={VRMA4.WIDTH}
+        height={VRMA4.HEIGHT}
+      />
+      <Composition
+        id="VRMA4-VrmaLowerThird"
+        component={VrmaLowerThird}
+        defaultProps={vrmaLowerThirdDefaults}
+        durationInFrames={VRMA4.LOWER_THIRD_DURATION}
+        fps={VRMA4.FPS}
+        width={VRMA4.WIDTH}
+        height={VRMA4.HEIGHT}
       />
     </>
   );
