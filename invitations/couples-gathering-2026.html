@@ -1,0 +1,1266 @@
+<title>Munting Hardin Couples Gathering</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..700,50,1;1,9..144,300..700,50,1&family=Karla:ital,wght@0,300..700;1,400..600&display=swap">
+<style>
+  :root {
+    --night: #0B1A13;
+    --panel: #12271C;
+    --panel-2: #16301F;
+    --ivory: #F3EEE1;
+    --sage: #9BB0A2;
+    --sage-dim: #6E8877;
+    --lantern: #EFB35C;
+    --bloom: #E0879B;
+    --leaf: #4F8F63;
+    --hair: rgba(155, 176, 162, 0.22);
+    --hair-strong: rgba(155, 176, 162, 0.4);
+    --display: "Fraunces", "Iowan Old Style", Georgia, serif;
+    --body: "Karla", "Helvetica Neue", Arial, sans-serif;
+    --col: 660px;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--night);
+    color: var(--ivory);
+    font-family: var(--body);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+
+  /* ---------- backdrop ---------- */
+  #garden {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .vignette {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background:
+      radial-gradient(120% 80% at 50% -10%, rgba(239, 179, 92, 0.16), transparent 60%),
+      radial-gradient(100% 60% at 50% 110%, rgba(79, 143, 99, 0.14), transparent 65%);
+  }
+
+  /* ---------- string lights ---------- */
+  .lights {
+    position: relative;
+    z-index: 3;
+    display: block;
+    width: 100%;
+    height: 92px;
+    overflow: hidden;
+  }
+  .lights svg { display: block; width: 100%; height: 92px; }
+  .bulb { transform-box: fill-box; transform-origin: 50% 0%; }
+  @media (prefers-reduced-motion: no-preference) {
+    .lights svg { animation: sway 9s ease-in-out infinite; transform-origin: 50% 0%; }
+    .bulb { animation: glow 3.4s ease-in-out infinite; }
+  }
+  @keyframes sway {
+    0%, 100% { transform: rotate(-0.5deg); }
+    50%      { transform: rotate(0.5deg); }
+  }
+  @keyframes glow {
+    0%, 100% { opacity: 1; }
+    50%      { opacity: 0.45; }
+  }
+
+  /* ---------- shell ---------- */
+  .stage {
+    position: relative;
+    z-index: 2;
+    padding: 0 20px 72px;
+  }
+  .col {
+    width: min(var(--col), 100%);
+    margin: 0 auto;
+  }
+
+  /* ---------- hero ---------- */
+  .hero { text-align: center; padding-top: 8px; }
+  .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin: 0;
+  }
+  .crest { width: 132px; height: 132px; margin: 14px auto 6px; display: block; }
+  @media (prefers-reduced-motion: no-preference) {
+    .draw { stroke-dasharray: 340; stroke-dashoffset: 340; animation: draw 1.9s cubic-bezier(.5,0,.2,1) .25s forwards; }
+    .sprig { opacity: 0; animation: sprout .7s ease-out forwards; }
+    .rise { animation: rise .85s cubic-bezier(.2,.75,.25,1) both; }
+  }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+  @keyframes sprout { to { opacity: 1; } }
+  @keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+
+  h1 {
+    font-family: var(--display);
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-size: clamp(44px, 10vw, 78px);
+    line-height: 0.98;
+    letter-spacing: -0.02em;
+    margin: 6px 0 0;
+    text-wrap: balance;
+    color: var(--ivory);
+  }
+  h1 em {
+    display: block;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--lantern);
+  }
+  .lede {
+    font-family: var(--display);
+    font-style: italic;
+    font-size: 19px;
+    color: var(--sage);
+    margin: 14px auto 0;
+    max-width: 34ch;
+    text-wrap: balance;
+  }
+
+  /* ---------- countdown ---------- */
+  .countdown {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 26px 0 4px;
+    flex-wrap: wrap;
+  }
+  .tick {
+    min-width: 74px;
+    padding: 10px 6px 8px;
+    border: 1px solid var(--hair);
+    border-radius: 2px;
+    background: rgba(18, 39, 28, 0.66);
+    backdrop-filter: blur(2px);
+  }
+  .tick b {
+    display: block;
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 26px;
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+    color: var(--lantern);
+  }
+  .tick span {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--sage-dim);
+  }
+
+  .rule {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--hair-strong), transparent);
+    margin: 40px 0;
+    border: 0;
+  }
+
+  /* ---------- details ---------- */
+  .facts { display: grid; gap: 0; }
+  .fact {
+    display: grid;
+    grid-template-columns: 96px 1fr;
+    gap: 18px;
+    padding: 16px 2px;
+    border-top: 1px solid var(--hair);
+    align-items: baseline;
+  }
+  .fact:last-child { border-bottom: 1px solid var(--hair); }
+  @media (max-width: 520px) {
+    .fact { grid-template-columns: 1fr; gap: 6px; }
+    .fact dt { padding-top: 0; }
+  }
+  .fact dt {
+    font-size: 10.5px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--sage-dim);
+    padding-top: 5px;
+  }
+  .fact dd { margin: 0; }
+  .fact .big {
+    font-family: var(--display);
+    font-size: 21px;
+    line-height: 1.25;
+    color: var(--ivory);
+  }
+  .fact .sub {
+    display: block;
+    font-size: 14px;
+    color: var(--sage);
+    margin-top: 3px;
+  }
+  .bis { font-style: italic; color: var(--sage-dim); }
+
+  /* ---------- section headings ---------- */
+  .sec-head { margin: 0 0 6px; }
+  .sec-head h2 {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: 30px;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+  .sec-head p { color: var(--sage); margin: 6px 0 0; font-size: 15px; }
+
+  /* ---------- form ---------- */
+  form { margin-top: 22px; display: grid; gap: 18px; }
+  .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  @media (max-width: 560px) { .pair { grid-template-columns: 1fr; } }
+
+  .field { display: grid; gap: 6px; }
+  .field label {
+    font-size: 10.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--sage);
+  }
+  .field .hint { font-size: 13px; color: var(--sage-dim); font-style: italic; }
+  .field input,
+  .field select,
+  .field textarea {
+    width: 100%;
+    font-family: var(--body);
+    font-size: 16px;
+    color: var(--ivory);
+    background: rgba(11, 26, 19, 0.72);
+    border: 1px solid var(--hair);
+    border-radius: 2px;
+    padding: 11px 12px;
+    transition: border-color .18s ease, box-shadow .18s ease, background .18s ease;
+  }
+  .field textarea { resize: vertical; min-height: 84px; }
+  .field select {
+    appearance: none;
+    background-image: linear-gradient(45deg, transparent 50%, var(--sage) 50%), linear-gradient(135deg, var(--sage) 50%, transparent 50%);
+    background-position: calc(100% - 19px) 21px, calc(100% - 13px) 21px;
+    background-size: 6px 6px, 6px 6px;
+    background-repeat: no-repeat;
+  }
+  .field input:focus-visible,
+  .field select:focus-visible,
+  .field textarea:focus-visible {
+    outline: none;
+    border-color: var(--lantern);
+    background: rgba(18, 39, 28, 0.9);
+    box-shadow: 0 0 0 3px rgba(239, 179, 92, 0.18);
+  }
+  .field input::placeholder, .field textarea::placeholder { color: rgba(155, 176, 162, 0.45); }
+  .field.invalid input, .field.invalid select { border-color: var(--bloom); }
+  .err { font-size: 13px; color: var(--bloom); min-height: 0; }
+
+  .choices { display: flex; gap: 10px; flex-wrap: wrap; }
+  .choice {
+    position: relative;
+    flex: 1 1 180px;
+    border: 1px solid var(--hair);
+    border-radius: 2px;
+    padding: 13px 14px;
+    cursor: pointer;
+    transition: border-color .18s ease, background .18s ease;
+    background: rgba(11, 26, 19, 0.55);
+  }
+  .choice:hover { border-color: var(--hair-strong); }
+  .choice input { position: absolute; opacity: 0; pointer-events: none; }
+  .choice strong { display: block; font-weight: 600; font-size: 15px; }
+  .choice small { color: var(--sage-dim); font-size: 13px; }
+  .choice:has(input:checked) {
+    border-color: var(--lantern);
+    background: rgba(239, 179, 92, 0.1);
+  }
+  .choice:has(input:focus-visible) { box-shadow: 0 0 0 3px rgba(239, 179, 92, 0.18); }
+
+  /* ---------- payment ---------- */
+  .paybox {
+    border: 1px solid var(--hair);
+    border-left: 3px solid var(--lantern);
+    background: rgba(18, 39, 28, 0.6);
+    padding: 18px 20px;
+    display: grid;
+    gap: 4px;
+  }
+  .paybox .amt {
+    font-family: var(--display);
+    font-size: 34px;
+    line-height: 1.1;
+    color: var(--lantern);
+  }
+  .gcash {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+  }
+  .gnum {
+    font-size: 21px;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.04em;
+  }
+  .copy {
+    font-family: var(--body);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--sage);
+    background: transparent;
+    border: 1px solid var(--hair-strong);
+    border-radius: 2px;
+    padding: 6px 11px;
+    cursor: pointer;
+    transition: color .18s ease, border-color .18s ease;
+  }
+  .copy:hover { color: var(--lantern); border-color: var(--lantern); }
+  .copy:focus-visible { outline: 2px solid var(--lantern); outline-offset: 2px; }
+
+  /* ---------- buttons ---------- */
+  .submit {
+    font-family: var(--body);
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--night);
+    background: var(--lantern);
+    border: 0;
+    border-radius: 2px;
+    padding: 16px 22px;
+    cursor: pointer;
+    transition: transform .16s ease, box-shadow .2s ease, background .2s ease;
+    box-shadow: 0 0 0 rgba(239, 179, 92, 0);
+  }
+  .submit:hover { background: #F6C377; box-shadow: 0 8px 30px rgba(239, 179, 92, 0.24); }
+  .submit:active { transform: translateY(1px); }
+  .submit:focus-visible { outline: 2px solid var(--ivory); outline-offset: 3px; }
+  .submit[disabled] { opacity: 0.55; cursor: progress; }
+
+  .ghost {
+    font-family: var(--body);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--sage);
+    background: transparent;
+    border: 1px solid var(--hair-strong);
+    border-radius: 2px;
+    padding: 10px 16px;
+    cursor: pointer;
+    transition: color .18s ease, border-color .18s ease;
+  }
+  .ghost:hover { color: var(--lantern); border-color: var(--lantern); }
+  .ghost:focus-visible { outline: 2px solid var(--lantern); outline-offset: 2px; }
+
+  .note {
+    font-size: 13.5px;
+    color: var(--sage-dim);
+    border-left: 1px solid var(--hair);
+    padding-left: 12px;
+  }
+
+  /* ---------- confirmation ---------- */
+  .done { text-align: center; padding: 8px 0 4px; }
+  .done .seal { width: 92px; height: 92px; margin: 0 auto 10px; display: block; }
+  .done h2 {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: 40px;
+    margin: 0;
+    color: var(--ivory);
+  }
+  .done .bis { display: block; margin-top: 10px; font-size: 17px; }
+  .recap {
+    text-align: left;
+    margin: 26px auto 0;
+    max-width: 420px;
+    display: grid;
+    gap: 0;
+  }
+  .recap div {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 10px 2px;
+    border-top: 1px solid var(--hair);
+    font-size: 14.5px;
+  }
+  .recap div:last-child { border-bottom: 1px solid var(--hair); }
+  .recap span { color: var(--sage-dim); }
+  .recap b { font-weight: 600; text-align: right; }
+
+  /* ---------- sheet ---------- */
+  .sheet-wrap { display: none; position: relative; z-index: 2; padding: 24px 20px 72px; }
+  body.sheet .sheet-wrap { display: block; }
+  body.sheet .stage, body.sheet .lights { display: none; }
+  .sheet-inner { width: min(1120px, 100%); margin: 0 auto; }
+  body.sheet .vignette { opacity: 0.5; }
+  .sheet-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; }
+  .sheet-head h2 { font-family: var(--display); font-weight: 400; font-size: 34px; margin: 0; }
+  .sheet-head p { margin: 4px 0 0; color: var(--sage); font-size: 14px; }
+  .sheet-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+  .tiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--hair); border: 1px solid var(--hair); margin: 26px 0 22px; }
+  @media (max-width: 700px) { .tiles { grid-template-columns: repeat(2, 1fr); } }
+  .tile { background: var(--panel); padding: 16px 18px; }
+  .tile span { display: block; font-size: 10.5px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--sage-dim); }
+  .tile b { display: block; font-family: var(--display); font-weight: 500; font-size: 30px; line-height: 1.2; font-variant-numeric: tabular-nums; margin-top: 4px; }
+  .tile.gold b { color: var(--lantern); }
+  .tile.rose b { color: var(--bloom); }
+  .tile.leaf b { color: var(--leaf); }
+
+  .tablewrap { overflow-x: auto; border: 1px solid var(--hair); background: rgba(11, 26, 19, 0.86); }
+  table { border-collapse: collapse; width: 100%; min-width: 900px; font-size: 14px; }
+  thead th {
+    position: sticky; top: 0;
+    background: var(--panel-2);
+    text-align: left;
+    font-size: 10.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--sage);
+    font-weight: 600;
+    padding: 11px 14px;
+    border-bottom: 1px solid var(--hair-strong);
+    white-space: nowrap;
+  }
+  tbody td { padding: 12px 14px; border-bottom: 1px solid var(--hair); vertical-align: top; }
+  tbody tr:nth-child(even) { background: rgba(18, 39, 28, 0.4); }
+  tbody tr:hover { background: rgba(239, 179, 92, 0.06); }
+  td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .pill {
+    display: inline-block;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 999px;
+    border: 1px solid;
+    white-space: nowrap;
+  }
+  .pill.gcash { color: var(--lantern); border-color: rgba(239, 179, 92, 0.5); background: rgba(239, 179, 92, 0.1); }
+  .pill.cash { color: var(--leaf); border-color: rgba(79, 143, 99, 0.55); background: rgba(79, 143, 99, 0.12); }
+  .pill.yes { color: var(--bloom); border-color: rgba(224, 135, 155, 0.5); background: rgba(224, 135, 155, 0.1); }
+  .empty { padding: 40px 18px; text-align: center; color: var(--sage-dim); font-style: italic; }
+  .search {
+    font-family: var(--body); font-size: 14px; color: var(--ivory);
+    background: rgba(11, 26, 19, 0.7); border: 1px solid var(--hair);
+    border-radius: 2px; padding: 9px 12px; min-width: 220px;
+  }
+  .search:focus-visible { outline: none; border-color: var(--lantern); box-shadow: 0 0 0 3px rgba(239, 179, 92, 0.18); }
+
+  /* ---------- footer ---------- */
+  footer {
+    margin-top: 48px;
+    padding-top: 20px;
+    border-top: 1px solid var(--hair);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    font-size: 13px;
+    color: var(--sage-dim);
+  }
+  .linkish {
+    background: none; border: 0; padding: 0;
+    font-family: var(--body); font-size: 13px;
+    color: var(--sage); cursor: pointer;
+    border-bottom: 1px solid var(--hair-strong);
+  }
+  .linkish:hover { color: var(--lantern); border-color: var(--lantern); }
+  .linkish:focus-visible { outline: 2px solid var(--lantern); outline-offset: 3px; }
+
+  .status { font-size: 13.5px; color: var(--sage); min-height: 20px; }
+  .status.bad { color: var(--bloom); }
+  .status.good { color: var(--leaf); }
+  [hidden] { display: none !important; }
+</style>
+
+<canvas id="garden" aria-hidden="true"></canvas>
+<div class="vignette" aria-hidden="true"></div>
+
+<div class="lights" aria-hidden="true">
+  <svg viewBox="0 0 1200 92" preserveAspectRatio="none" role="presentation">
+    <path d="M-20 6 Q 300 84 600 46 T 1220 6" fill="none" stroke="rgba(155,176,162,0.35)" stroke-width="1.4"></path>
+    <g id="bulbs"></g>
+  </svg>
+</div>
+
+<div class="stage">
+  <div class="col">
+
+    <!-- ============ INVITATION ============ -->
+    <section id="invite">
+      <div class="hero">
+        <p class="eyebrow rise" style="animation-delay:.05s">Munting Hardin Resorts &amp; Suites &middot; Kidapawan City</p>
+
+        <svg class="crest" viewBox="0 0 120 120" role="img" aria-label="Two interlocking rings framed by leaves">
+          <circle class="draw" cx="50" cy="60" r="21" fill="none" stroke="#EFB35C" stroke-width="1.6"></circle>
+          <circle class="draw" cx="70" cy="60" r="21" fill="none" stroke="#E0879B" stroke-width="1.6" style="animation-delay:.55s"></circle>
+          <g stroke="#4F8F63" stroke-width="1.3" fill="none" stroke-linecap="round">
+            <path class="sprig" style="animation-delay:1.5s" d="M60 26 C 44 30 34 42 32 56"></path>
+            <path class="sprig" style="animation-delay:1.6s" d="M60 26 C 76 30 86 42 88 56"></path>
+            <path class="sprig" style="animation-delay:1.7s" d="M32 56 C 30 72 38 86 52 94"></path>
+            <path class="sprig" style="animation-delay:1.8s" d="M88 56 C 90 72 82 86 68 94"></path>
+          </g>
+          <g fill="#4F8F63">
+            <ellipse class="sprig" style="animation-delay:1.9s" cx="41" cy="36" rx="5" ry="2.6" transform="rotate(-38 41 36)"></ellipse>
+            <ellipse class="sprig" style="animation-delay:1.95s" cx="79" cy="36" rx="5" ry="2.6" transform="rotate(38 79 36)"></ellipse>
+            <ellipse class="sprig" style="animation-delay:2s" cx="31" cy="70" rx="5" ry="2.6" transform="rotate(-76 31 70)"></ellipse>
+            <ellipse class="sprig" style="animation-delay:2.05s" cx="89" cy="70" rx="5" ry="2.6" transform="rotate(76 89 70)"></ellipse>
+          </g>
+          <g fill="#E0879B">
+            <circle class="sprig" style="animation-delay:2.15s" cx="60" cy="24" r="3"></circle>
+            <circle class="sprig" style="animation-delay:2.2s" cx="52" cy="96" r="2.4"></circle>
+            <circle class="sprig" style="animation-delay:2.25s" cx="68" cy="96" r="2.4"></circle>
+          </g>
+        </svg>
+
+        <h1 class="rise" style="animation-delay:.15s">Couples<em>Gathering</em></h1>
+        <p class="lede rise" style="animation-delay:.3s">One afternoon in the garden &mdash; for every married couple, and the marriage you are still building.</p>
+
+        <div class="countdown rise" id="countdown" style="animation-delay:.45s" aria-label="Time until the gathering"></div>
+      </div>
+
+      <hr class="rule">
+
+      <dl class="facts">
+        <div class="fact">
+          <dt>Who</dt>
+          <dd><span class="big">All married couples</span><span class="sub">Bisita ug bag-ong kasal, welcome kaayo mo.</span></dd>
+        </div>
+        <div class="fact">
+          <dt>When</dt>
+          <dd><span class="big">Saturday, 12 September 2026 &middot; 1:00 PM onwards</span><span class="sub">Program starts promptly at 1:30 PM.</span></dd>
+        </div>
+        <div class="fact">
+          <dt>Where</dt>
+          <dd><span class="big">Munting Hardin Resorts &amp; Suites</span><span class="sub">Kasoy Street, Purok 4, Lanao, Kidapawan City &middot; <span class="bis">atbang sa balay nila Mayor Pao</span></span></dd>
+        </div>
+        <div class="fact">
+          <dt>Fee</dt>
+          <dd><span class="big">&#8369;600 per couple</span><span class="sub">Covers venue, food, and the games. GCash or cash.</span></dd>
+        </div>
+        <div class="fact">
+          <dt>Wear</dt>
+          <dd><span class="big">Most comfortable clothing</span><span class="sub"><span class="bis">Pwede kaayo magdala og pang-swimming.</span> There is a pool.</span></dd>
+        </div>
+      </dl>
+
+      <hr class="rule">
+
+      <div class="sec-head">
+        <h2>Reserve your slot</h2>
+        <p>One form per couple. Fill it out para masayod mi sa headcount ug pagkaon.</p>
+      </div>
+
+      <form id="rsvp" novalidate>
+        <div class="pair">
+          <div class="field" data-for="husband">
+            <label for="husband">Husband&rsquo;s full name</label>
+            <input id="husband" name="husband" type="text" autocomplete="name" placeholder="Juan Dela Cruz" required>
+          </div>
+          <div class="field" data-for="wife">
+            <label for="wife">Wife&rsquo;s full name</label>
+            <input id="wife" name="wife" type="text" autocomplete="name" placeholder="Maria Dela Cruz" required>
+          </div>
+        </div>
+
+        <div class="pair">
+          <div class="field" data-for="phone">
+            <label for="phone">Contact number</label>
+            <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="0917 000 0000" required>
+          </div>
+          <div class="field">
+            <label for="church">Church or group <span style="text-transform:none;letter-spacing:0">(optional)</span></label>
+            <input id="church" name="church" type="text" placeholder="Ministry, chapter, or barangay">
+          </div>
+        </div>
+
+        <div class="pair">
+          <div class="field">
+            <label for="kids">Kids coming along</label>
+            <input id="kids" name="kids" type="number" min="0" max="12" step="1" value="0">
+            <span class="hint">The &#8369;600 covers the couple. Tell us the kids so we can add food.</span>
+          </div>
+          <div class="field">
+            <label for="swim">Magdala og pang-swimming?</label>
+            <select id="swim" name="swim">
+              <option value="Yes">Yes &mdash; we&rsquo;re swimming</option>
+              <option value="No">No &mdash; just the program</option>
+              <option value="Maybe">Not sure yet</option>
+            </select>
+          </div>
+        </div>
+
+        <hr class="rule" style="margin:14px 0 4px">
+
+        <div class="sec-head">
+          <h2>Registration payment</h2>
+          <p>Send it before the gathering, then write your reference number below.</p>
+        </div>
+
+        <div class="paybox">
+          <span class="eyebrow">Registration fee</span>
+          <span class="amt">&#8369;600 <span style="font-size:16px;color:var(--sage)">/ couple</span></span>
+          <div class="gcash">
+            <span class="eyebrow" style="letter-spacing:.16em">GCash</span>
+            <span class="gnum" id="gnum">0910 122 3238</span>
+            <button class="copy" type="button" id="copyBtn">Copy number</button>
+          </div>
+          <span class="sub" style="color:var(--sage);font-size:14px">Patrick Julius Paccal &middot; <span class="bis">Pwede pud kaayo cash sa venue.</span></span>
+        </div>
+
+        <div class="field">
+          <label>Mode of payment</label>
+          <div class="choices" role="radiogroup" aria-label="Mode of payment">
+            <label class="choice">
+              <input type="radio" name="mode" value="GCash" checked>
+              <strong>GCash</strong>
+              <small>Sent to 0910 122 3238</small>
+            </label>
+            <label class="choice">
+              <input type="radio" name="mode" value="Cash">
+              <strong>Cash</strong>
+              <small>Bayad sa venue on the day</small>
+            </label>
+          </div>
+        </div>
+
+        <div class="pair" id="gcashFields">
+          <div class="field" data-for="reference">
+            <label for="reference">GCash reference number</label>
+            <input id="reference" name="reference" type="text" inputmode="numeric" placeholder="e.g. 1029384756123" autocomplete="off">
+            <span class="hint">The 13-digit number on your GCash receipt.</span>
+          </div>
+          <div class="field">
+            <label for="sender">Sender&rsquo;s name <span style="text-transform:none;letter-spacing:0">(if not yours)</span></label>
+            <input id="sender" name="sender" type="text" placeholder="Whose GCash sent it">
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="notes">Anything we should know <span style="text-transform:none;letter-spacing:0">(optional)</span></label>
+          <textarea id="notes" name="notes" placeholder="Food allergies, arriving late, need a ride&hellip;"></textarea>
+        </div>
+
+        <div class="err" id="formErr" role="alert" aria-live="polite"></div>
+
+        <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap">
+          <button class="submit" type="submit" id="submitBtn">Confirm our slot</button>
+          <span class="status" id="status" aria-live="polite"></span>
+        </div>
+
+        <p class="note" id="offlineNote" hidden>
+          Saving is unavailable on this view, so your answers can&rsquo;t be recorded here. Use <b>Copy our details</b> below and send it to Patrick on Messenger instead.
+        </p>
+        <div id="offlineActions" hidden>
+          <button class="ghost" type="button" id="copyDetails">Copy our details</button>
+        </div>
+      </form>
+
+      <div id="confirmation" class="done" hidden>
+        <svg class="seal" viewBox="0 0 100 100" role="img" aria-label="Sealed with two rings">
+          <circle cx="42" cy="52" r="20" fill="none" stroke="#EFB35C" stroke-width="1.8"></circle>
+          <circle cx="58" cy="52" r="20" fill="none" stroke="#E0879B" stroke-width="1.8"></circle>
+          <path d="M32 30 C 44 22 56 22 68 30" fill="none" stroke="#4F8F63" stroke-width="1.4" stroke-linecap="round"></path>
+          <circle cx="50" cy="24" r="3" fill="#E0879B"></circle>
+        </svg>
+        <h2>Nakalista na mo!</h2>
+        <p class="lede">See you on the 12th at Munting Hardin. Keep your reference number &mdash; we&rsquo;ll check it at the gate.</p>
+        <div class="recap" id="recap"></div>
+        <p style="margin-top:26px"><button class="ghost" type="button" id="another">Register another couple</button></p>
+      </div>
+
+      <footer>
+        <span>Questions? Text Patrick at 0910 122 3238.</span>
+        <button class="linkish" type="button" id="toSheet">Organizer &mdash; view responses</button>
+      </footer>
+    </section>
+  </div>
+</div>
+
+<!-- ============ RESPONSE SHEET ============ -->
+<div class="sheet-wrap">
+  <div class="sheet-inner">
+    <div class="sheet-head">
+      <div>
+        <h2>Responses</h2>
+        <p>Couples Gathering &middot; 12 September 2026 &middot; Munting Hardin Resorts &amp; Suites</p>
+      </div>
+      <div class="sheet-actions">
+        <input class="search" id="search" type="search" placeholder="Search name, group, reference&hellip;" aria-label="Search responses">
+        <button class="ghost" type="button" id="csvBtn">Download CSV</button>
+        <button class="ghost" type="button" id="copyTsv">Copy for Sheets</button>
+        <button class="ghost" type="button" id="toInvite">Back to invitation</button>
+      </div>
+    </div>
+
+    <div class="tiles">
+      <div class="tile gold"><span>Couples registered</span><b id="tCouples">0</b></div>
+      <div class="tile"><span>Heads expected</span><b id="tHeads">0</b></div>
+      <div class="tile leaf"><span>Fees committed</span><b id="tFees">&#8369;0</b></div>
+      <div class="tile rose"><span>Swimming</span><b id="tSwim">0</b></div>
+    </div>
+
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Submitted</th>
+            <th>Husband</th>
+            <th>Wife</th>
+            <th>Contact</th>
+            <th>Group</th>
+            <th>Kids</th>
+            <th>Swim</th>
+            <th>Mode</th>
+            <th>Reference</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody id="rows"></tbody>
+      </table>
+      <div class="empty" id="sheetEmpty">Waiting for the first couple to register.</div>
+    </div>
+    <p class="status" id="sheetStatus" style="margin-top:14px"></p>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var GCASH = "09101223238";
+  var EVENT_AT = new Date("2026-09-12T13:00:00+08:00").getTime();
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function $(id) { return document.getElementById(id); }
+  function esc(s) {
+    return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+
+  /* ---------------- string lights ---------------- */
+  (function lights() {
+    var g = $("bulbs");
+    if (!g) return;
+    var svgns = "http://www.w3.org/2000/svg";
+    var colors = ["#EFB35C", "#F3EEE1", "#E0879B", "#EFB35C"];
+    for (var i = 0; i <= 24; i++) {
+      var t = i / 24;
+      // sample the wire: two joined quadratics approximated for bulb placement
+      var x = -20 + t * 1240;
+      var y = 6 + Math.sin(t * Math.PI * 2 - Math.PI / 2) * -1 * 0 + (t < 0.5
+        ? 6 + (t / 0.5) * (46 - 6) * 0.86
+        : 46 - ((t - 0.5) / 0.5) * (46 - 6) * 0.86);
+      var line = document.createElementNS(svgns, "line");
+      line.setAttribute("x1", x); line.setAttribute("y1", y);
+      line.setAttribute("x2", x); line.setAttribute("y2", y + 9);
+      line.setAttribute("stroke", "rgba(155,176,162,0.35)");
+      line.setAttribute("stroke-width", "1");
+      g.appendChild(line);
+      var c = document.createElementNS(svgns, "circle");
+      c.setAttribute("class", "bulb");
+      c.setAttribute("cx", x); c.setAttribute("cy", y + 13);
+      c.setAttribute("r", "3.6");
+      c.setAttribute("fill", colors[i % colors.length]);
+      c.setAttribute("opacity", "0.9");
+      c.style.animationDelay = (i * 0.27 % 3.4).toFixed(2) + "s";
+      g.appendChild(c);
+    }
+  })();
+
+  /* ---------------- drifting garden canvas ---------------- */
+  (function garden() {
+    var cv = $("garden");
+    if (!cv || !cv.getContext) return;
+    var ctx = cv.getContext("2d");
+    var W = 0, H = 0, dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var petals = [], bokeh = [], burst = [];
+    var PETAL_COLORS = ["rgba(224,135,155,", "rgba(243,238,225,", "rgba(79,143,99,", "rgba(239,179,92,"];
+
+    function resize() {
+      W = cv.clientWidth; H = cv.clientHeight;
+      cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    function seed() {
+      petals = []; bokeh = [];
+      for (var i = 0; i < 24; i++) {
+        petals.push({
+          x: Math.random() * W, y: Math.random() * H,
+          r: 3 + Math.random() * 5,
+          sp: 0.16 + Math.random() * 0.42,
+          sway: 0.4 + Math.random() * 1.2,
+          ph: Math.random() * Math.PI * 2,
+          rot: Math.random() * Math.PI,
+          vr: (Math.random() - 0.5) * 0.014,
+          c: PETAL_COLORS[i % PETAL_COLORS.length],
+          a: 0.13 + Math.random() * 0.24
+        });
+      }
+      for (var j = 0; j < 15; j++) {
+        bokeh.push({
+          x: Math.random() * W, y: Math.random() * H * 0.9,
+          r: 20 + Math.random() * 60,
+          ph: Math.random() * Math.PI * 2,
+          a: 0.025 + Math.random() * 0.04
+        });
+      }
+    }
+    function drawPetal(p) {
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.rot);
+      ctx.beginPath();
+      ctx.ellipse(0, 0, p.r, p.r * 0.46, 0, 0, Math.PI * 2);
+      ctx.fillStyle = p.c + p.a + ")";
+      ctx.fill();
+      ctx.restore();
+    }
+    function frame(t) {
+      ctx.clearRect(0, 0, W, H);
+      var i;
+      for (i = 0; i < bokeh.length; i++) {
+        var b = bokeh[i];
+        var pulse = 0.65 + 0.35 * Math.sin(t / 2400 + b.ph);
+        var grd = ctx.createRadialGradient(b.x, b.y, 0, b.x, b.y, b.r);
+        grd.addColorStop(0, "rgba(239,179,92," + (b.a * pulse).toFixed(3) + ")");
+        grd.addColorStop(1, "rgba(239,179,92,0)");
+        ctx.fillStyle = grd;
+        ctx.beginPath(); ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2); ctx.fill();
+      }
+      for (i = 0; i < petals.length; i++) {
+        var p = petals[i];
+        p.y += p.sp;
+        p.x += Math.sin(t / 1600 + p.ph) * p.sway * 0.5;
+        p.rot += p.vr;
+        if (p.y - p.r > H) { p.y = -12; p.x = Math.random() * W; }
+        if (p.x < -20) p.x = W + 10;
+        if (p.x > W + 20) p.x = -10;
+        drawPetal(p);
+      }
+      for (i = burst.length - 1; i >= 0; i--) {
+        var q = burst[i];
+        q.vy += 0.045; q.x += q.vx; q.y += q.vy; q.rot += q.vr; q.life -= 1;
+        q.a = Math.max(0, q.life / q.max) * 0.85;
+        drawPetal(q);
+        if (q.life <= 0 || q.y > H + 30) burst.splice(i, 1);
+      }
+      raf = requestAnimationFrame(frame);
+    }
+    var raf = null;
+    function start() {
+      resize(); seed();
+      if (reduce) { ctx.clearRect(0, 0, W, H); frameOnce(); return; }
+      if (raf) cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(frame);
+    }
+    function frameOnce() {
+      for (var i = 0; i < petals.length; i++) drawPetal(petals[i]);
+    }
+    var rt;
+    window.addEventListener("resize", function () {
+      clearTimeout(rt); rt = setTimeout(start, 180);
+    });
+    start();
+
+    window.__petalBurst = function () {
+      if (reduce) return;
+      var cx = W / 2, cy = H * 0.42;
+      for (var i = 0; i < 60; i++) {
+        var ang = Math.random() * Math.PI * 2;
+        var spd = 1.6 + Math.random() * 4.6;
+        burst.push({
+          x: cx, y: cy,
+          vx: Math.cos(ang) * spd, vy: Math.sin(ang) * spd - 1.6,
+          r: 3.5 + Math.random() * 5,
+          rot: Math.random() * Math.PI, vr: (Math.random() - 0.5) * 0.2,
+          c: PETAL_COLORS[i % PETAL_COLORS.length],
+          a: 0.85, life: 110 + Math.random() * 70, max: 160
+        });
+      }
+    };
+  })();
+
+  /* ---------------- countdown ---------------- */
+  (function countdown() {
+    var el = $("countdown");
+    if (!el) return;
+    function paint() {
+      var diff = EVENT_AT - Date.now();
+      if (diff <= 0) {
+        el.innerHTML = '<div class="tick" style="min-width:auto;padding:12px 20px"><b>Today</b><span>Munting Hardin</span></div>';
+        return;
+      }
+      var s = Math.floor(diff / 1000);
+      var parts = [
+        [Math.floor(s / 86400), "Days"],
+        [Math.floor(s / 3600) % 24, "Hours"],
+        [Math.floor(s / 60) % 60, "Minutes"],
+        [s % 60, "Seconds"]
+      ];
+      el.innerHTML = parts.map(function (p) {
+        return '<div class="tick"><b>' + String(p[0]).padStart(2, "0") + "</b><span>" + p[1] + "</span></div>";
+      }).join("");
+    }
+    paint();
+    setInterval(paint, 1000);
+  })();
+
+  /* ---------------- copy helpers ---------------- */
+  function copyText(text, btn, doneLabel) {
+    var original = btn ? btn.textContent : "";
+    function ok() {
+      if (!btn) return;
+      btn.textContent = doneLabel || "Copied";
+      setTimeout(function () { btn.textContent = original; }, 1800);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(ok, function () { fallback(text, ok); });
+    } else {
+      fallback(text, ok);
+    }
+  }
+  function fallback(text, ok) {
+    var ta = document.createElement("textarea");
+    ta.value = text;
+    ta.style.position = "fixed";
+    ta.style.opacity = "0";
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand("copy"); ok(); } catch (e) { /* nothing to do */ }
+    document.body.removeChild(ta);
+  }
+
+  $("copyBtn").addEventListener("click", function () {
+    copyText(GCASH, this, "Copied ✓");
+  });
+
+  /* ---------------- form ---------------- */
+  var form = $("rsvp");
+  var modeInputs = form.querySelectorAll('input[name="mode"]');
+  var gcashFields = $("gcashFields");
+  var refField = $("reference");
+  var statusEl = $("status");
+  var errEl = $("formErr");
+  var db = null;
+  var dbReady = false;
+
+  function currentMode() {
+    for (var i = 0; i < modeInputs.length; i++) if (modeInputs[i].checked) return modeInputs[i].value;
+    return "GCash";
+  }
+  function syncMode() {
+    var isG = currentMode() === "GCash";
+    gcashFields.hidden = !isG;
+    if (!isG) { refField.value = ""; $("sender").value = ""; clearInvalid("reference"); }
+  }
+  for (var m = 0; m < modeInputs.length; m++) modeInputs[m].addEventListener("change", syncMode);
+  syncMode();
+
+  function markInvalid(name, msg) {
+    var w = form.querySelector('.field[data-for="' + name + '"]');
+    if (w) w.classList.add("invalid");
+    if (msg) errEl.textContent = msg;
+  }
+  function clearInvalid(name) {
+    var w = form.querySelector('.field[data-for="' + name + '"]');
+    if (w) w.classList.remove("invalid");
+  }
+  function clearAllInvalid() {
+    var ws = form.querySelectorAll(".field.invalid");
+    for (var i = 0; i < ws.length; i++) ws[i].classList.remove("invalid");
+    errEl.textContent = "";
+  }
+
+  function collect() {
+    return {
+      husband: $("husband").value.trim(),
+      wife: $("wife").value.trim(),
+      phone: $("phone").value.trim(),
+      church: $("church").value.trim(),
+      kids: Math.max(0, Math.min(12, parseInt($("kids").value, 10) || 0)),
+      swim: $("swim").value,
+      mode: currentMode(),
+      reference: refField.value.trim(),
+      sender: $("sender").value.trim(),
+      notes: $("notes").value.trim(),
+      fee: 600
+    };
+  }
+
+  function validate(d) {
+    clearAllInvalid();
+    if (!d.husband) { markInvalid("husband", "Please enter the husband’s name."); return false; }
+    if (!d.wife) { markInvalid("wife", "Please enter the wife’s name."); return false; }
+    if (d.phone.replace(/\D/g, "").length < 10) {
+      markInvalid("phone", "Please enter a contact number we can reach, like 0917 000 0000.");
+      return false;
+    }
+    if (d.mode === "GCash" && d.reference.replace(/\s/g, "").length < 6) {
+      markInvalid("reference", "Please enter the reference number from your GCash receipt — or switch the mode of payment to Cash.");
+      return false;
+    }
+    return true;
+  }
+
+  function detailsAsText(d) {
+    return [
+      "COUPLES GATHERING — 12 Sept 2026, Munting Hardin",
+      "Husband: " + d.husband,
+      "Wife: " + d.wife,
+      "Contact: " + d.phone,
+      "Group: " + (d.church || "—"),
+      "Kids: " + d.kids,
+      "Swimming: " + d.swim,
+      "Payment: " + d.mode + (d.mode === "GCash" ? " — ref " + d.reference : ""),
+      d.sender ? "Sender: " + d.sender : "",
+      d.notes ? "Notes: " + d.notes : ""
+    ].filter(Boolean).join("\n");
+  }
+
+  function showConfirmation(d) {
+    var rows = [
+      ["Couple", d.husband + " & " + d.wife],
+      ["Contact", d.phone],
+      ["Kids joining", String(d.kids)],
+      ["Swimming", d.swim],
+      ["Payment", d.mode],
+      ["Reference", d.mode === "GCash" ? d.reference : "Cash sa venue"],
+      ["Amount", "₱600"]
+    ];
+    $("recap").innerHTML = rows.map(function (r) {
+      return "<div><span>" + esc(r[0]) + "</span><b>" + esc(r[1]) + "</b></div>";
+    }).join("");
+    form.hidden = true;
+    document.querySelectorAll("#invite .sec-head")[0].hidden = true;
+    $("confirmation").hidden = false;
+    $("confirmation").scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" });
+    if (window.__petalBurst) window.__petalBurst();
+  }
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var d = collect();
+    if (!validate(d)) return;
+
+    if (!dbReady || !db) {
+      statusEl.className = "status bad";
+      statusEl.textContent = "Can’t save from this view — copy your details instead.";
+      return;
+    }
+
+    var btn = $("submitBtn");
+    btn.disabled = true;
+    statusEl.className = "status";
+    statusEl.textContent = "Saving…";
+
+    d.submittedAt = new Date().toISOString();
+    d.ts = Date.now();
+
+    db.collection("rsvps").add(d).then(function () {
+      btn.disabled = false;
+      statusEl.textContent = "";
+      showConfirmation(d);
+    }, function (err) {
+      btn.disabled = false;
+      statusEl.className = "status bad";
+      var code = err && err.code;
+      if (code === "quota_exceeded") {
+        statusEl.textContent = "Registration list is full — please text Patrick at " + GCASH + ".";
+      } else if (code === "resource_exhausted") {
+        statusEl.textContent = "Too many submissions at once. Wait a moment and press Confirm again.";
+      } else {
+        statusEl.textContent = "That didn’t save. Press Confirm again, or text Patrick at " + GCASH + ".";
+      }
+      $("offlineNote").hidden = false;
+      $("offlineActions").hidden = false;
+    });
+  });
+
+  $("copyDetails").addEventListener("click", function () {
+    copyText(detailsAsText(collect()), this, "Copied ✓");
+  });
+
+  $("another").addEventListener("click", function () {
+    form.reset();
+    syncMode();
+    clearAllInvalid();
+    form.hidden = false;
+    document.querySelectorAll("#invite .sec-head")[0].hidden = false;
+    $("confirmation").hidden = true;
+    $("husband").focus();
+    form.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+  });
+
+  /* ---------------- sheet ---------------- */
+  var allRows = [];
+  var filterText = "";
+
+  function money(n) { return "₱" + Number(n || 0).toLocaleString("en-PH"); }
+
+  function renderSheet() {
+    var q = filterText.toLowerCase();
+    var rows = allRows.filter(function (r) {
+      if (!q) return true;
+      return [r.husband, r.wife, r.phone, r.church, r.reference, r.notes]
+        .join(" ").toLowerCase().indexOf(q) !== -1;
+    });
+
+    $("tCouples").textContent = allRows.length;
+    $("tHeads").textContent = allRows.reduce(function (a, r) { return a + 2 + (Number(r.kids) || 0); }, 0);
+    $("tFees").textContent = money(allRows.length * 600);
+    $("tSwim").textContent = allRows.filter(function (r) { return r.swim === "Yes"; }).length;
+
+    var tbody = $("rows");
+    if (!rows.length) {
+      tbody.innerHTML = "";
+      $("sheetEmpty").hidden = false;
+      $("sheetEmpty").textContent = allRows.length
+        ? "No response matches “" + filterText + "”."
+        : "Waiting for the first couple to register.";
+      return;
+    }
+    $("sheetEmpty").hidden = true;
+    tbody.innerHTML = rows.map(function (r) {
+      var when = r.submittedAt ? new Date(r.submittedAt) : null;
+      var whenTxt = when && !isNaN(when) ? when.toLocaleString("en-PH", { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" }) : "—";
+      var modeClass = r.mode === "Cash" ? "cash" : "gcash";
+      return "<tr>" +
+        '<td class="num">' + esc(whenTxt) + "</td>" +
+        "<td>" + esc(r.husband) + "</td>" +
+        "<td>" + esc(r.wife) + "</td>" +
+        '<td class="num">' + esc(r.phone) + "</td>" +
+        "<td>" + esc(r.church || "—") + "</td>" +
+        '<td class="num">' + esc(r.kids || 0) + "</td>" +
+        "<td>" + (r.swim === "Yes" ? '<span class="pill yes">Swim</span>' : esc(r.swim || "—")) + "</td>" +
+        '<td><span class="pill ' + modeClass + '">' + esc(r.mode || "—") + "</span></td>" +
+        '<td class="num">' + esc(r.reference || (r.mode === "Cash" ? "cash sa venue" : "—")) + "</td>" +
+        "<td>" + esc(r.notes || "") + "</td>" +
+        "</tr>";
+    }).join("");
+  }
+
+  var HEADERS = ["Submitted", "Husband", "Wife", "Contact", "Group", "Kids", "Swimming", "Mode of payment", "Reference number", "Sender", "Fee", "Notes"];
+  function rowValues(r) {
+    return [
+      r.submittedAt || "", r.husband || "", r.wife || "", r.phone || "", r.church || "",
+      String(r.kids || 0), r.swim || "", r.mode || "", r.reference || "", r.sender || "",
+      "600", (r.notes || "").replace(/[\r\n]+/g, " ")
+    ];
+  }
+  function toCsv() {
+    var lines = [HEADERS.join(",")];
+    allRows.forEach(function (r) {
+      lines.push(rowValues(r).map(function (v) { return '"' + String(v).replace(/"/g, '""') + '"'; }).join(","));
+    });
+    return lines.join("\r\n");
+  }
+  function toTsv() {
+    var lines = [HEADERS.join("\t")];
+    allRows.forEach(function (r) {
+      lines.push(rowValues(r).map(function (v) { return String(v).replace(/\t/g, " "); }).join("\t"));
+    });
+    return lines.join("\n");
+  }
+
+  $("search").addEventListener("input", function () {
+    filterText = this.value.trim();
+    renderSheet();
+  });
+
+  $("copyTsv").addEventListener("click", function () {
+    if (!allRows.length) { $("sheetStatus").textContent = "Nothing to copy yet."; return; }
+    copyText(toTsv(), this, "Copied ✓");
+    $("sheetStatus").className = "status good";
+    $("sheetStatus").textContent = "Paste it straight into Google Sheets or Excel.";
+  });
+
+  var csvBtn = $("csvBtn");
+  csvBtn.addEventListener("click", function () {
+    if (!allRows.length) { $("sheetStatus").textContent = "Nothing to download yet."; return; }
+    if (!window.__downloads) {
+      $("sheetStatus").className = "status bad";
+      $("sheetStatus").textContent = "Downloads aren’t available here — use Copy for Sheets instead.";
+      return;
+    }
+    window.__downloads.save({ filename: "couples-gathering-responses.csv", data: toCsv() }).then(function () {
+      $("sheetStatus").className = "status good";
+      $("sheetStatus").textContent = "Saved.";
+    }, function (err) {
+      if (err && err.code === "declined") { $("sheetStatus").textContent = ""; return; }
+      $("sheetStatus").className = "status bad";
+      $("sheetStatus").textContent = "Couldn’t save the file — use Copy for Sheets instead.";
+    });
+  });
+
+  function showSheet(on) {
+    document.body.classList.toggle("sheet", on);
+    window.scrollTo(0, 0);
+    if (on) $("search").focus();
+  }
+  $("toSheet").addEventListener("click", function () { showSheet(true); });
+  $("toInvite").addEventListener("click", function () { showSheet(false); });
+
+  /* ---------------- capabilities ---------------- */
+  if (window.claude && typeof window.claude.use === "function") {
+    window.claude.use("db").then(function (d) {
+      if (!d) { offline(); return; }
+      db = d; dbReady = true;
+      $("offlineNote").hidden = true;
+      $("offlineActions").hidden = true;
+      d.collection("rsvps").orderBy("ts", "desc").limit(500).onSnapshot(function (snap) {
+        allRows = snap.docs.map(function (doc) {
+          var v = doc.data() || {};
+          return {
+            husband: v.husband, wife: v.wife, phone: v.phone, church: v.church,
+            kids: v.kids, swim: v.swim, mode: v.mode, reference: v.reference,
+            sender: v.sender, notes: v.notes, submittedAt: v.submittedAt
+          };
+        });
+        renderSheet();
+      }, function (err) {
+        $("sheetStatus").className = "status bad";
+        $("sheetStatus").textContent = (err && err.code === "revoked")
+          ? "The live list stopped updating. Reload the page to reconnect."
+          : "Couldn’t load the live list. Reload the page to try again.";
+      });
+    }, offline);
+
+    window.claude.use("downloads").then(function (dl) {
+      if (dl) { window.__downloads = dl; } else { csvBtn.hidden = true; }
+    }, function () { csvBtn.hidden = true; });
+  } else {
+    offline();
+  }
+
+  function offline() {
+    dbReady = false;
+    $("offlineNote").hidden = false;
+    $("offlineActions").hidden = false;
+    $("sheetStatus").className = "status bad";
+    $("sheetStatus").textContent = "Responses can’t be loaded on this view. Open the published page on claude.ai to see the sheet.";
+    renderSheet();
+  }
+
+  renderSheet();
+})();
+</script>
