@@ -19,7 +19,7 @@ export const ChapterThreeScene: React.FC = () => {
   return (
     <AbsoluteFill
       style={{
-        background: `radial-gradient(110% 80% at 22% 46%, ${palette.bgLift} 0%, ${palette.bg} 62%)`,
+        background: `radial-gradient(110% 80% at 22% 46%, ${palette.groundLift} 0%, transparent 64%), ${palette.nearBlack}`,
       }}
     >
       <AbsoluteFill style={{ opacity: exit }}>

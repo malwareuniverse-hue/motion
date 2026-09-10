@@ -39,8 +39,8 @@ export const GuestQuestion: React.FC = () => {
           position: "absolute",
           inset: 0,
           borderRadius: 18,
-          background: palette.panel,
-          border: `1px solid ${palette.panelBorderLift}`,
+          background: palette.charcoal,
+          border: `1px solid ${palette.hairlineLift}`,
         }}
       />
 
@@ -52,7 +52,7 @@ export const GuestQuestion: React.FC = () => {
           top: 36,
           width: 4,
           height: rule,
-          background: palette.amber,
+          background: palette.warmGold,
           borderRadius: 2,
         }}
       />
@@ -76,7 +76,7 @@ export const GuestQuestion: React.FC = () => {
             fontSize: 21,
             fontWeight: 600,
             letterSpacing: 6,
-            color: palette.amber,
+            color: palette.warmGold,
           }}
         >
           {QUESTION_LABEL}
@@ -89,7 +89,7 @@ export const GuestQuestion: React.FC = () => {
             fontSize: 62,
             fontWeight: 700,
             letterSpacing: 1.2,
-            color: palette.cream,
+            color: palette.softWhite,
           }}
         >
           {QUESTION_TEXT}

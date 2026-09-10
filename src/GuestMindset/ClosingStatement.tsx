@@ -28,7 +28,13 @@ export const ClosingStatement: React.FC = () => {
 
   return (
     <div style={{ position: "absolute", inset: 0, opacity: bgOpacity }}>
-      <div style={{ position: "absolute", inset: 0, background: palette.bg }} />
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          background: palette.nearBlack,
+        }}
+      />
       <div
         style={{
           position: "absolute",
@@ -45,7 +51,7 @@ export const ClosingStatement: React.FC = () => {
           style={{
             width: ruleWidth,
             height: 2,
-            background: palette.teal,
+            background: palette.warmGold,
             opacity: 0.9,
             marginBottom: 14,
           }}
@@ -58,7 +64,7 @@ export const ClosingStatement: React.FC = () => {
             fontSize: 52,
             fontWeight: 600,
             letterSpacing: 1.4,
-            color: palette.creamSoft,
+            color: palette.mutedGray,
             textAlign: "center",
           }}
         >
@@ -72,12 +78,12 @@ export const ClosingStatement: React.FC = () => {
             fontSize: 68,
             fontWeight: 700,
             letterSpacing: 1.2,
-            color: palette.cream,
+            color: palette.softWhite,
             textAlign: "center",
           }}
         >
           {CLOSING_LINE_2_LEAD}
-          <span style={{ color: palette.amberSoft }}>
+          <span style={{ color: palette.warmGold }}>
             {CLOSING_LINE_2_ACCENT}
           </span>
         </span>

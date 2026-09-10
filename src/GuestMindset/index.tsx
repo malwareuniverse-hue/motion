@@ -19,7 +19,7 @@ export const GuestMindsetScene: React.FC = () => {
   return (
     <AbsoluteFill
       style={{
-        background: `radial-gradient(120% 90% at 50% 12%, ${palette.bgLift} 0%, ${palette.bg} 60%)`,
+        background: `radial-gradient(120% 90% at 50% 12%, ${palette.groundLift} 0%, transparent 62%), ${palette.nearBlack}`,
       }}
     >
       <AbsoluteFill style={{ opacity: stageOpacity }}>

@@ -27,7 +27,7 @@ export const DismissedItem: React.FC<Props> = ({ spec }) => {
     easeOutCubic,
   );
 
-  const textColor = strike > 0.5 ? palette.creamFaint : palette.creamSoft;
+  const textColor = strike > 0.5 ? palette.mutedGrayFaint : palette.mutedGray;
 
   return (
     <div
@@ -46,8 +46,8 @@ export const DismissedItem: React.FC<Props> = ({ spec }) => {
           position: "absolute",
           inset: 0,
           borderRadius: 14,
-          background: palette.panel,
-          border: `1px solid ${palette.panelBorder}`,
+          background: palette.charcoal,
+          border: `1px solid ${palette.hairline}`,
         }}
       />
       <div
@@ -78,8 +78,8 @@ export const DismissedItem: React.FC<Props> = ({ spec }) => {
               top: "50%",
               width: `${strike * 100}%`,
               height: 2,
-              background: palette.rose,
-              opacity: 0.72,
+              background: palette.mutedGray,
+              opacity: 0.8,
             }}
           />
         </span>

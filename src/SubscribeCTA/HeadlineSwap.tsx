@@ -24,7 +24,7 @@ const headlineStyle: React.CSSProperties = {
   fontWeight: 700,
   lineHeight: 1.16,
   letterSpacing: 0.8,
-  color: palette.cream,
+  color: palette.softWhite,
 };
 
 export const HeadlineSwap: React.FC = () => {

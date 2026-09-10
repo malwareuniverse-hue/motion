@@ -1,17 +1,32 @@
+/**
+ * Locked PBM palette. These six roles are the whole colour system — every other
+ * token below is one of them at a different opacity. Do not add a hue that is
+ * not in this table.
+ */
 export const palette = {
-  bg: "#0B0D11",
-  bgLift: "#12151B",
-  panel: "#151920",
-  panelBorder: "rgba(246, 244, 238, 0.09)",
-  panelBorderLift: "rgba(246, 244, 238, 0.18)",
-  cream: "#F6F4EE",
-  creamSoft: "rgba(246, 244, 238, 0.62)",
-  creamFaint: "rgba(246, 244, 238, 0.34)",
-  teal: "#14A08D",
-  tealSoft: "#7FC4B7",
-  amber: "#E0A23D",
-  amberSoft: "#F0CE94",
-  amberBg: "rgba(224, 162, 61, 0.12)",
-  rose: "#C25B4F",
-  roseSoft: "#E5A79C",
+  nearBlack: "#0B0C0E",
+  charcoal: "#1B1D21",
+  warmGold: "#C9A45C",
+  softWhite: "#F3F1EC",
+  mutedGray: "#A7A7A5",
+  deepNavy: "#172033",
+
+  // soft-white at reduced prominence
+  softWhiteSoft: "rgba(243, 241, 236, 0.62)",
+
+  // muted-gray at reduced prominence — labels, dismissed information
+  mutedGraySoft: "rgba(167, 167, 165, 0.68)",
+  mutedGrayFaint: "rgba(167, 167, 165, 0.4)",
+
+  // charcoal at overlay alpha, for cards that sit over footage
+  panelOverlay: "rgba(27, 29, 33, 0.94)",
+
+  // deep navy at low alpha — the only lift on the near-black ground, kept far
+  // below charcoal so card surfaces still separate from it
+  groundLift: "rgba(23, 32, 51, 0.4)",
+
+  // thin precise lines — soft-white at line weight
+  hairline: "rgba(243, 241, 236, 0.1)",
+  hairlineLift: "rgba(243, 241, 236, 0.18)",
+  ghost: "rgba(243, 241, 236, 0.042)",
 } as const;

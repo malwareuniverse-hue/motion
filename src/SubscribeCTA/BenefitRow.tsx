@@ -30,7 +30,7 @@ export const BenefitRow: React.FC<Props> = ({ spec }) => {
           width: 7,
           height: 7,
           borderRadius: 4,
-          background: palette.teal,
+          background: palette.mutedGray,
           flexShrink: 0,
         }}
       />
@@ -40,7 +40,7 @@ export const BenefitRow: React.FC<Props> = ({ spec }) => {
           fontSize: 24,
           fontWeight: 500,
           letterSpacing: 2.6,
-          color: palette.creamSoft,
+          color: palette.mutedGray,
         }}
       >
         {spec.text}

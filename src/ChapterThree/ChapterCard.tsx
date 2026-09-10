@@ -24,7 +24,7 @@ const headlineStyle: React.CSSProperties = {
   fontWeight: 700,
   lineHeight: 1,
   letterSpacing: 1,
-  color: palette.cream,
+  color: palette.softWhite,
   whiteSpace: "nowrap",
 };
 
@@ -50,7 +50,7 @@ export const ChapterCard: React.FC = () => {
           top: RULE_Y,
           width: rule,
           height: 3,
-          background: palette.amber,
+          background: palette.warmGold,
           borderRadius: 2,
         }}
       />
@@ -66,7 +66,7 @@ export const ChapterCard: React.FC = () => {
           fontSize: 24,
           fontWeight: 600,
           letterSpacing: 7,
-          color: palette.amber,
+          color: palette.warmGold,
         }}
       >
         {LABEL_TEXT}
@@ -81,7 +81,7 @@ export const ChapterCard: React.FC = () => {
         }}
       >
         {HEADLINE_LINE_1_LEAD}
-        <span style={{ color: palette.amberSoft }}>
+        <span style={{ color: palette.warmGold }}>
           {HEADLINE_LINE_1_ACCENT}
         </span>
       </span>

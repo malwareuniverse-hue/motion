@@ -84,8 +84,8 @@ export const CtaCard: React.FC = () => {
           position: "absolute",
           inset: 0,
           borderRadius: 18,
-          background: palette.panel,
-          border: `1px solid ${palette.panelBorder}`,
+          background: palette.panelOverlay,
+          border: `1px solid ${palette.hairline}`,
         }}
       />
 
@@ -96,7 +96,7 @@ export const CtaCard: React.FC = () => {
           top: 48,
           width: 4,
           height: rule,
-          background: palette.amber,
+          background: palette.warmGold,
           borderRadius: 2,
         }}
       />
@@ -122,7 +122,7 @@ export const CtaCard: React.FC = () => {
             transform: `scale(${0.98 + mark * 0.02})`,
           }}
         >
-          <PlayMark color={palette.amber} size={44} />
+          <PlayMark color={palette.warmGold} size={44} />
         </div>
         <span
           style={{
@@ -130,7 +130,7 @@ export const CtaCard: React.FC = () => {
             fontSize: 19,
             fontWeight: 600,
             letterSpacing: 4.6,
-            color: palette.amber,
+            color: palette.warmGold,
           }}
         >
           {LABEL_TEXT}
@@ -146,7 +146,7 @@ export const CtaCard: React.FC = () => {
           top: DIVIDER_Y,
           width: divider,
           height: 1,
-          background: palette.rule,
+          background: palette.hairline,
         }}
       />
 

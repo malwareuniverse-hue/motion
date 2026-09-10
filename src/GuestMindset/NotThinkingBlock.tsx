@@ -44,7 +44,7 @@ export const NotThinkingBlock: React.FC = () => {
             fontSize: 22,
             fontWeight: 600,
             letterSpacing: 6.5,
-            color: palette.creamFaint,
+            color: palette.mutedGraySoft,
           }}
         >
           {EYEBROW_TEXT}
