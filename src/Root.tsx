@@ -23,6 +23,8 @@ import { ChapterThreeScene } from "./ChapterThree";
 import * as ChapterThreeTimeline from "./ChapterThree/timeline";
 import { FiveThingsScene } from "./FiveThings";
 import * as FiveThingsTimeline from "./FiveThings/timeline";
+import { AssessmentCTAScene } from "./AssessmentCTA";
+import * as AssessmentCTATimeline from "./AssessmentCTA/timeline";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -115,6 +117,15 @@ export const RemotionRoot: React.FC = () => {
         fps={FiveThingsTimeline.FPS}
         width={FiveThingsTimeline.WIDTH}
         height={FiveThingsTimeline.HEIGHT}
+        defaultProps={{ backdrop: "green" as const }}
+      />
+      <Composition
+        id="AssessmentCTA"
+        component={AssessmentCTAScene}
+        durationInFrames={AssessmentCTATimeline.DURATION_IN_FRAMES}
+        fps={AssessmentCTATimeline.FPS}
+        width={AssessmentCTATimeline.WIDTH}
+        height={AssessmentCTATimeline.HEIGHT}
         defaultProps={{ backdrop: "green" as const }}
       />
     </>
