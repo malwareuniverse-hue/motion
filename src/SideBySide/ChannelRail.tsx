@@ -3,6 +3,7 @@ import { useCurrentFrame } from "remotion";
 import { palette } from "./theme";
 import { poppins } from "./fonts";
 import { clampedInterp, easeOutCubic, fadeRise } from "./utils";
+import { AirbnbMark, DirectMark, GoogleMark, VrboMark } from "./BrandMarks";
 import {
   CENTER_X,
   CHANNELS,
@@ -16,10 +17,30 @@ import {
   T,
   channelX,
   type Channel,
+  type ChannelMark,
   type Constraint,
 } from "./timeline";
 
-const ChannelCard: React.FC<{ channel: Channel; index: number }> = ({ channel, index }) => {
+const ChannelGlyph: React.FC<{ mark: ChannelMark; color: string }> = ({
+  mark,
+  color,
+}) => {
+  switch (mark) {
+    case "airbnb":
+      return <AirbnbMark color={color} />;
+    case "vrbo":
+      return <VrboMark color={color} fontFamily={poppins} />;
+    case "google":
+      return <GoogleMark color={color} />;
+    default:
+      return <DirectMark color={color} />;
+  }
+};
+
+const ChannelCard: React.FC<{ channel: Channel; index: number }> = ({
+  channel,
+  index,
+}) => {
   const frame = useCurrentFrame();
 
   const enter = fadeRise(frame, channel.inStart, T.channelDur, 12);
@@ -50,26 +71,36 @@ const ChannelCard: React.FC<{ channel: Channel; index: number }> = ({ channel, i
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        gap: 16,
+        gap: 14,
       }}
     >
+      <ChannelGlyph mark={channel.mark} color={palette.softWhite} />
       <span
         style={{
           fontFamily: poppins,
-          fontSize: 25,
+          fontSize: 21,
           fontWeight: 500,
           letterSpacing: 4,
-          color: palette.softWhite,
+          color: palette.mutedGray,
         }}
       >
         {channel.label}
       </span>
-      <div style={{ width: rule, height: 1, background: palette.gold, opacity: 0.9 }} />
+      <div
+        style={{
+          width: rule,
+          height: 1,
+          background: palette.gold,
+          opacity: 0.9,
+        }}
+      />
     </div>
   );
 };
 
-const ConstraintPill: React.FC<{ constraint: Constraint }> = ({ constraint }) => {
+const ConstraintPill: React.FC<{ constraint: Constraint }> = ({
+  constraint,
+}) => {
   const frame = useCurrentFrame();
   const enter = fadeRise(frame, constraint.inStart, T.constraintDur, 8);
 
@@ -99,7 +130,11 @@ export const ChannelRail: React.FC = () => {
   const frame = useCurrentFrame();
 
   const label = fadeRise(frame, T.channelLabelIn, T.channelLabelDur, 8);
-  const out = clampedInterp(frame, [T.stage1Out, T.stage1Out + T.stage1OutDur], [1, 0]);
+  const out = clampedInterp(
+    frame,
+    [T.stage1Out, T.stage1Out + T.stage1OutDur],
+    [1, 0],
+  );
 
   if (out <= 0) return null;
 

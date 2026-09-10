@@ -12,14 +12,16 @@ export const CENTER_X = WIDTH / 2;
 /* Act 1 — the channels the guest shops on */
 export const CHANNEL_LABEL_Y = 258;
 export const CHANNEL_W = 300;
-export const CHANNEL_H = 120;
+export const CHANNEL_H = 168;
 export const CHANNEL_GAP = 36;
-export const CHANNEL_Y = 500;
+export const CHANNEL_Y = 490;
 export const CONSTRAINT_Y = 720;
 
 const CHANNEL_SPAN = 4 * CHANNEL_W + 3 * CHANNEL_GAP;
 export const channelX = (index: number) =>
-  (WIDTH - CHANNEL_SPAN) / 2 + CHANNEL_W / 2 + index * (CHANNEL_W + CHANNEL_GAP);
+  (WIDTH - CHANNEL_SPAN) / 2 +
+  CHANNEL_W / 2 +
+  index * (CHANNEL_W + CHANNEL_GAP);
 
 /* Act 2 — the five things the guest actually judges */
 /** The headline opens centred, then docks to the top as the list header. */
@@ -49,8 +51,11 @@ export const YOURS_INDEX = 2;
 
 const GRID_SPAN = GRID_COLS * TILE_W + (GRID_COLS - 1) * TILE_GAP_X;
 export const tileX = (index: number) =>
-  (WIDTH - GRID_SPAN) / 2 + TILE_W / 2 + (index % GRID_COLS) * (TILE_W + TILE_GAP_X);
-export const tileY = (index: number) => GRID_ROW_Y[Math.floor(index / GRID_COLS)];
+  (WIDTH - GRID_SPAN) / 2 +
+  TILE_W / 2 +
+  (index % GRID_COLS) * (TILE_W + TILE_GAP_X);
+export const tileY = (index: number) =>
+  GRID_ROW_Y[Math.floor(index / GRID_COLS)];
 
 /* ------------------------------------------------------------------ *
  * Timing — frames keyed to the transcript timecodes (30fps)           *
@@ -122,14 +127,16 @@ export const T = {
  * Content                                                             *
  * ------------------------------------------------------------------ */
 
-export type Channel = { label: string; inStart: number };
+export type ChannelMark = "airbnb" | "vrbo" | "google" | "direct";
+
+export type Channel = { label: string; mark: ChannelMark; inStart: number };
 
 /** Where the guest actually shops — named, never shown as brand logos. */
 export const CHANNELS: Channel[] = [
-  { label: "AIRBNB", inStart: 24 },
-  { label: "VRBO", inStart: 84 },
-  { label: "GOOGLE", inStart: 168 },
-  { label: "DIRECT", inStart: 222 },
+  { label: "AIRBNB", mark: "airbnb", inStart: 24 },
+  { label: "VRBO", mark: "vrbo", inStart: 84 },
+  { label: "GOOGLE", mark: "google", inStart: 168 },
+  { label: "DIRECT", mark: "direct", inStart: 222 },
 ];
 
 export type Constraint = { label: string; inStart: number };
