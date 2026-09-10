@@ -27,11 +27,11 @@ const ChannelGlyph: React.FC<{ mark: ChannelMark; color: string }> = ({
 }) => {
   switch (mark) {
     case "airbnb":
-      return <AirbnbMark color={color} />;
+      return <AirbnbMark />;
     case "vrbo":
       return <VrboMark color={color} fontFamily={poppins} />;
     case "google":
-      return <GoogleMark color={color} />;
+      return <GoogleMark />;
     default:
       return <DirectMark color={color} />;
   }
