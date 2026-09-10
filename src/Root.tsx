@@ -21,6 +21,8 @@ import { SideBySideScene } from "./SideBySide";
 import * as SideBySideTimeline from "./SideBySide/timeline";
 import { RealTargetScene } from "./RealTarget";
 import * as RealTargetTimeline from "./RealTarget/timeline";
+import { WhichLeverScene } from "./WhichLever";
+import * as WhichLeverTimeline from "./WhichLever/timeline";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -105,6 +107,14 @@ export const RemotionRoot: React.FC = () => {
         fps={RealTargetTimeline.FPS}
         width={RealTargetTimeline.WIDTH}
         height={RealTargetTimeline.HEIGHT}
+      />
+      <Composition
+        id="WhichLever"
+        component={WhichLeverScene}
+        durationInFrames={WhichLeverTimeline.DURATION_IN_FRAMES}
+        fps={WhichLeverTimeline.FPS}
+        width={WhichLeverTimeline.WIDTH}
+        height={WhichLeverTimeline.HEIGHT}
       />
     </>
   );
