@@ -23,6 +23,8 @@ import { RealTargetScene } from "./RealTarget";
 import * as RealTargetTimeline from "./RealTarget/timeline";
 import { WhichLeverScene } from "./WhichLever";
 import * as WhichLeverTimeline from "./WhichLever/timeline";
+import { CompsChecklistScene } from "./CompsChecklist";
+import * as CompsChecklistTimeline from "./CompsChecklist/timeline";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -115,6 +117,14 @@ export const RemotionRoot: React.FC = () => {
         fps={WhichLeverTimeline.FPS}
         width={WhichLeverTimeline.WIDTH}
         height={WhichLeverTimeline.HEIGHT}
+      />
+      <Composition
+        id="CompsChecklist"
+        component={CompsChecklistScene}
+        durationInFrames={CompsChecklistTimeline.DURATION_IN_FRAMES}
+        fps={CompsChecklistTimeline.FPS}
+        width={CompsChecklistTimeline.WIDTH}
+        height={CompsChecklistTimeline.HEIGHT}
       />
     </>
   );
