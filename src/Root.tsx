@@ -19,6 +19,8 @@ import { SameOnPaperScene } from "./SameOnPaper";
 import * as SameOnPaperTimeline from "./SameOnPaper/timeline";
 import { SideBySideScene } from "./SideBySide";
 import * as SideBySideTimeline from "./SideBySide/timeline";
+import { RealTargetScene } from "./RealTarget";
+import * as RealTargetTimeline from "./RealTarget/timeline";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -95,6 +97,14 @@ export const RemotionRoot: React.FC = () => {
         fps={SideBySideTimeline.FPS}
         width={SideBySideTimeline.WIDTH}
         height={SideBySideTimeline.HEIGHT}
+      />
+      <Composition
+        id="RealTarget"
+        component={RealTargetScene}
+        durationInFrames={RealTargetTimeline.DURATION_IN_FRAMES}
+        fps={RealTargetTimeline.FPS}
+        width={RealTargetTimeline.WIDTH}
+        height={RealTargetTimeline.HEIGHT}
       />
     </>
   );
