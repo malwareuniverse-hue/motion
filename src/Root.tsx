@@ -15,6 +15,8 @@ import { BookingDecisionScene } from "./BookingDecision";
 import * as BookingDecisionTimeline from "./BookingDecision/timeline";
 import { CompsChainScene } from "./CompsChain";
 import * as CompsChainTimeline from "./CompsChain/timeline";
+import { SameOnPaperScene } from "./SameOnPaper";
+import * as SameOnPaperTimeline from "./SameOnPaper/timeline";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -75,6 +77,14 @@ export const RemotionRoot: React.FC = () => {
         fps={CompsChainTimeline.FPS}
         width={CompsChainTimeline.WIDTH}
         height={CompsChainTimeline.HEIGHT}
+      />
+      <Composition
+        id="SameOnPaper"
+        component={SameOnPaperScene}
+        durationInFrames={SameOnPaperTimeline.DURATION_IN_FRAMES}
+        fps={SameOnPaperTimeline.FPS}
+        width={SameOnPaperTimeline.WIDTH}
+        height={SameOnPaperTimeline.HEIGHT}
       />
     </>
   );
