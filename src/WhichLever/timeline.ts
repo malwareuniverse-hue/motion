@@ -1,7 +1,12 @@
 export const FPS = 30;
-export const WIDTH = 1920;
-export const HEIGHT = 1080;
+export const WIDTH = 1080;
+export const HEIGHT = 1920;
 export const DURATION_IN_FRAMES = 480; // 16s
+
+/** Side gutter. Vertical crops are watched with UI over the extreme edges. */
+export const SAFE_X = 70;
+/** Headline and statement wrap width. */
+export const TEXT_MAX_W = 920;
 
 export const CENTER_X = WIDTH / 2;
 
@@ -9,20 +14,20 @@ export const CENTER_X = WIDTH / 2;
  * Layout                                                              *
  * ------------------------------------------------------------------ */
 
-/** The question opens centred, then docks to the top over the levers. */
-export const HEAD_Y_OPEN = 470;
-export const HEAD_Y_DOCKED = 216;
-export const HEAD_SCALE_DOCKED = 0.82;
-export const SUB_GAP = 34;
+/** The question opens centred, then docks upward over the levers. */
+export const HEAD_Y_OPEN = 840;
+export const HEAD_Y_DOCKED = 470;
+export const HEAD_SCALE_DOCKED = 0.84;
+export const SUB_GAP = 30;
 
 export const LEVER_COUNT = 4;
-export const LEVER_PITCH = 340;
-export const TRACK_TOP = 392;
-export const TRACK_H = 236;
+export const LEVER_PITCH = 230;
+export const TRACK_TOP = 800;
+export const TRACK_H = 400;
 export const TRACK_W = 6;
-export const HANDLE_W = 62;
+export const HANDLE_W = 58;
 export const HANDLE_H = 22;
-export const LABEL_Y = 700;
+export const LABEL_Y = 1270;
 
 /** Handles rest here, and the pulled one travels to the bottom of its track. */
 export const HANDLE_REST = 0.32;
@@ -36,7 +41,7 @@ export const leverX = (index: number) =>
   CENTER_X - LEVER_SPAN / 2 + index * LEVER_PITCH;
 export const handleY = (t: number) => TRACK_TOP + TRACK_H * t;
 
-export const DROP_LABEL_Y = 800;
+export const DROP_LABEL_Y = 1420;
 
 /* ------------------------------------------------------------------ *
  * Timing — frames keyed to the transcript timecodes (30fps)           *
@@ -83,7 +88,7 @@ export const T = {
  * Content                                                             *
  * ------------------------------------------------------------------ */
 
-export const HEAD_TEXT = "WHICH LEVER SHOULD YOU PULL?";
+export const HEAD_TEXT = "WHICH LEVER\nSHOULD YOU PULL?";
 export const SUB_TEXT = "WHEN A PROPERTY ISN'T BOOKING";
 
 /**

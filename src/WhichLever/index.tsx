@@ -18,6 +18,7 @@ import {
   SUB_GAP,
   SUB_TEXT,
   T,
+  TEXT_MAX_W,
 } from "./timeline";
 
 export const WhichLeverScene: React.FC = () => {
@@ -63,6 +64,7 @@ export const WhichLeverScene: React.FC = () => {
             position: "absolute",
             left: CENTER_X,
             top: headY,
+            width: TEXT_MAX_W,
             transform: `translate(-50%, -50%) translateY(${head.translateY}px) scale(${headScale})`,
             opacity: head.opacity,
             display: "flex",
@@ -74,11 +76,14 @@ export const WhichLeverScene: React.FC = () => {
           <span
             style={{
               fontFamily: poppins,
-              fontSize: 56,
+              fontSize: 66,
               fontWeight: 600,
-              letterSpacing: 1.5,
+              letterSpacing: 1,
               color: palette.softWhite,
-              whiteSpace: "nowrap",
+              textAlign: "center",
+              lineHeight: 1.18,
+              maxWidth: TEXT_MAX_W,
+              whiteSpace: "pre-line",
             }}
           >
             {HEAD_TEXT}
@@ -88,11 +93,11 @@ export const WhichLeverScene: React.FC = () => {
               opacity: sub.opacity * (1 - dock * 0.55),
               transform: `translateY(${sub.translateY}px)`,
               fontFamily: poppins,
-              fontSize: 26,
+              fontSize: 24,
               fontWeight: 400,
-              letterSpacing: 6,
+              letterSpacing: 4,
               color: palette.mutedGray,
-              whiteSpace: "nowrap",
+              textAlign: "center",
             }}
           >
             {SUB_TEXT}
@@ -114,7 +119,7 @@ export const WhichLeverScene: React.FC = () => {
             ),
             opacity: q1.opacity,
             shift: q1.translateY,
-            size: 60,
+            size: 58,
           },
         ]}
       />
@@ -131,7 +136,7 @@ export const WhichLeverScene: React.FC = () => {
             ),
             opacity: q2.opacity,
             shift: q2.translateY,
-            size: 60,
+            size: 58,
           },
         ]}
       />

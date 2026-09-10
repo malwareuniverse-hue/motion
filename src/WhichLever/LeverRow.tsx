@@ -110,9 +110,9 @@ const Lever: React.FC<{ index: number }> = ({ index }) => {
           top: LABEL_Y,
           transform: "translate(-50%, -50%)",
           fontFamily: poppins,
-          fontSize: isPrice ? 22 : 20,
+          fontSize: isPrice ? 21 : 19,
           fontWeight: 500,
-          letterSpacing: isPrice ? 4 : 2,
+          letterSpacing: isPrice ? 3 : 2,
           color: isPrice ? palette.softWhite : palette.mutedGrayFaint,
           whiteSpace: "nowrap",
         }}
@@ -142,9 +142,9 @@ export const LeverRow: React.FC = () => {
             transform: `translate(-50%, -50%) translateY(${drop.translateY}px)`,
             opacity: drop.opacity,
             fontFamily: poppins,
-            fontSize: 30,
+            fontSize: 26,
             fontWeight: 500,
-            letterSpacing: 5,
+            letterSpacing: 4,
             color: palette.gold,
             whiteSpace: "nowrap",
           }}

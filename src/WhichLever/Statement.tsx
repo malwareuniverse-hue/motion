@@ -1,6 +1,7 @@
 import React from "react";
 import { palette } from "./theme";
 import { poppins } from "./fonts";
+import { SAFE_X, TEXT_MAX_W } from "./timeline";
 
 type Line = {
   content: React.ReactNode;
@@ -35,7 +36,7 @@ export const Statement: React.FC<{
         alignItems: "center",
         justifyContent: "center",
         gap,
-        padding: "0 180px",
+        padding: `0 ${SAFE_X}px`,
       }}
     >
       {rule === undefined ? null : (
@@ -60,7 +61,8 @@ export const Statement: React.FC<{
             letterSpacing: line.letterSpacing ?? 1.5,
             color: line.color ?? palette.softWhite,
             textAlign: "center",
-            lineHeight: 1.22,
+            lineHeight: 1.24,
+            maxWidth: TEXT_MAX_W,
           }}
         >
           {line.content}
