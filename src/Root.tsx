@@ -21,6 +21,8 @@ import { SubscribeCTAScene } from "./SubscribeCTA";
 import * as SubscribeCTATimeline from "./SubscribeCTA/timeline";
 import { ChapterThreeScene } from "./ChapterThree";
 import * as ChapterThreeTimeline from "./ChapterThree/timeline";
+import { FiveThingsScene } from "./FiveThings";
+import * as FiveThingsTimeline from "./FiveThings/timeline";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -105,6 +107,15 @@ export const RemotionRoot: React.FC = () => {
         fps={ChapterThreeTimeline.FPS}
         width={ChapterThreeTimeline.WIDTH}
         height={ChapterThreeTimeline.HEIGHT}
+      />
+      <Composition
+        id="FiveThings"
+        component={FiveThingsScene}
+        durationInFrames={FiveThingsTimeline.DURATION_IN_FRAMES}
+        fps={FiveThingsTimeline.FPS}
+        width={FiveThingsTimeline.WIDTH}
+        height={FiveThingsTimeline.HEIGHT}
+        defaultProps={{ backdrop: "green" as const }}
       />
     </>
   );
