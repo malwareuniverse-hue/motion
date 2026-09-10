@@ -17,6 +17,8 @@ import { CompsChainScene } from "./CompsChain";
 import * as CompsChainTimeline from "./CompsChain/timeline";
 import { SameOnPaperScene } from "./SameOnPaper";
 import * as SameOnPaperTimeline from "./SameOnPaper/timeline";
+import { SideBySideScene } from "./SideBySide";
+import * as SideBySideTimeline from "./SideBySide/timeline";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -85,6 +87,14 @@ export const RemotionRoot: React.FC = () => {
         fps={SameOnPaperTimeline.FPS}
         width={SameOnPaperTimeline.WIDTH}
         height={SameOnPaperTimeline.HEIGHT}
+      />
+      <Composition
+        id="SideBySide"
+        component={SideBySideScene}
+        durationInFrames={SideBySideTimeline.DURATION_IN_FRAMES}
+        fps={SideBySideTimeline.FPS}
+        width={SideBySideTimeline.WIDTH}
+        height={SideBySideTimeline.HEIGHT}
       />
     </>
   );
