@@ -15,6 +15,16 @@ import { BookingDecisionScene } from "./BookingDecision";
 import * as BookingDecisionTimeline from "./BookingDecision/timeline";
 import { CompsChainScene } from "./CompsChain";
 import * as CompsChainTimeline from "./CompsChain/timeline";
+import { GuestMindsetScene } from "./GuestMindset";
+import * as GuestMindsetTimeline from "./GuestMindset/timeline";
+import { SubscribeCTAScene } from "./SubscribeCTA";
+import * as SubscribeCTATimeline from "./SubscribeCTA/timeline";
+import { ChapterThreeScene } from "./ChapterThree";
+import * as ChapterThreeTimeline from "./ChapterThree/timeline";
+import { FiveThingsScene } from "./FiveThings";
+import * as FiveThingsTimeline from "./FiveThings/timeline";
+import { AssessmentCTAScene } from "./AssessmentCTA";
+import * as AssessmentCTATimeline from "./AssessmentCTA/timeline";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -75,6 +85,48 @@ export const RemotionRoot: React.FC = () => {
         fps={CompsChainTimeline.FPS}
         width={CompsChainTimeline.WIDTH}
         height={CompsChainTimeline.HEIGHT}
+      />
+      <Composition
+        id="GuestMindset"
+        component={GuestMindsetScene}
+        durationInFrames={GuestMindsetTimeline.DURATION_IN_FRAMES}
+        fps={GuestMindsetTimeline.FPS}
+        width={GuestMindsetTimeline.WIDTH}
+        height={GuestMindsetTimeline.HEIGHT}
+      />
+      <Composition
+        id="SubscribeCTA"
+        component={SubscribeCTAScene}
+        durationInFrames={SubscribeCTATimeline.DURATION_IN_FRAMES}
+        fps={SubscribeCTATimeline.FPS}
+        width={SubscribeCTATimeline.WIDTH}
+        height={SubscribeCTATimeline.HEIGHT}
+      />
+      <Composition
+        id="ChapterThree"
+        component={ChapterThreeScene}
+        durationInFrames={ChapterThreeTimeline.DURATION_IN_FRAMES}
+        fps={ChapterThreeTimeline.FPS}
+        width={ChapterThreeTimeline.WIDTH}
+        height={ChapterThreeTimeline.HEIGHT}
+      />
+      <Composition
+        id="FiveThings"
+        component={FiveThingsScene}
+        durationInFrames={FiveThingsTimeline.DURATION_IN_FRAMES}
+        fps={FiveThingsTimeline.FPS}
+        width={FiveThingsTimeline.WIDTH}
+        height={FiveThingsTimeline.HEIGHT}
+        defaultProps={{ backdrop: "green" as const }}
+      />
+      <Composition
+        id="AssessmentCTA"
+        component={AssessmentCTAScene}
+        durationInFrames={AssessmentCTATimeline.DURATION_IN_FRAMES}
+        fps={AssessmentCTATimeline.FPS}
+        width={AssessmentCTATimeline.WIDTH}
+        height={AssessmentCTATimeline.HEIGHT}
+        defaultProps={{ backdrop: "green" as const }}
       />
     </>
   );
