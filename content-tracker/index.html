@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Content Tracker — Mira</title>
+<style>
+  :root {
+    /* Warm hospitality palette */
+    --bg: #f6f1ea;
+    --surface: #fffdf9;
+    --surface-2: #f0e8dc;
+    --ink: #2b2622;
+    --ink-soft: #6b6157;
+    --ink-faint: #9a8f82;
+    --line: #e4d9c9;
+    --accent: #b07a3c;        /* muted gold / terracotta */
+    --accent-soft: #e9d6bd;
+    --accent-ink: #7a4f1f;
+    --danger: #a63d2f;
+    --danger-soft: #f2dcd7;
+    --ok: #4a6b4d;
+    --warn: #b8791f;
+    --shadow: 0 1px 2px rgba(43,38,34,.06), 0 8px 24px rgba(43,38,34,.08);
+    --shadow-lg: 0 12px 40px rgba(43,38,34,.20);
+    --radius: 14px;
+    --radius-sm: 9px;
+    --serif: Georgia, "Times New Roman", "Iowan Old Style", serif;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.45;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ---------- Header ---------- */
+  header.app-header {
+    padding: 22px 28px 16px;
+    background: linear-gradient(180deg, var(--surface) 0%, rgba(255,253,249,.4) 100%);
+    border-bottom: 1px solid var(--line);
+  }
+  .brand-row {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .brand-mark {
+    font-family: var(--serif);
+    font-size: 26px;
+    font-weight: 600;
+    letter-spacing: .2px;
+    color: var(--ink);
+    margin: 0;
+  }
+  .brand-mark .accent { color: var(--accent); }
+  .brand-tag {
+    font-size: 13px;
+    color: var(--ink-soft);
+    font-style: italic;
+  }
+
+  /* ---------- Stats ---------- */
+  .stats {
+    display: flex;
+    gap: 12px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+  }
+  .stat {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    padding: 10px 16px;
+    min-width: 120px;
+    box-shadow: var(--shadow);
+  }
+  .stat .num {
+    font-family: var(--serif);
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--accent-ink);
+    line-height: 1.1;
+  }
+  .stat .label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .09em;
+    color: var(--ink-faint);
+    margin-top: 2px;
+  }
+
+  /* ---------- Toolbar ---------- */
+  .toolbar {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 16px 28px;
+    background: var(--bg);
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    border-bottom: 1px solid var(--line);
+  }
+  .toolbar .grow { flex: 1 1 auto; }
+
+  input[type="text"], input[type="date"], select, textarea {
+    font-family: var(--sans);
+    font-size: 14px;
+    color: var(--ink);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    padding: 9px 12px;
+    outline: none;
+    transition: border-color .15s, box-shadow .15s;
+  }
+  input:focus, select:focus, textarea:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+  }
+  .search-box { min-width: 220px; flex: 1 1 260px; max-width: 360px; }
+  select.filter { min-width: 150px; }
+
+  button {
+    font-family: var(--sans);
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: var(--radius-sm);
+    border: 1px solid transparent;
+    padding: 9px 15px;
+    transition: background .15s, box-shadow .15s, transform .05s, border-color .15s;
+  }
+  button:active { transform: translateY(1px); }
+  .btn-primary {
+    background: var(--accent);
+    color: #fff;
+    font-weight: 600;
+    box-shadow: var(--shadow);
+  }
+  .btn-primary:hover { background: var(--accent-ink); }
+  .btn-ghost {
+    background: var(--surface);
+    color: var(--ink-soft);
+    border-color: var(--line);
+  }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent-ink); }
+  .btn-danger {
+    background: var(--danger-soft);
+    color: var(--danger);
+    border-color: transparent;
+  }
+  .btn-danger:hover { background: #ecc9c1; }
+
+  /* ---------- Board ---------- */
+  .board-wrap { padding: 20px 28px 60px; overflow-x: auto; }
+  .board {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    min-width: min-content;
+  }
+  .column {
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    width: 264px;
+    min-width: 264px;
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    max-height: calc(100vh - 220px);
+  }
+  .column.drag-over {
+    outline: 2px dashed var(--accent);
+    outline-offset: -3px;
+    background: var(--accent-soft);
+  }
+  .col-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 13px 15px 10px;
+    border-bottom: 1px solid var(--line);
+  }
+  .col-title {
+    font-family: var(--serif);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .col-count {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ink-soft);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 1px 9px;
+    min-width: 22px;
+    text-align: center;
+  }
+  .col-body {
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+    overflow-y: auto;
+    min-height: 60px;
+    flex: 1 1 auto;
+  }
+  .col-empty {
+    color: var(--ink-faint);
+    font-size: 12.5px;
+    font-style: italic;
+    text-align: center;
+    padding: 16px 8px;
+    border: 1px dashed var(--line);
+    border-radius: var(--radius-sm);
+  }
+
+  /* ---------- Card ---------- */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    padding: 12px 13px;
+    box-shadow: var(--shadow);
+    cursor: grab;
+    transition: box-shadow .15s, transform .05s, border-color .15s;
+  }
+  .card:hover { box-shadow: var(--shadow-lg); border-color: var(--accent-soft); }
+  .card.dragging { opacity: .5; cursor: grabbing; }
+  .card-title {
+    font-weight: 600;
+    font-size: 14.5px;
+    color: var(--ink);
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+  .badges { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+  .badge {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 9px;
+    border-radius: 20px;
+    white-space: nowrap;
+    letter-spacing: .01em;
+  }
+  .card-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 12px;
+    color: var(--ink-soft);
+  }
+  .card-meta .row { display: flex; align-items: center; gap: 6px; }
+  .card-meta .ic { color: var(--ink-faint); flex: 0 0 auto; }
+  .due {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-weight: 600;
+    padding: 1px 8px;
+    border-radius: 6px;
+    font-size: 11.5px;
+    background: var(--surface-2);
+    color: var(--ink-soft);
+    align-self: flex-start;
+  }
+  .due.soon { background: #fbeecd; color: var(--warn); }
+  .due.overdue { background: var(--danger-soft); color: var(--danger); }
+
+  /* ---------- Empty board ---------- */
+  .board-empty {
+    text-align: center;
+    padding: 70px 20px;
+    color: var(--ink-soft);
+  }
+  .board-empty h2 {
+    font-family: var(--serif);
+    font-weight: 600;
+    color: var(--ink);
+    margin: 0 0 8px;
+  }
+  .board-empty p { margin: 0 0 20px; }
+
+  /* ---------- Modal ---------- */
+  .overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(43,38,34,.42);
+    backdrop-filter: blur(2px);
+    display: none;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 40px 16px;
+    overflow-y: auto;
+    z-index: 100;
+  }
+  .overlay.open { display: flex; }
+  .modal {
+    background: var(--surface);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-lg);
+    width: 100%;
+    max-width: 520px;
+    padding: 24px 26px 22px;
+    animation: pop .16s ease-out;
+  }
+  @keyframes pop { from { opacity: 0; transform: translateY(8px) scale(.99); } to { opacity: 1; transform: none; } }
+  .modal h2 {
+    font-family: var(--serif);
+    font-size: 21px;
+    font-weight: 600;
+    margin: 0 0 4px;
+  }
+  .modal .sub { font-size: 13px; color: var(--ink-faint); margin-bottom: 18px; }
+  .field { margin-bottom: 14px; }
+  .field label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: var(--ink-soft);
+    margin-bottom: 5px;
+  }
+  .field input, .field select, .field textarea { width: 100%; }
+  .field textarea { resize: vertical; min-height: 64px; }
+  .field-row { display: flex; gap: 14px; }
+  .field-row .field { flex: 1; }
+  .custom-channel { margin-top: 8px; }
+  .modal-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-top: 22px;
+  }
+  .modal-actions .right { display: flex; gap: 10px; margin-left: auto; }
+
+  .hidden { display: none !important; }
+
+  .footnote {
+    text-align: center;
+    font-size: 12px;
+    color: var(--ink-faint);
+    padding: 0 20px 30px;
+  }
+
+  @media (max-width: 640px) {
+    header.app-header, .toolbar, .board-wrap { padding-left: 16px; padding-right: 16px; }
+    .field-row { flex-direction: column; gap: 0; }
+  }
+</style>
+</head>
+<body>
+  <header class="app-header">
+    <div class="brand-row">
+      <h1 class="brand-mark">Content <span class="accent">Tracker</span></h1>
+      <span class="brand-tag">Production pipeline · Mira &amp; friends</span>
+    </div>
+    <div class="stats" id="stats"></div>
+  </header>
+
+  <div class="toolbar">
+    <input type="text" id="search" class="search-box" placeholder="Search title, notes, platform…" />
+    <select id="filterChannel" class="filter"><option value="">All channels</option></select>
+    <select id="filterFormat" class="filter"><option value="">All formats</option></select>
+    <span class="grow"></span>
+    <button class="btn-ghost" id="exportBtn" title="Download all data as JSON">Export JSON</button>
+    <button class="btn-ghost" id="importBtn" title="Load data from a JSON file">Import JSON</button>
+    <input type="file" id="importFile" accept="application/json,.json" class="hidden" />
+    <button class="btn-primary" id="newBtn">+ New content</button>
+  </div>
+
+  <div class="board-wrap">
+    <div class="board" id="board"></div>
+    <div class="board-empty hidden" id="boardEmpty">
+      <h2>Nothing in the pipeline yet</h2>
+      <p>Add your first piece of content to start tracking it through the 8 stages.</p>
+      <button class="btn-primary" id="emptyNewBtn">+ New content</button>
+    </div>
+  </div>
+
+  <div class="footnote">
+    Data is saved locally in this browser. Use <strong>Export JSON</strong> regularly to back up or move between machines.
+  </div>
+
+  <!-- Edit / New modal -->
+  <div class="overlay" id="overlay">
+    <div class="modal" role="dialog" aria-modal="true">
+      <h2 id="modalTitle">New content</h2>
+      <div class="sub" id="modalSub">Add a piece to your production pipeline.</div>
+      <form id="itemForm">
+        <input type="hidden" id="f-id" />
+        <div class="field">
+          <label for="f-title">Title</label>
+          <input type="text" id="f-title" required placeholder="e.g. Dynamic pricing walkthrough" />
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="f-channel">Channel</label>
+            <select id="f-channel"></select>
+            <input type="text" id="f-channel-custom" class="custom-channel hidden" placeholder="Custom channel name" />
+          </div>
+          <div class="field">
+            <label for="f-format">Format</label>
+            <select id="f-format"></select>
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="f-stage">Stage</label>
+            <select id="f-stage"></select>
+          </div>
+          <div class="field">
+            <label for="f-due">Due date</label>
+            <input type="date" id="f-due" />
+          </div>
+        </div>
+        <div class="field">
+          <label for="f-platform">Platform(s)</label>
+          <input type="text" id="f-platform" placeholder="e.g. YouTube, TikTok, Instagram" />
+        </div>
+        <div class="field">
+          <label for="f-notes">Notes</label>
+          <textarea id="f-notes" placeholder="Optional notes, hooks, references…"></textarea>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn-danger hidden" id="deleteBtn">Delete</button>
+          <div class="right">
+            <button type="button" class="btn-ghost" id="cancelBtn">Cancel</button>
+            <button type="submit" class="btn-primary" id="saveBtn">Save</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+<script>
+(function () {
+  "use strict";
+
+  var STORAGE_KEY = "mira-content-tracker-v1";
+
+  var STAGES = ["Intake", "Rough cut", "Graphics", "Second pass", "Captions", "Music", "Export", "Published"];
+  var CHANNELS = ["Pricing by Mira / Emile Sael", "Mira Hospitality", "Revenue Academy"];
+  var FORMATS = ["Long-form YouTube", "Short — Explainer", "Short — TikTok/Raw"];
+
+  // Consistent color coding for badges
+  var CHANNEL_COLORS = {
+    "Pricing by Mira / Emile Sael": { bg: "#e7eef0", fg: "#355a63" },
+    "Mira Hospitality":             { bg: "#efe4d6", fg: "#8a5a29" },
+    "Revenue Academy":              { bg: "#e6e3ef", fg: "#4c447a" }
+  };
+  var CHANNEL_FALLBACK = { bg: "#e4d9c9", fg: "#6b5636" };
+  var FORMAT_COLORS = {
+    "Long-form YouTube":   { bg: "#f3ddd6", fg: "#9c4a37" },
+    "Short — Explainer":   { bg: "#e2ecdd", fg: "#4a6b4d" },
+    "Short — TikTok/Raw":  { bg: "#f6ecc9", fg: "#8a6d1c" }
+  };
+  var FORMAT_FALLBACK = { bg: "#e4d9c9", fg: "#6b5636" };
+
+  var state = { items: [] };
+
+  // ---------- persistence ----------
+  function load() {
+    var raw = null;
+    try { raw = localStorage.getItem(STORAGE_KEY); } catch (e) { raw = null; }
+    if (!raw) { return null; }
+    try {
+      var parsed = JSON.parse(raw);
+      if (parsed && Array.isArray(parsed.items)) { return parsed; }
+    } catch (e) {}
+    return null;
+  }
+  function save() {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+    catch (e) { console.warn("Could not save to localStorage", e); }
+  }
+
+  function uid() {
+    return "c-" + Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 7);
+  }
+
+  function seed() {
+    var today = new Date();
+    function iso(offsetDays) {
+      var d = new Date(today.getTime() + offsetDays * 86400000);
+      return d.toISOString().slice(0, 10);
+    }
+    return {
+      items: [
+        {
+          id: uid(),
+          title: "[EXAMPLE] Dynamic pricing that actually converts",
+          channel: "Pricing by Mira / Emile Sael",
+          format: "Long-form YouTube",
+          stage: "Graphics",
+          platform: "YouTube",
+          dueDate: iso(6),
+          notes: "Example card — drag me between columns, click to edit, or delete me.",
+          updatedAt: Date.now()
+        },
+        {
+          id: uid(),
+          title: "[EXAMPLE] 3 nightly-rate mistakes (hook test)",
+          channel: "Mira Hospitality",
+          format: "Short — TikTok/Raw",
+          stage: "Rough cut",
+          platform: "TikTok, Instagram Reels",
+          dueDate: iso(2),
+          notes: "Example card — this one is due soon.",
+          updatedAt: Date.now()
+        },
+        {
+          id: uid(),
+          title: "[EXAMPLE] What is RevPAR? (60s explainer)",
+          channel: "Revenue Academy",
+          format: "Short — Explainer",
+          stage: "Published",
+          platform: "YouTube Shorts, TikTok",
+          dueDate: "",
+          notes: "Example card — already published.",
+          updatedAt: Date.now()
+        }
+      ]
+    };
+  }
+
+  // ---------- helpers ----------
+  function esc(s) {
+    return String(s == null ? "" : s)
+      .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+  }
+
+  function colorFor(map, fallback, key) {
+    return map[key] || fallback;
+  }
+
+  function dueInfo(dateStr) {
+    if (!dateStr) { return null; }
+    var d = new Date(dateStr + "T00:00:00");
+    if (isNaN(d.getTime())) { return null; }
+    var today = new Date();
+    today.setHours(0, 0, 0, 0);
+    var diffDays = Math.round((d.getTime() - today.getTime()) / 86400000);
+    var cls = "";
+    if (diffDays < 0) { cls = "overdue"; }
+    else if (diffDays <= 3) { cls = "soon"; }
+    var label = d.toLocaleDateString(undefined, { month: "short", day: "numeric" });
+    if (diffDays < 0) { label = "Overdue · " + label; }
+    else if (diffDays === 0) { label = "Due today"; }
+    else if (diffDays === 1) { label = "Due tomorrow"; }
+    return { cls: cls, label: label };
+  }
+
+  // ---------- filtering ----------
+  function getFilters() {
+    return {
+      q: (document.getElementById("search").value || "").trim().toLowerCase(),
+      channel: document.getElementById("filterChannel").value,
+      format: document.getElementById("filterFormat").value
+    };
+  }
+  function matches(item, f) {
+    if (f.channel && item.channel !== f.channel) { return false; }
+    if (f.format && item.format !== f.format) { return false; }
+    if (f.q) {
+      var hay = (item.title + " " + (item.notes || "") + " " + (item.platform || "")).toLowerCase();
+      if (hay.indexOf(f.q) === -1) { return false; }
+    }
+    return true;
+  }
+
+  // ---------- rendering ----------
+  function renderStats() {
+    var total = state.items.length;
+    var inProgress = 0, published = 0;
+    state.items.forEach(function (i) {
+      if (i.stage === "Published") { published++; }
+      else if (i.stage !== "Intake") { inProgress++; }
+    });
+    var el = document.getElementById("stats");
+    el.innerHTML =
+      statTile(total, "Total items") +
+      statTile(inProgress, "In progress") +
+      statTile(published, "Published");
+  }
+  function statTile(n, label) {
+    return '<div class="stat"><div class="num">' + n + '</div><div class="label">' + esc(label) + '</div></div>';
+  }
+
+  function cardHTML(item) {
+    var ch = colorFor(CHANNEL_COLORS, CHANNEL_FALLBACK, item.channel);
+    var fm = colorFor(FORMAT_COLORS, FORMAT_FALLBACK, item.format);
+    var html = '<div class="card" draggable="true" data-id="' + esc(item.id) + '">';
+    html += '<div class="card-title">' + esc(item.title) + '</div>';
+    html += '<div class="badges">';
+    html += '<span class="badge" style="background:' + ch.bg + ';color:' + ch.fg + '">' + esc(item.channel) + '</span>';
+    html += '<span class="badge" style="background:' + fm.bg + ';color:' + fm.fg + '">' + esc(item.format) + '</span>';
+    html += '</div>';
+    html += '<div class="card-meta">';
+    var di = dueInfo(item.dueDate);
+    if (di) {
+      html += '<span class="due ' + di.cls + '">📅 ' + esc(di.label) + '</span>';
+    }
+    if (item.platform) {
+      html += '<div class="row"><span class="ic">▶</span><span>' + esc(item.platform) + '</span></div>';
+    }
+    html += '</div></div>';
+    return html;
+  }
+
+  function render() {
+    renderStats();
+    var f = getFilters();
+    var board = document.getElementById("board");
+    var boardEmpty = document.getElementById("boardEmpty");
+
+    if (state.items.length === 0) {
+      board.innerHTML = "";
+      board.classList.add("hidden");
+      boardEmpty.classList.remove("hidden");
+      return;
+    }
+    board.classList.remove("hidden");
+    boardEmpty.classList.add("hidden");
+
+    var byStage = {};
+    STAGES.forEach(function (s) { byStage[s] = []; });
+    state.items.forEach(function (i) {
+      if (!byStage[i.stage]) { byStage[i.stage] = []; }
+      byStage[i.stage].push(i);
+    });
+
+    var out = "";
+    STAGES.forEach(function (stage) {
+      var all = byStage[stage] || [];
+      var visible = all.filter(function (i) { return matches(i, f); });
+      out += '<div class="column" data-stage="' + esc(stage) + '">';
+      out += '<div class="col-head"><span class="col-title">' + esc(stage) + '</span>';
+      out += '<span class="col-count">' + all.length + '</span></div>';
+      out += '<div class="col-body" data-stage="' + esc(stage) + '">';
+      if (visible.length === 0) {
+        var msg = all.length === 0 ? "Empty" : "No matches";
+        out += '<div class="col-empty">' + msg + '</div>';
+      } else {
+        visible.forEach(function (i) { out += cardHTML(i); });
+      }
+      out += '</div></div>';
+    });
+    board.innerHTML = out;
+    wireBoardEvents();
+  }
+
+  // ---------- drag & drop ----------
+  var draggingId = null;
+  function wireBoardEvents() {
+    var cards = document.querySelectorAll(".card");
+    Array.prototype.forEach.call(cards, function (card) {
+      card.addEventListener("dragstart", function (e) {
+        draggingId = card.getAttribute("data-id");
+        card.classList.add("dragging");
+        if (e.dataTransfer) {
+          e.dataTransfer.effectAllowed = "move";
+          try { e.dataTransfer.setData("text/plain", draggingId); } catch (err) {}
+        }
+      });
+      card.addEventListener("dragend", function () {
+        card.classList.remove("dragging");
+        draggingId = null;
+        var cols = document.querySelectorAll(".column");
+        Array.prototype.forEach.call(cols, function (c) { c.classList.remove("drag-over"); });
+      });
+      card.addEventListener("click", function () {
+        openModal(card.getAttribute("data-id"));
+      });
+    });
+
+    var cols = document.querySelectorAll(".column");
+    Array.prototype.forEach.call(cols, function (col) {
+      col.addEventListener("dragover", function (e) {
+        e.preventDefault();
+        if (e.dataTransfer) { e.dataTransfer.dropEffect = "move"; }
+        col.classList.add("drag-over");
+      });
+      col.addEventListener("dragleave", function (e) {
+        if (!col.contains(e.relatedTarget)) { col.classList.remove("drag-over"); }
+      });
+      col.addEventListener("drop", function (e) {
+        e.preventDefault();
+        col.classList.remove("drag-over");
+        var id = draggingId;
+        if (!id && e.dataTransfer) { id = e.dataTransfer.getData("text/plain"); }
+        var stage = col.getAttribute("data-stage");
+        if (id && stage) { moveItem(id, stage); }
+      });
+    });
+  }
+
+  function moveItem(id, stage) {
+    var item = findItem(id);
+    if (!item || item.stage === stage) { return; }
+    item.stage = stage;
+    item.updatedAt = Date.now();
+    save();
+    render();
+  }
+
+  function findItem(id) {
+    for (var i = 0; i < state.items.length; i++) {
+      if (state.items[i].id === id) { return state.items[i]; }
+    }
+    return null;
+  }
+
+  // ---------- modal ----------
+  var overlay = document.getElementById("overlay");
+  function fillSelect(sel, values, includeBlank) {
+    sel.innerHTML = "";
+    if (includeBlank) { sel.appendChild(new Option("", "")); }
+    values.forEach(function (v) { sel.appendChild(new Option(v, v)); });
+  }
+
+  function openModal(id) {
+    var form = document.getElementById("itemForm");
+    var isEdit = !!id;
+    document.getElementById("modalTitle").textContent = isEdit ? "Edit content" : "New content";
+    document.getElementById("modalSub").textContent = isEdit
+      ? "Update the details or delete this item."
+      : "Add a piece to your production pipeline.";
+    document.getElementById("deleteBtn").classList.toggle("hidden", !isEdit);
+
+    var chSel = document.getElementById("f-channel");
+    var chCustom = document.getElementById("f-channel-custom");
+    chCustom.classList.add("hidden");
+    chCustom.value = "";
+
+    if (isEdit) {
+      var item = findItem(id);
+      if (!item) { return; }
+      document.getElementById("f-id").value = item.id;
+      document.getElementById("f-title").value = item.title || "";
+      document.getElementById("f-format").value = FORMATS.indexOf(item.format) >= 0 ? item.format : FORMATS[0];
+      document.getElementById("f-stage").value = STAGES.indexOf(item.stage) >= 0 ? item.stage : STAGES[0];
+      document.getElementById("f-due").value = item.dueDate || "";
+      document.getElementById("f-platform").value = item.platform || "";
+      document.getElementById("f-notes").value = item.notes || "";
+      if (CHANNELS.indexOf(item.channel) >= 0) {
+        chSel.value = item.channel;
+      } else {
+        chSel.value = "__custom__";
+        chCustom.classList.remove("hidden");
+        chCustom.value = item.channel || "";
+      }
+    } else {
+      form.reset();
+      document.getElementById("f-id").value = "";
+      chSel.value = CHANNELS[0];
+      document.getElementById("f-format").value = FORMATS[0];
+      document.getElementById("f-stage").value = STAGES[0];
+    }
+    overlay.classList.add("open");
+    setTimeout(function () { document.getElementById("f-title").focus(); }, 30);
+  }
+
+  function closeModal() { overlay.classList.remove("open"); }
+
+  function submitForm(e) {
+    e.preventDefault();
+    var id = document.getElementById("f-id").value;
+    var chSel = document.getElementById("f-channel");
+    var channel = chSel.value;
+    if (channel === "__custom__") {
+      channel = (document.getElementById("f-channel-custom").value || "").trim() || "Custom";
+    }
+    var data = {
+      title: (document.getElementById("f-title").value || "").trim(),
+      channel: channel,
+      format: document.getElementById("f-format").value,
+      stage: document.getElementById("f-stage").value,
+      platform: (document.getElementById("f-platform").value || "").trim(),
+      dueDate: document.getElementById("f-due").value || "",
+      notes: (document.getElementById("f-notes").value || "").trim()
+    };
+    if (!data.title) { return; }
+
+    if (id) {
+      var item = findItem(id);
+      if (item) {
+        item.title = data.title; item.channel = data.channel; item.format = data.format;
+        item.stage = data.stage; item.platform = data.platform; item.dueDate = data.dueDate;
+        item.notes = data.notes; item.updatedAt = Date.now();
+      }
+    } else {
+      data.id = uid();
+      data.updatedAt = Date.now();
+      state.items.push(data);
+    }
+    save();
+    render();
+    closeModal();
+  }
+
+  function deleteCurrent() {
+    var id = document.getElementById("f-id").value;
+    if (!id) { return; }
+    var item = findItem(id);
+    var name = item ? item.title : "this item";
+    if (!window.confirm('Delete "' + name + '"? This cannot be undone.')) { return; }
+    state.items = state.items.filter(function (i) { return i.id !== id; });
+    save();
+    render();
+    closeModal();
+  }
+
+  // ---------- backup ----------
+  function exportJSON() {
+    var blob = new Blob([JSON.stringify(state, null, 2)], { type: "application/json" });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement("a");
+    var stamp = new Date().toISOString().slice(0, 10);
+    a.href = url;
+    a.download = "mira-content-tracker-" + stamp + ".json";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+  }
+
+  function importJSON(file) {
+    var reader = new FileReader();
+    reader.onload = function () {
+      var parsed = null;
+      try { parsed = JSON.parse(reader.result); } catch (e) {}
+      if (!parsed || !Array.isArray(parsed.items)) {
+        window.alert("That file doesn't look like a valid Content Tracker export.");
+        return;
+      }
+      if (!window.confirm("Import " + parsed.items.length + " item(s)? This will REPLACE all current data.")) {
+        return;
+      }
+      // normalize
+      state.items = parsed.items.map(function (i) {
+        return {
+          id: i.id || uid(),
+          title: String(i.title || "Untitled"),
+          channel: String(i.channel || CHANNELS[0]),
+          format: String(i.format || FORMATS[0]),
+          stage: STAGES.indexOf(i.stage) >= 0 ? i.stage : STAGES[0],
+          platform: String(i.platform || ""),
+          dueDate: i.dueDate || "",
+          notes: String(i.notes || ""),
+          updatedAt: i.updatedAt || Date.now()
+        };
+      });
+      save();
+      render();
+      window.alert("Imported " + state.items.length + " item(s).");
+    };
+    reader.readAsText(file);
+  }
+
+  // ---------- init ----------
+  function initSelects() {
+    fillSelect(document.getElementById("filterChannel"), CHANNELS, false);
+    // filterChannel already has an "All channels" first option in HTML; rebuild properly:
+    var fc = document.getElementById("filterChannel");
+    fc.innerHTML = "";
+    fc.appendChild(new Option("All channels", ""));
+    CHANNELS.forEach(function (c) { fc.appendChild(new Option(c, c)); });
+
+    var ff = document.getElementById("filterFormat");
+    ff.innerHTML = "";
+    ff.appendChild(new Option("All formats", ""));
+    FORMATS.forEach(function (v) { ff.appendChild(new Option(v, v)); });
+
+    var chSel = document.getElementById("f-channel");
+    chSel.innerHTML = "";
+    CHANNELS.forEach(function (c) { chSel.appendChild(new Option(c, c)); });
+    chSel.appendChild(new Option("+ Custom channel…", "__custom__"));
+
+    fillSelect(document.getElementById("f-format"), FORMATS, false);
+    fillSelect(document.getElementById("f-stage"), STAGES, false);
+  }
+
+  function wireGlobalEvents() {
+    document.getElementById("newBtn").addEventListener("click", function () { openModal(null); });
+    document.getElementById("emptyNewBtn").addEventListener("click", function () { openModal(null); });
+    document.getElementById("cancelBtn").addEventListener("click", closeModal);
+    document.getElementById("deleteBtn").addEventListener("click", deleteCurrent);
+    document.getElementById("itemForm").addEventListener("submit", submitForm);
+
+    document.getElementById("f-channel").addEventListener("change", function () {
+      var custom = document.getElementById("f-channel-custom");
+      if (this.value === "__custom__") { custom.classList.remove("hidden"); custom.focus(); }
+      else { custom.classList.add("hidden"); }
+    });
+
+    overlay.addEventListener("mousedown", function (e) {
+      if (e.target === overlay) { closeModal(); }
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && overlay.classList.contains("open")) { closeModal(); }
+    });
+
+    document.getElementById("search").addEventListener("input", render);
+    document.getElementById("filterChannel").addEventListener("change", render);
+    document.getElementById("filterFormat").addEventListener("change", render);
+
+    document.getElementById("exportBtn").addEventListener("click", exportJSON);
+    document.getElementById("importBtn").addEventListener("click", function () {
+      document.getElementById("importFile").click();
+    });
+    document.getElementById("importFile").addEventListener("change", function (e) {
+      var file = e.target.files && e.target.files[0];
+      if (file) { importJSON(file); }
+      e.target.value = "";
+    });
+  }
+
+  function init() {
+    initSelects();
+    wireGlobalEvents();
+    var loaded = load();
+    if (loaded) { state = loaded; }
+    else { state = seed(); save(); }
+    render();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
+})();
+</script>
+</body>
+</html>
