@@ -24,7 +24,7 @@ export const OpeningStatement: React.FC = () => {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        padding: "0 220px",
+        padding: "0 80px",
         opacity: enter.opacity * (1 - recede),
         transform: `translateY(${enter.translateY - recede * 30}px) scale(${1 - recede * 0.03})`,
         filter: `blur(${recede * 3}px)`,
@@ -32,10 +32,12 @@ export const OpeningStatement: React.FC = () => {
     >
       <span
         style={{
+          maxWidth: "92%",
           fontFamily: poppins,
-          fontSize: 58,
+          fontSize: 50,
           fontWeight: 700,
-          letterSpacing: 1,
+          lineHeight: 1.28,
+          letterSpacing: 0.6,
           color: palette.softWhite,
           textAlign: "center",
         }}

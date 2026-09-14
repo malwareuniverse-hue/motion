@@ -31,8 +31,8 @@ export const CalmStatement: React.FC = () => {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        gap: 30,
-        padding: "0 190px",
+        gap: 34,
+        padding: "0 76px",
       }}
     >
       <div
@@ -45,12 +45,14 @@ export const CalmStatement: React.FC = () => {
       />
       <span
         style={{
+          maxWidth: "94%",
           opacity: line1.opacity,
           transform: `translateY(${line1.translateY}px)`,
           fontFamily: poppins,
-          fontSize: 50,
+          fontSize: 40,
           fontWeight: 700,
-          letterSpacing: 0.8,
+          lineHeight: 1.3,
+          letterSpacing: 0.4,
           color: palette.softWhite,
           textAlign: "center",
         }}
@@ -60,12 +62,14 @@ export const CalmStatement: React.FC = () => {
       </span>
       <span
         style={{
+          maxWidth: "92%",
           opacity: line2.opacity,
           transform: `translateY(${line2.translateY}px)`,
           fontFamily: poppins,
-          fontSize: 40,
+          fontSize: 30,
           fontWeight: 500,
-          letterSpacing: 1.4,
+          lineHeight: 1.3,
+          letterSpacing: 1,
           color: palette.mutedGraySoft,
           textAlign: "center",
         }}

@@ -37,10 +37,11 @@ export const ProcessCard: React.FC = () => {
   const step2 = fadeSlide(frame, T.moveIn, T.moveDur, 20);
 
   const stepStyle: React.CSSProperties = {
+    maxWidth: "90%",
     fontFamily: poppins,
-    fontSize: 74,
+    fontSize: 58,
     fontWeight: 700,
-    letterSpacing: 0.6,
+    letterSpacing: 0.4,
     color: palette.softWhite,
     textAlign: "center",
   };
@@ -62,6 +63,7 @@ export const ProcessCard: React.FC = () => {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
+          padding: "0 60px",
         }}
       >
         <span

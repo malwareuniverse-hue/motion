@@ -1,12 +1,14 @@
 export const FPS = 30;
-export const WIDTH = 1920;
-export const HEIGHT = 1080;
+export const WIDTH = 1080;
+export const HEIGHT = 1920;
 export const DURATION_IN_FRAMES = 440; // 14s 20f
 
 /**
  * A three-beat full-screen sequence: the warning, the calm claim, then the
  * two-step process that backs it up. No side panel, no chroma — this plays
- * full-bleed on the locked PBM near-black ground.
+ * full-bleed on the locked PBM near-black ground. 9:16 vertical — every text
+ * block wraps within a percentage-based safe width rather than a fixed pixel
+ * one, so it holds up whether this lands at 1080x1920 or any other 9:16 size.
  *
  * Source placement: drop this composition at 00:00:00:00 on the master timeline.
  * The transcript's own pause markers set the transition timing below — each
