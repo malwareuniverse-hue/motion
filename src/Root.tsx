@@ -25,6 +25,8 @@ import { FiveThingsScene } from "./FiveThings";
 import * as FiveThingsTimeline from "./FiveThings/timeline";
 import { AssessmentCTAScene } from "./AssessmentCTA";
 import * as AssessmentCTATimeline from "./AssessmentCTA/timeline";
+import { CalmDiagnosisScene } from "./CalmDiagnosis";
+import * as CalmDiagnosisTimeline from "./CalmDiagnosis/timeline";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -127,6 +129,14 @@ export const RemotionRoot: React.FC = () => {
         width={AssessmentCTATimeline.WIDTH}
         height={AssessmentCTATimeline.HEIGHT}
         defaultProps={{ backdrop: "green" as const }}
+      />
+      <Composition
+        id="CalmDiagnosis"
+        component={CalmDiagnosisScene}
+        durationInFrames={CalmDiagnosisTimeline.DURATION_IN_FRAMES}
+        fps={CalmDiagnosisTimeline.FPS}
+        width={CalmDiagnosisTimeline.WIDTH}
+        height={CalmDiagnosisTimeline.HEIGHT}
       />
     </>
   );
