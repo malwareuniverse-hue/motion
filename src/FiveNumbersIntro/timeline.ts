@@ -1,13 +1,13 @@
 export const FPS = 30;
-export const WIDTH = 1080;
-export const HEIGHT = 1920;
+export const WIDTH = 1920;
+export const HEIGHT = 1080;
 export const DURATION_IN_FRAMES = 700; // 23s 10f
 
 /**
  * A chapter-opener: the warning against judging by one number, the "five"
  * framework claim with its payoff stacking in underneath, then the handoff
  * line that sets up the next clip's reveal. Full-bleed on the locked PBM
- * near-black ground, 9:16 vertical, no side panel, no chroma. This clip does
+ * near-black ground, 16:9 widescreen, no side panel, no chroma. This clip does
  * not itself resolve — it ends on the anticipation line and cuts to whatever
  * reveals the first number.
  *
