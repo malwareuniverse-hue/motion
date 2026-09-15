@@ -29,6 +29,8 @@ import { CalmDiagnosisScene } from "./CalmDiagnosis";
 import * as CalmDiagnosisTimeline from "./CalmDiagnosis/timeline";
 import { RevenueLossScene } from "./RevenueLoss";
 import * as RevenueLossTimeline from "./RevenueLoss/timeline";
+import { OccupancyMeterScene } from "./OccupancyMeter";
+import * as OccupancyMeterTimeline from "./OccupancyMeter/timeline";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -148,6 +150,14 @@ export const RemotionRoot: React.FC = () => {
         width={RevenueLossTimeline.WIDTH}
         height={RevenueLossTimeline.HEIGHT}
         defaultProps={{ backdrop: "dark" as const }}
+      />
+      <Composition
+        id="OccupancyMeter"
+        component={OccupancyMeterScene}
+        durationInFrames={OccupancyMeterTimeline.DURATION_IN_FRAMES}
+        fps={OccupancyMeterTimeline.FPS}
+        width={OccupancyMeterTimeline.WIDTH}
+        height={OccupancyMeterTimeline.HEIGHT}
       />
     </>
   );
