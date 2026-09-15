@@ -33,6 +33,8 @@ import { OccupancyMeterScene } from "./OccupancyMeter";
 import * as OccupancyMeterTimeline from "./OccupancyMeter/timeline";
 import { FiveNumbersIntroScene } from "./FiveNumbersIntro";
 import * as FiveNumbersIntroTimeline from "./FiveNumbersIntro/timeline";
+import { FullCalendarTrapScene } from "./FullCalendarTrap";
+import * as FullCalendarTrapTimeline from "./FullCalendarTrap/timeline";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -168,6 +170,14 @@ export const RemotionRoot: React.FC = () => {
         fps={FiveNumbersIntroTimeline.FPS}
         width={FiveNumbersIntroTimeline.WIDTH}
         height={FiveNumbersIntroTimeline.HEIGHT}
+      />
+      <Composition
+        id="FullCalendarTrap"
+        component={FullCalendarTrapScene}
+        durationInFrames={FullCalendarTrapTimeline.DURATION_IN_FRAMES}
+        fps={FullCalendarTrapTimeline.FPS}
+        width={FullCalendarTrapTimeline.WIDTH}
+        height={FullCalendarTrapTimeline.HEIGHT}
       />
     </>
   );
