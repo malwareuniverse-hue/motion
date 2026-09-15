@@ -27,6 +27,8 @@ import { AssessmentCTAScene } from "./AssessmentCTA";
 import * as AssessmentCTATimeline from "./AssessmentCTA/timeline";
 import { CalmDiagnosisScene } from "./CalmDiagnosis";
 import * as CalmDiagnosisTimeline from "./CalmDiagnosis/timeline";
+import { RevenueLossScene } from "./RevenueLoss";
+import * as RevenueLossTimeline from "./RevenueLoss/timeline";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -137,6 +139,15 @@ export const RemotionRoot: React.FC = () => {
         fps={CalmDiagnosisTimeline.FPS}
         width={CalmDiagnosisTimeline.WIDTH}
         height={CalmDiagnosisTimeline.HEIGHT}
+      />
+      <Composition
+        id="RevenueLoss"
+        component={RevenueLossScene}
+        durationInFrames={RevenueLossTimeline.DURATION_IN_FRAMES}
+        fps={RevenueLossTimeline.FPS}
+        width={RevenueLossTimeline.WIDTH}
+        height={RevenueLossTimeline.HEIGHT}
+        defaultProps={{ backdrop: "dark" as const }}
       />
     </>
   );
