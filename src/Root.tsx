@@ -31,6 +31,8 @@ import { RevenueLossScene } from "./RevenueLoss";
 import * as RevenueLossTimeline from "./RevenueLoss/timeline";
 import { OccupancyMeterScene } from "./OccupancyMeter";
 import * as OccupancyMeterTimeline from "./OccupancyMeter/timeline";
+import { FiveNumbersIntroScene } from "./FiveNumbersIntro";
+import * as FiveNumbersIntroTimeline from "./FiveNumbersIntro/timeline";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -158,6 +160,14 @@ export const RemotionRoot: React.FC = () => {
         fps={OccupancyMeterTimeline.FPS}
         width={OccupancyMeterTimeline.WIDTH}
         height={OccupancyMeterTimeline.HEIGHT}
+      />
+      <Composition
+        id="FiveNumbersIntro"
+        component={FiveNumbersIntroScene}
+        durationInFrames={FiveNumbersIntroTimeline.DURATION_IN_FRAMES}
+        fps={FiveNumbersIntroTimeline.FPS}
+        width={FiveNumbersIntroTimeline.WIDTH}
+        height={FiveNumbersIntroTimeline.HEIGHT}
       />
     </>
   );
