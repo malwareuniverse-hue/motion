@@ -41,6 +41,8 @@ import { RevenueDuelScene } from "./RevenueDuel";
 import * as RevenueDuelTimeline from "./RevenueDuel/timeline";
 import { RevParRevealScene } from "./RevParReveal";
 import * as RevParRevealTimeline from "./RevParReveal/timeline";
+import { BookingWindowScene } from "./BookingWindow";
+import * as BookingWindowTimeline from "./BookingWindow/timeline";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -208,6 +210,14 @@ export const RemotionRoot: React.FC = () => {
         fps={RevParRevealTimeline.FPS}
         width={RevParRevealTimeline.WIDTH}
         height={RevParRevealTimeline.HEIGHT}
+      />
+      <Composition
+        id="BookingWindow"
+        component={BookingWindowScene}
+        durationInFrames={BookingWindowTimeline.DURATION_IN_FRAMES}
+        fps={BookingWindowTimeline.FPS}
+        width={BookingWindowTimeline.WIDTH}
+        height={BookingWindowTimeline.HEIGHT}
       />
     </>
   );
