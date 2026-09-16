@@ -37,6 +37,8 @@ import { FullCalendarTrapScene } from "./FullCalendarTrap";
 import * as FullCalendarTrapTimeline from "./FullCalendarTrap/timeline";
 import { HighRateTrapScene } from "./HighRateTrap";
 import * as HighRateTrapTimeline from "./HighRateTrap/timeline";
+import { RevenueDuelScene } from "./RevenueDuel";
+import * as RevenueDuelTimeline from "./RevenueDuel/timeline";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -188,6 +190,14 @@ export const RemotionRoot: React.FC = () => {
         fps={HighRateTrapTimeline.FPS}
         width={HighRateTrapTimeline.WIDTH}
         height={HighRateTrapTimeline.HEIGHT}
+      />
+      <Composition
+        id="RevenueDuel"
+        component={RevenueDuelScene}
+        durationInFrames={RevenueDuelTimeline.DURATION_IN_FRAMES}
+        fps={RevenueDuelTimeline.FPS}
+        width={RevenueDuelTimeline.WIDTH}
+        height={RevenueDuelTimeline.HEIGHT}
       />
     </>
   );
