@@ -35,6 +35,8 @@ import { FiveNumbersIntroScene } from "./FiveNumbersIntro";
 import * as FiveNumbersIntroTimeline from "./FiveNumbersIntro/timeline";
 import { FullCalendarTrapScene } from "./FullCalendarTrap";
 import * as FullCalendarTrapTimeline from "./FullCalendarTrap/timeline";
+import { HighRateTrapScene } from "./HighRateTrap";
+import * as HighRateTrapTimeline from "./HighRateTrap/timeline";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -178,6 +180,14 @@ export const RemotionRoot: React.FC = () => {
         fps={FullCalendarTrapTimeline.FPS}
         width={FullCalendarTrapTimeline.WIDTH}
         height={FullCalendarTrapTimeline.HEIGHT}
+      />
+      <Composition
+        id="HighRateTrap"
+        component={HighRateTrapScene}
+        durationInFrames={HighRateTrapTimeline.DURATION_IN_FRAMES}
+        fps={HighRateTrapTimeline.FPS}
+        width={HighRateTrapTimeline.WIDTH}
+        height={HighRateTrapTimeline.HEIGHT}
       />
     </>
   );

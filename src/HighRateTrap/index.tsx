@@ -1,0 +1,44 @@
+import React from "react";
+import { AbsoluteFill, useCurrentFrame } from "remotion";
+import { palette } from "./theme";
+import { clampedInterp, easeInCubic, easeOutCubic } from "./utils";
+import { OpeningStatement } from "./OpeningStatement";
+import { ContrastStatement } from "./ContrastStatement";
+import { ResolutionCard } from "./ResolutionCard";
+import { T } from "./timeline";
+
+export const HighRateTrapScene: React.FC = () => {
+  const frame = useCurrentFrame();
+
+  // the setup + the ironic contrast share one stage, which cross-dissolves to
+  // the resolution card on the transcript's own declared pause
+  const stageOpacity = clampedInterp(
+    frame,
+    [T.cardBgStart, T.cardBgStart + T.cardBgDur],
+    [1, 0],
+    easeOutCubic,
+  );
+  const exit = clampedInterp(
+    frame,
+    [T.outStart, T.outStart + T.outDur],
+    [1, 0],
+    easeInCubic,
+  );
+
+  return (
+    <AbsoluteFill
+      style={{
+        background: `radial-gradient(120% 90% at 50% 14%, ${palette.groundLift} 0%, transparent 62%), ${palette.nearBlack}`,
+      }}
+    >
+      <AbsoluteFill style={{ opacity: exit }}>
+        <AbsoluteFill style={{ opacity: stageOpacity }}>
+          <OpeningStatement />
+          <ContrastStatement />
+        </AbsoluteFill>
+
+        <ResolutionCard />
+      </AbsoluteFill>
+    </AbsoluteFill>
+  );
+};
