@@ -43,6 +43,8 @@ import { RevParRevealScene } from "./RevParReveal";
 import * as RevParRevealTimeline from "./RevParReveal/timeline";
 import { BookingWindowScene } from "./BookingWindow";
 import * as BookingWindowTimeline from "./BookingWindow/timeline";
+import { ProblemMayBeYouScene } from "./ProblemMayBeYou";
+import * as ProblemMayBeYouTimeline from "./ProblemMayBeYou/timeline";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -218,6 +220,14 @@ export const RemotionRoot: React.FC = () => {
         fps={BookingWindowTimeline.FPS}
         width={BookingWindowTimeline.WIDTH}
         height={BookingWindowTimeline.HEIGHT}
+      />
+      <Composition
+        id="ProblemMayBeYou"
+        component={ProblemMayBeYouScene}
+        durationInFrames={ProblemMayBeYouTimeline.DURATION_IN_FRAMES}
+        fps={ProblemMayBeYouTimeline.FPS}
+        width={ProblemMayBeYouTimeline.WIDTH}
+        height={ProblemMayBeYouTimeline.HEIGHT}
       />
     </>
   );
