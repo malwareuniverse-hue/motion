@@ -39,6 +39,8 @@ import { HighRateTrapScene } from "./HighRateTrap";
 import * as HighRateTrapTimeline from "./HighRateTrap/timeline";
 import { RevenueDuelScene } from "./RevenueDuel";
 import * as RevenueDuelTimeline from "./RevenueDuel/timeline";
+import { RevParRevealScene } from "./RevParReveal";
+import * as RevParRevealTimeline from "./RevParReveal/timeline";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -198,6 +200,14 @@ export const RemotionRoot: React.FC = () => {
         fps={RevenueDuelTimeline.FPS}
         width={RevenueDuelTimeline.WIDTH}
         height={RevenueDuelTimeline.HEIGHT}
+      />
+      <Composition
+        id="RevParReveal"
+        component={RevParRevealScene}
+        durationInFrames={RevParRevealTimeline.DURATION_IN_FRAMES}
+        fps={RevParRevealTimeline.FPS}
+        width={RevParRevealTimeline.WIDTH}
+        height={RevParRevealTimeline.HEIGHT}
       />
     </>
   );
