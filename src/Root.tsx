@@ -49,6 +49,8 @@ import { FiveNumbersScorecardScene } from "./FiveNumbersScorecard";
 import * as FiveNumbersScorecardTimeline from "./FiveNumbersScorecard/timeline";
 import { RevenueAssessmentCTAScene } from "./RevenueAssessmentCTA";
 import * as RevenueAssessmentCTATimeline from "./RevenueAssessmentCTA/timeline";
+import { SimpleStrategiesCTAScene } from "./SimpleStrategiesCTA";
+import * as SimpleStrategiesCTATimeline from "./SimpleStrategiesCTA/timeline";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -248,6 +250,14 @@ export const RemotionRoot: React.FC = () => {
         fps={RevenueAssessmentCTATimeline.FPS}
         width={RevenueAssessmentCTATimeline.WIDTH}
         height={RevenueAssessmentCTATimeline.HEIGHT}
+      />
+      <Composition
+        id="SimpleStrategiesCTA"
+        component={SimpleStrategiesCTAScene}
+        durationInFrames={SimpleStrategiesCTATimeline.DURATION_IN_FRAMES}
+        fps={SimpleStrategiesCTATimeline.FPS}
+        width={SimpleStrategiesCTATimeline.WIDTH}
+        height={SimpleStrategiesCTATimeline.HEIGHT}
       />
     </>
   );
