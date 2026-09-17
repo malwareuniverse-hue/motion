@@ -45,6 +45,8 @@ import { BookingWindowScene } from "./BookingWindow";
 import * as BookingWindowTimeline from "./BookingWindow/timeline";
 import { ProblemMayBeYouScene } from "./ProblemMayBeYou";
 import * as ProblemMayBeYouTimeline from "./ProblemMayBeYou/timeline";
+import { FiveNumbersScorecardScene } from "./FiveNumbersScorecard";
+import * as FiveNumbersScorecardTimeline from "./FiveNumbersScorecard/timeline";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -228,6 +230,14 @@ export const RemotionRoot: React.FC = () => {
         fps={ProblemMayBeYouTimeline.FPS}
         width={ProblemMayBeYouTimeline.WIDTH}
         height={ProblemMayBeYouTimeline.HEIGHT}
+      />
+      <Composition
+        id="FiveNumbersScorecard"
+        component={FiveNumbersScorecardScene}
+        durationInFrames={FiveNumbersScorecardTimeline.DURATION_IN_FRAMES}
+        fps={FiveNumbersScorecardTimeline.FPS}
+        width={FiveNumbersScorecardTimeline.WIDTH}
+        height={FiveNumbersScorecardTimeline.HEIGHT}
       />
     </>
   );
