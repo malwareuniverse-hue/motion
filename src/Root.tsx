@@ -51,6 +51,8 @@ import { RevenueAssessmentCTAScene } from "./RevenueAssessmentCTA";
 import * as RevenueAssessmentCTATimeline from "./RevenueAssessmentCTA/timeline";
 import { SimpleStrategiesCTAScene } from "./SimpleStrategiesCTA";
 import * as SimpleStrategiesCTATimeline from "./SimpleStrategiesCTA/timeline";
+import { HoldMoveOrPanicScene } from "./HoldMoveOrPanic";
+import * as HoldMoveOrPanicTimeline from "./HoldMoveOrPanic/timeline";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -258,6 +260,14 @@ export const RemotionRoot: React.FC = () => {
         fps={SimpleStrategiesCTATimeline.FPS}
         width={SimpleStrategiesCTATimeline.WIDTH}
         height={SimpleStrategiesCTATimeline.HEIGHT}
+      />
+      <Composition
+        id="HoldMoveOrPanic"
+        component={HoldMoveOrPanicScene}
+        durationInFrames={HoldMoveOrPanicTimeline.DURATION_IN_FRAMES}
+        fps={HoldMoveOrPanicTimeline.FPS}
+        width={HoldMoveOrPanicTimeline.WIDTH}
+        height={HoldMoveOrPanicTimeline.HEIGHT}
       />
     </>
   );
