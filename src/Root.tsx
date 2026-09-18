@@ -53,6 +53,8 @@ import { SimpleStrategiesCTAScene } from "./SimpleStrategiesCTA";
 import * as SimpleStrategiesCTATimeline from "./SimpleStrategiesCTA/timeline";
 import { HoldMoveOrPanicScene } from "./HoldMoveOrPanic";
 import * as HoldMoveOrPanicTimeline from "./HoldMoveOrPanic/timeline";
+import { OwnerEyesShortScene } from "./OwnerEyesShort";
+import * as OwnerEyesShortTimeline from "./OwnerEyesShort/timeline";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -268,6 +270,14 @@ export const RemotionRoot: React.FC = () => {
         fps={HoldMoveOrPanicTimeline.FPS}
         width={HoldMoveOrPanicTimeline.WIDTH}
         height={HoldMoveOrPanicTimeline.HEIGHT}
+      />
+      <Composition
+        id="OwnerEyesShort"
+        component={OwnerEyesShortScene}
+        durationInFrames={OwnerEyesShortTimeline.DURATION_IN_FRAMES}
+        fps={OwnerEyesShortTimeline.FPS}
+        width={OwnerEyesShortTimeline.WIDTH}
+        height={OwnerEyesShortTimeline.HEIGHT}
       />
     </>
   );
