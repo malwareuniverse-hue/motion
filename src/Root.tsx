@@ -55,6 +55,8 @@ import { HoldMoveOrPanicScene } from "./HoldMoveOrPanic";
 import * as HoldMoveOrPanicTimeline from "./HoldMoveOrPanic/timeline";
 import { OwnerEyesShortScene } from "./OwnerEyesShort";
 import * as OwnerEyesShortTimeline from "./OwnerEyesShort/timeline";
+import { GoalsCanBeWrongScene } from "./GoalsCanBeWrong";
+import * as GoalsCanBeWrongTimeline from "./GoalsCanBeWrong/timeline";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -278,6 +280,14 @@ export const RemotionRoot: React.FC = () => {
         fps={OwnerEyesShortTimeline.FPS}
         width={OwnerEyesShortTimeline.WIDTH}
         height={OwnerEyesShortTimeline.HEIGHT}
+      />
+      <Composition
+        id="GoalsCanBeWrong"
+        component={GoalsCanBeWrongScene}
+        durationInFrames={GoalsCanBeWrongTimeline.DURATION_IN_FRAMES}
+        fps={GoalsCanBeWrongTimeline.FPS}
+        width={GoalsCanBeWrongTimeline.WIDTH}
+        height={GoalsCanBeWrongTimeline.HEIGHT}
       />
     </>
   );
