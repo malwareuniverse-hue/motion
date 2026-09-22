@@ -57,6 +57,8 @@ import { OwnerEyesShortScene } from "./OwnerEyesShort";
 import * as OwnerEyesShortTimeline from "./OwnerEyesShort/timeline";
 import { GoalsCanBeWrongScene } from "./GoalsCanBeWrong";
 import * as GoalsCanBeWrongTimeline from "./GoalsCanBeWrong/timeline";
+import { MarketAnalysisScene } from "./MarketAnalysis";
+import * as MarketAnalysisTimeline from "./MarketAnalysis/timeline";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -288,6 +290,14 @@ export const RemotionRoot: React.FC = () => {
         fps={GoalsCanBeWrongTimeline.FPS}
         width={GoalsCanBeWrongTimeline.WIDTH}
         height={GoalsCanBeWrongTimeline.HEIGHT}
+      />
+      <Composition
+        id="MarketAnalysis"
+        component={MarketAnalysisScene}
+        durationInFrames={MarketAnalysisTimeline.DURATION_IN_FRAMES}
+        fps={MarketAnalysisTimeline.FPS}
+        width={MarketAnalysisTimeline.WIDTH}
+        height={MarketAnalysisTimeline.HEIGHT}
       />
     </>
   );
