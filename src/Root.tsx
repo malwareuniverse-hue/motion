@@ -65,6 +65,8 @@ import { OccupancyContextScene } from "./OccupancyContext";
 import * as OccupancyContextTimeline from "./OccupancyContext/timeline";
 import { MarketVelocityScene } from "./MarketVelocity";
 import * as MarketVelocityTimeline from "./MarketVelocity/timeline";
+import { TimingContextScene } from "./TimingContext";
+import * as TimingContextTimeline from "./TimingContext/timeline";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -328,6 +330,14 @@ export const RemotionRoot: React.FC = () => {
         fps={MarketVelocityTimeline.FPS}
         width={MarketVelocityTimeline.WIDTH}
         height={MarketVelocityTimeline.HEIGHT}
+      />
+      <Composition
+        id="TimingContext"
+        component={TimingContextScene}
+        durationInFrames={TimingContextTimeline.DURATION_IN_FRAMES}
+        fps={TimingContextTimeline.FPS}
+        width={TimingContextTimeline.WIDTH}
+        height={TimingContextTimeline.HEIGHT}
       />
     </>
   );
