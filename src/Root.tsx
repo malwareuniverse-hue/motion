@@ -63,6 +63,8 @@ import { Q1CardScene } from "./Q1Card";
 import * as Q1CardTimeline from "./Q1Card/timeline";
 import { OccupancyContextScene } from "./OccupancyContext";
 import * as OccupancyContextTimeline from "./OccupancyContext/timeline";
+import { MarketVelocityScene } from "./MarketVelocity";
+import * as MarketVelocityTimeline from "./MarketVelocity/timeline";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -318,6 +320,14 @@ export const RemotionRoot: React.FC = () => {
         fps={OccupancyContextTimeline.FPS}
         width={OccupancyContextTimeline.WIDTH}
         height={OccupancyContextTimeline.HEIGHT}
+      />
+      <Composition
+        id="MarketVelocity"
+        component={MarketVelocityScene}
+        durationInFrames={MarketVelocityTimeline.DURATION_IN_FRAMES}
+        fps={MarketVelocityTimeline.FPS}
+        width={MarketVelocityTimeline.WIDTH}
+        height={MarketVelocityTimeline.HEIGHT}
       />
     </>
   );
