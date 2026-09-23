@@ -59,6 +59,8 @@ import { GoalsCanBeWrongScene } from "./GoalsCanBeWrong";
 import * as GoalsCanBeWrongTimeline from "./GoalsCanBeWrong/timeline";
 import { MarketAnalysisScene } from "./MarketAnalysis";
 import * as MarketAnalysisTimeline from "./MarketAnalysis/timeline";
+import { Q1CardScene } from "./Q1Card";
+import * as Q1CardTimeline from "./Q1Card/timeline";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -298,6 +300,14 @@ export const RemotionRoot: React.FC = () => {
         fps={MarketAnalysisTimeline.FPS}
         width={MarketAnalysisTimeline.WIDTH}
         height={MarketAnalysisTimeline.HEIGHT}
+      />
+      <Composition
+        id="Q1Card"
+        component={Q1CardScene}
+        durationInFrames={Q1CardTimeline.DURATION_IN_FRAMES}
+        fps={Q1CardTimeline.FPS}
+        width={Q1CardTimeline.WIDTH}
+        height={Q1CardTimeline.HEIGHT}
       />
     </>
   );
