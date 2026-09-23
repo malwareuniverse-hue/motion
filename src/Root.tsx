@@ -61,6 +61,8 @@ import { MarketAnalysisScene } from "./MarketAnalysis";
 import * as MarketAnalysisTimeline from "./MarketAnalysis/timeline";
 import { Q1CardScene } from "./Q1Card";
 import * as Q1CardTimeline from "./Q1Card/timeline";
+import { OccupancyContextScene } from "./OccupancyContext";
+import * as OccupancyContextTimeline from "./OccupancyContext/timeline";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -308,6 +310,14 @@ export const RemotionRoot: React.FC = () => {
         fps={Q1CardTimeline.FPS}
         width={Q1CardTimeline.WIDTH}
         height={Q1CardTimeline.HEIGHT}
+      />
+      <Composition
+        id="OccupancyContext"
+        component={OccupancyContextScene}
+        durationInFrames={OccupancyContextTimeline.DURATION_IN_FRAMES}
+        fps={OccupancyContextTimeline.FPS}
+        width={OccupancyContextTimeline.WIDTH}
+        height={OccupancyContextTimeline.HEIGHT}
       />
     </>
   );
