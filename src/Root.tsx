@@ -19,6 +19,7 @@ import { MovingPictureScene } from "./MovingPicture";
 import * as MovingPictureTimeline from "./MovingPicture/timeline";
 import { STRPortfolioScene, DURATION_IN_FRAMES as STR_DURATION, WIDTH as STR_WIDTH, HEIGHT as STR_HEIGHT } from "./STRPortfolio";
 import { CompsWindowScene, DURATION_IN_FRAMES as CW_DURATION, WIDTH as CW_WIDTH, HEIGHT as CW_HEIGHT } from "./CompsWindow";
+import { ScoreCardScene, DURATION_IN_FRAMES as SC_DURATION, WIDTH as SC_WIDTH, HEIGHT as SC_HEIGHT } from "./ScoreCard";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -103,6 +104,14 @@ export const RemotionRoot: React.FC = () => {
         fps={30}
         width={CW_WIDTH}
         height={CW_HEIGHT}
+      />
+      <Composition
+        id="ScoreCard"
+        component={ScoreCardScene}
+        durationInFrames={SC_DURATION}
+        fps={30}
+        width={SC_WIDTH}
+        height={SC_HEIGHT}
       />
     </>
   );
