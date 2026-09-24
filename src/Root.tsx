@@ -17,6 +17,7 @@ import { CompsChainScene } from "./CompsChain";
 import * as CompsChainTimeline from "./CompsChain/timeline";
 import { MovingPictureScene } from "./MovingPicture";
 import * as MovingPictureTimeline from "./MovingPicture/timeline";
+import { STRPortfolioScene, DURATION_IN_FRAMES as STR_DURATION, WIDTH as STR_WIDTH, HEIGHT as STR_HEIGHT } from "./STRPortfolio";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -85,6 +86,14 @@ export const RemotionRoot: React.FC = () => {
         fps={MovingPictureTimeline.FPS}
         width={MovingPictureTimeline.WIDTH}
         height={MovingPictureTimeline.HEIGHT}
+      />
+      <Composition
+        id="STRPortfolio"
+        component={STRPortfolioScene}
+        durationInFrames={STR_DURATION}
+        fps={30}
+        width={STR_WIDTH}
+        height={STR_HEIGHT}
       />
     </>
   );
