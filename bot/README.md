@@ -56,15 +56,102 @@ Any client can connect to `ws://localhost:8765` to receive JSON signals:
 }
 ```
 
-## Telegram Alerts
+## Telegram Alerts Setup
 
-Set these environment variables to enable Telegram notifications for BUY/SELL signals:
+Follow these steps to create a Telegram bot and wire it to ScalpBot.
+
+### Step 1 — Create a bot with BotFather
+
+1. Open Telegram and search for **@BotFather** (the official Telegram bot).
+2. Send the command:
+   ```
+   /newbot
+   ```
+3. Choose a display name (e.g. `My ScalpBot`).
+4. Choose a username — must end in `bot` (e.g. `my_scalpbot`).
+5. BotFather replies with your **bot token**, which looks like:
+   ```
+   123456789:ABCDefGhIJKlmNoPQRsTUVwxyZ
+   ```
+   Copy and keep this safe — it is your `TELEGRAM_TOKEN`.
+
+### Step 2 — Get your Chat ID
+
+You need to tell the bot where to send messages. The easiest way:
+
+**Option A — personal chat (just you)**
+
+1. Search for your new bot in Telegram and send it any message (e.g. `/start`).
+2. Open this URL in your browser (replace `<TOKEN>` with your actual token):
+   ```
+   https://api.telegram.org/bot<TOKEN>/getUpdates
+   ```
+3. Look for `"chat":{"id":` in the JSON response. That number is your `TELEGRAM_CHAT_ID`.
+
+**Option B — a group or channel**
+
+1. Add your bot to the group or channel.
+2. Give it **admin** rights if it is a channel (required to post).
+3. Send a message in the group, then open the `getUpdates` URL above.
+4. Find `"chat":{"id":` — group IDs are negative numbers (e.g. `-1001234567890`).
+
+### Step 3 — Start ScalpBot with Telegram enabled
 
 ```bash
-TELEGRAM_TOKEN=<your_bot_token>
-TELEGRAM_CHAT_ID=<your_chat_id>
+cd bot
+
+# Pass the credentials inline:
+TELEGRAM_TOKEN=123456789:ABCDefGhIJKlmNoPQRsTUVwxyZ \
+TELEGRAM_CHAT_ID=987654321 \
+npm start
+
+# Or export them first:
+export TELEGRAM_TOKEN=123456789:ABCDefGhIJKlmNoPQRsTUVwxyZ
+export TELEGRAM_CHAT_ID=987654321
 npm start
 ```
+
+To persist the variables across terminal sessions, add them to your shell profile (`~/.bashrc`, `~/.zshrc`, etc.) or use a `.env` file with a tool like `dotenv`.
+
+### Step 4 — Verify it works
+
+ScalpBot prints `Telegram notifications enabled` at startup when the token is set.  
+The first `BUY`, `SELL`, `STRONG_BUY`, or `STRONG_SELL` signal will send a message like:
+
+```
+🟢 BUY — BTCUSDT 1m
+💲 Price: 43,210.50
+📊 Confidence: 43% (score +6)
+🛑 Stop Loss: 43,100.20
+🎯 Take Profit: 43,400.80
+
+Reasons:
+• ✅ Uptrend: EMA9 > EMA21 > EMA50
+• 📉 RSI bullish zone: 44.2
+• 🔥 MACD bullish: line=12.50, hist=3.20
+• ↙ Price near BB lower band
+```
+
+### Customising which signals trigger alerts
+
+Edit `bot/src/config.ts` and change `telegram.minSignal`:
+
+```ts
+// Only fire on strong signals:
+minSignal: ['STRONG_BUY', 'STRONG_SELL'],
+
+// Fire on all actionable signals (default):
+minSignal: ['BUY', 'SELL', 'STRONG_BUY', 'STRONG_SELL'],
+```
+
+### Troubleshooting
+
+| Problem | Fix |
+|---|---|
+| `getUpdates` returns empty `result` | Send your bot a message first, then retry |
+| No messages arriving | Double-check the token and chat ID have no extra spaces |
+| Channel posts fail | Make the bot an **admin** of the channel |
+| `401 Unauthorized` | Token is wrong or the bot was deleted — recreate with BotFather |
 
 ## Signal Logic
 
