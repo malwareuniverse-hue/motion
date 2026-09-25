@@ -20,6 +20,7 @@ import * as MovingPictureTimeline from "./MovingPicture/timeline";
 import { STRPortfolioScene, DURATION_IN_FRAMES as STR_DURATION, WIDTH as STR_WIDTH, HEIGHT as STR_HEIGHT } from "./STRPortfolio";
 import { CompsWindowScene, DURATION_IN_FRAMES as CW_DURATION, WIDTH as CW_WIDTH, HEIGHT as CW_HEIGHT } from "./CompsWindow";
 import { ScoreCardScene, DURATION_IN_FRAMES as SC_DURATION, WIDTH as SC_WIDTH, HEIGHT as SC_HEIGHT } from "./ScoreCard";
+import { MarketSignalScene, DURATION_IN_FRAMES as MS_DURATION, WIDTH as MS_WIDTH, HEIGHT as MS_HEIGHT } from "./MarketSignal";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -112,6 +113,14 @@ export const RemotionRoot: React.FC = () => {
         fps={30}
         width={SC_WIDTH}
         height={SC_HEIGHT}
+      />
+      <Composition
+        id="MarketSignal"
+        component={MarketSignalScene}
+        durationInFrames={MS_DURATION}
+        fps={30}
+        width={MS_WIDTH}
+        height={MS_HEIGHT}
       />
     </>
   );
