@@ -726,7 +726,8 @@ export const FiveTestsScene: React.FC = () => {
   const PANEL_Y = 60;
 
   return (
-    <AbsoluteFill style={{ background: "#00FF00" }}>
+    <AbsoluteFill style={{ background: palette.bg }}>
+      <AbsoluteFill style={{ background: "radial-gradient(ellipse at 50% 50%, transparent 55%, rgba(0,0,0,0.55) 100%)", pointerEvents: "none" }} />
       {/* Left panel */}
       <GlassPanel
         x={28}
