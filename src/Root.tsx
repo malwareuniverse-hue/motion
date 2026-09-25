@@ -15,6 +15,14 @@ import { BookingDecisionScene } from "./BookingDecision";
 import * as BookingDecisionTimeline from "./BookingDecision/timeline";
 import { CompsChainScene } from "./CompsChain";
 import * as CompsChainTimeline from "./CompsChain/timeline";
+import { MovingPictureScene } from "./MovingPicture";
+import * as MovingPictureTimeline from "./MovingPicture/timeline";
+import { STRPortfolioScene, DURATION_IN_FRAMES as STR_DURATION, WIDTH as STR_WIDTH, HEIGHT as STR_HEIGHT } from "./STRPortfolio";
+import { CompsWindowScene, DURATION_IN_FRAMES as CW_DURATION, WIDTH as CW_WIDTH, HEIGHT as CW_HEIGHT } from "./CompsWindow";
+import { ScoreCardScene, DURATION_IN_FRAMES as SC_DURATION, WIDTH as SC_WIDTH, HEIGHT as SC_HEIGHT } from "./ScoreCard";
+import { MarketSignalScene, DURATION_IN_FRAMES as MS_DURATION, WIDTH as MS_WIDTH, HEIGHT as MS_HEIGHT } from "./MarketSignal";
+import { FiveTestsScene, DURATION_IN_FRAMES as FT_DURATION, WIDTH as FT_WIDTH, HEIGHT as FT_HEIGHT } from "./FiveTests";
+import { StepByStepScene, DURATION_IN_FRAMES as SBS_DURATION, WIDTH as SBS_WIDTH, HEIGHT as SBS_HEIGHT } from "./StepByStep";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -75,6 +83,62 @@ export const RemotionRoot: React.FC = () => {
         fps={CompsChainTimeline.FPS}
         width={CompsChainTimeline.WIDTH}
         height={CompsChainTimeline.HEIGHT}
+      />
+      <Composition
+        id="MovingPicture"
+        component={MovingPictureScene}
+        durationInFrames={MovingPictureTimeline.DURATION_IN_FRAMES}
+        fps={MovingPictureTimeline.FPS}
+        width={MovingPictureTimeline.WIDTH}
+        height={MovingPictureTimeline.HEIGHT}
+      />
+      <Composition
+        id="STRPortfolio"
+        component={STRPortfolioScene}
+        durationInFrames={STR_DURATION}
+        fps={30}
+        width={STR_WIDTH}
+        height={STR_HEIGHT}
+      />
+      <Composition
+        id="CompsWindow"
+        component={CompsWindowScene}
+        durationInFrames={CW_DURATION}
+        fps={30}
+        width={CW_WIDTH}
+        height={CW_HEIGHT}
+      />
+      <Composition
+        id="ScoreCard"
+        component={ScoreCardScene}
+        durationInFrames={SC_DURATION}
+        fps={30}
+        width={SC_WIDTH}
+        height={SC_HEIGHT}
+      />
+      <Composition
+        id="MarketSignal"
+        component={MarketSignalScene}
+        durationInFrames={MS_DURATION}
+        fps={30}
+        width={MS_WIDTH}
+        height={MS_HEIGHT}
+      />
+      <Composition
+        id="FiveTests"
+        component={FiveTestsScene}
+        durationInFrames={FT_DURATION}
+        fps={30}
+        width={FT_WIDTH}
+        height={FT_HEIGHT}
+      />
+      <Composition
+        id="StepByStep"
+        component={StepByStepScene}
+        durationInFrames={SBS_DURATION}
+        fps={30}
+        width={SBS_WIDTH}
+        height={SBS_HEIGHT}
       />
     </>
   );
