@@ -21,6 +21,7 @@ import { STRPortfolioScene, DURATION_IN_FRAMES as STR_DURATION, WIDTH as STR_WID
 import { CompsWindowScene, DURATION_IN_FRAMES as CW_DURATION, WIDTH as CW_WIDTH, HEIGHT as CW_HEIGHT } from "./CompsWindow";
 import { ScoreCardScene, DURATION_IN_FRAMES as SC_DURATION, WIDTH as SC_WIDTH, HEIGHT as SC_HEIGHT } from "./ScoreCard";
 import { MarketSignalScene, DURATION_IN_FRAMES as MS_DURATION, WIDTH as MS_WIDTH, HEIGHT as MS_HEIGHT } from "./MarketSignal";
+import { FiveTestsScene, DURATION_IN_FRAMES as FT_DURATION, WIDTH as FT_WIDTH, HEIGHT as FT_HEIGHT } from "./FiveTests";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -121,6 +122,14 @@ export const RemotionRoot: React.FC = () => {
         fps={30}
         width={MS_WIDTH}
         height={MS_HEIGHT}
+      />
+      <Composition
+        id="FiveTests"
+        component={FiveTestsScene}
+        durationInFrames={FT_DURATION}
+        fps={30}
+        width={FT_WIDTH}
+        height={FT_HEIGHT}
       />
     </>
   );
